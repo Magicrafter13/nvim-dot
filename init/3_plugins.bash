@@ -6,6 +6,13 @@ nerdtree_step=0
 end_block=
 nerdtree_addon=' |\n\t\\ '
 
+# Ask about customization
+echo 'Would you like to change which plugins to install [n]ow or during [l]oop, or use [d]efaults?'
+whatToDo=
+while [[ "$whatToDo" != n && "$whatToDo" != l && "$whatToDo" != d ]]; do
+	read whatToDo
+done
+
 # nvim/vim-plug.vim
 echo 'Constructing nvim/vim-plug.vim, and copying custom plugin settings to nvim/plug-set/'
 echo -e "\"\n\" Vim-Plug\n\"\ncall plug#begin(stdpath('data') . '/plugged')" > nvim/vim-plug.vim
