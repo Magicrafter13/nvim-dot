@@ -1,0 +1,4 @@
+repo=hail2u/vim-css3-syntax
+params=
+default=yes
+comment=Improved CSS syntax highlighting

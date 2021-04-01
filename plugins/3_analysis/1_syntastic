@@ -1,0 +1,4 @@
+repo=scrooloose/syntastic
+params=
+default=yes
+comment=Syntax checking plugin, that runs through external syntax checkers

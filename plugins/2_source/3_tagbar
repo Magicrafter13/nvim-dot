@@ -1,0 +1,4 @@
+repo=majutsushi/tagbar
+params=
+default=yes
+comment=Browse tags of file (like classes, variables, and functions)

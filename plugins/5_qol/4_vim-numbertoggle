@@ -1,0 +1,4 @@
+repo=jeffkreeftmeijer/vim-numbertoggle
+params=
+default=yes
+comment=Toggle relativenumber based on current context

@@ -1,0 +1,4 @@
+repo=ObserverOfTime/discord.nvim
+params=
+default=no
+comment=Discord Rich Presence

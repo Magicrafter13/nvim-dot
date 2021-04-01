@@ -1,0 +1,4 @@
+repo=aurieh/discord.nvim
+params=
+default=yes
+comment=Discord Rich Presence

@@ -1,0 +1,4 @@
+repo=lervag/vimtex
+params=
+default=yes
+comment=Filetype plugin for LaTeX files

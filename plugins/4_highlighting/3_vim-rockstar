@@ -1,0 +1,4 @@
+repo=sirosen/vim-rockstar
+params=
+default=no
+comment=Rockstar syntax highlighting ...

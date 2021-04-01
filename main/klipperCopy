@@ -1,0 +1,6 @@
+#!/bin/bash -x
+
+#text="$(while read -r x; do echo "$x"; done)"
+text="$(cat)"
+echo "$text" > ~/klipper.log
+qdbus org.kde.klipper /klipper setClipboardContents "$text"

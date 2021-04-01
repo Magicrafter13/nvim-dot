@@ -1,0 +1,4 @@
+repo=tpope/vim-eunuch
+params=
+default=no
+comment='Vim sugar for the UNIX shell commands that need it most'

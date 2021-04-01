@@ -1,0 +1,4 @@
+repo=tiagofumo/vim-nerdtree-syntax-highlight
+params=
+default=yes
+comment=Colors devicons based on filetype

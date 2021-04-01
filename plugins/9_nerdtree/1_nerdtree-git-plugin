@@ -1,0 +1,4 @@
+repo=Xuyuanp/nerdtree-git-plugin
+params=
+default=yes
+comment=Adds git markers to NERDTree (like showing changes, or ignored files)

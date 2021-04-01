@@ -1,0 +1,6 @@
+repo=joshdick/onedark.vim
+params=
+default=yes
+comment=Inspired by Atom's One Dark theme
+
+colorscheme=onedark
