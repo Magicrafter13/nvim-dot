@@ -13,7 +13,7 @@ while [[ "$num" == temp ]]; do
 			cp main/kde_clipboard.vim nvim/clipboard.vim
 			#cp main/klipperCopy ~/.local/bin/
 			;;
-		2) echo 'Xfce' ;;
+		2) echo 'Xfce4 clipboard should work with Neovim out-of-the-box.' ;;
 		*) num='temp'
 	esac
 done
