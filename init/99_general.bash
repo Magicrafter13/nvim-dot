@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-echo 'Setting colorscheme'
+echo -e '\e[1;32mSetting colorscheme\e[0m'
 
 schemes=()
 while read line; do

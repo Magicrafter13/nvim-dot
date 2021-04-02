@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -e 'Setting up Clipboard Provider...\n'
+echo -e '\e[1;32mSetting up Clipboard Provider...\e[0m\n'
 echo -e 'Select System Environment\n\t0) None\n\t1) KDE\n\t2) Xfce'
 
 num='temp'

@@ -6,6 +6,8 @@ nerdtree_step=0
 end_block=
 nerdtree_addon=' |\n\t\\ '
 
+echo -e '\e[1;32mSetting up Plugins...\e[0m'
+
 # Ask about customization
 echo 'Would you like to change which plugins to install [n]ow or during [l]oop, or use [d]efaults?'
 whatToDo=
