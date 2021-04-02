@@ -70,17 +70,13 @@ for scheme in ${schemes[@]}; do
 done
 
 # Install/Update
-#echo 'Installing vim-plug, and installing any plugins that aren'\''t already installed...'
-#nvim -es -i NONE -c "qa"
-#nvim +qa
-#echo 'Upgrading vim-plug if possible...'
-#nvim -es -i NONE -c "PlugUpgrade" -c "qa"
-#nvim +PlugUpgrade +qa
-#echo 'Cleaning plugins...'
-#nvim -es -i NONE -c "PlugClean" -c "qa"
-#nvim +PlugClean +qa
-#echo 'Updating plugins if possible...'
-#nvim -es -i NONE -c "PlugUpdate" -c "qa"
-#nvim +PlugUpdate +qa
-echo 'Upgrading vim-plug, cleaning plugins, updating plugins, and installing any new plugins...'
-nvim +PlugUpgrade +PlugClean +PlugUpdate +PlugInstall +qa
+echo 'Installing vim-plug, and installing any plugins that aren'\''t already installed...'
+nvim -es -u nvim/init.vim -i NONE +qa
+echo 'Upgrading vim-plug if possible...'
+nvim -es -u nvim/init.vim -i NONE +PlugUpgrade +qa
+echo 'Cleaning plugins...'
+nvim -es -u nvim/init.vim -i NONE +PlugClean +qa
+echo 'Updating plugins if possible...'
+nvim -es -u nvim/init.vim -i NONE +PlugInstall +qa
+#echo 'Upgrading vim-plug, cleaning plugins, updating plugins, and installing any new plugins...'
+#nvim -es -u nvim/init.vim -i NONE +PlugUpgrade +PlugClean +PlugUpdate +PlugInstall +qa
