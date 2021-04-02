@@ -3,6 +3,7 @@ all: nvim
 	@mkdir -p nvim/plug-set/nerdtree
 	@./main/link.bash
 	@./main/init.bash
+	@./main/cleanup.bash
 
 nvim:
 	@mkdir nvim

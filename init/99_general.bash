@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 echo -e '\e[1;32mSetting colorscheme\e[0m'
 

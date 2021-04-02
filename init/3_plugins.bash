@@ -40,7 +40,7 @@ if [[ $whatToDo == n ]]; then
 fi
 
 # nvim/vim-plug.vim
-echo 'Constructing nvim/vim-plug.vim, and copying custom plugin settings to nvim/plug-set/'
+echo 'Constructing nvim/vim-plug.vim + copying plugin settings to nvim/plug-set/'
 echo -e "\"\n\" Vim-Plug\n\"\ncall plug#begin(stdpath('data') . '/plugged')" > nvim/vim-plug.vim
 cd plugins
 for cat in {0..9}; do
@@ -113,7 +113,6 @@ for cat in {0..9}; do
 done
 cd ..
 echo 'call plug#end()' >> nvim/vim-plug.vim
-echo
 
 unset pluginChanges
 
@@ -123,13 +122,11 @@ for scheme in ${schemes[@]}; do
 done
 
 # Install/Update
-echo 'Installing vim-plug, and installing any plugins that aren'\''t already installed...'
+echo 'Installing vim-plug + new plugins...'
 nvim -es -u nvim/init.vim -i NONE +qa
-echo 'Upgrading vim-plug if possible...'
+echo 'Updating vim-plug...'
 nvim -es -u nvim/init.vim -i NONE +PlugUpgrade +qa
 echo 'Cleaning plugins...'
-nvim -u nvim/init.vim -i NONE +PlugClean +qa <<< "y\n"
-echo 'Updating plugins if possible...'
-nvim -es -u nvim/init.vim -i NONE +PlugInstall +qa
-#echo 'Upgrading vim-plug, cleaning plugins, updating plugins, and installing any new plugins...'
-#nvim -es -u nvim/init.vim -i NONE +PlugUpgrade +PlugClean +PlugUpdate +PlugInstall +qa
+nvim -u nvim/init.vim -i NONE +PlugClean +qa! <<< "y"
+echo 'Updating plugins...'
+nvim -es -u nvim/init.vim -i NONE +PlugUpdate +qa
