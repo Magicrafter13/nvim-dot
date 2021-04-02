@@ -13,7 +13,10 @@ case ${#schemes} in
 		echo 'No colorschemes were installed! :('
 		exit
 		;;
-	1) echo "colorscheme ${schemes[0]}" >> nvim/init.vim ;;
+	1)
+		echo "colorscheme ${schemes[0]}" >> nvim/init.vim
+		[[ -f nvim/plug-set/1_0_lightline.vim ]] && echo "let g:lightline.colorscheme = '${schemes[0]}'" >> nvim/plug-set/1_0_lightline.vim
+		;;
 	*)
 		echo 'More than 1 colorscheme installed, please select one to use by default:'
 		i=0
@@ -27,5 +30,6 @@ case ${#schemes} in
 			selection=$((selection))
 		done
 		echo "colorscheme ${schemes[$((selection - 1))]}" >> nvim/init.vim
+		[[ -f nvim/plug-set/1_0_lightline.vim ]] && echo "let g:lightline.colorscheme = '${schemes[$((selection - 1))]}'" >> nvim/plug-set/1_0_lightline.vim
 		;;
 esac

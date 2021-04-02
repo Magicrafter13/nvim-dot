@@ -9,3 +9,6 @@ all: nvim
 
 nvim:
 	@mkdir nvim
+
+uninstall:
+	@./main/uninstall.bash
