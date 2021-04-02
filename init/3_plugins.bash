@@ -128,7 +128,7 @@ nvim -es -u nvim/init.vim -i NONE +qa
 echo 'Upgrading vim-plug if possible...'
 nvim -es -u nvim/init.vim -i NONE +PlugUpgrade +qa
 echo 'Cleaning plugins...'
-nvim -es -u nvim/init.vim -i NONE +PlugClean +y +qa
+nvim -u nvim/init.vim -i NONE +PlugClean +qa <<< "y\n"
 echo 'Updating plugins if possible...'
 nvim -es -u nvim/init.vim -i NONE +PlugInstall +qa
 #echo 'Upgrading vim-plug, cleaning plugins, updating plugins, and installing any new plugins...'
