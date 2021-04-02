@@ -40,6 +40,27 @@ for cat in {0..9}; do
 				data[$key]="$val"
 			done < ${category}/${plug}
 
+			case $whatToDo in
+				n)
+					echo "Not implemented yet..."
+					;;
+				l)
+					echo -e "Plugin \e[1;33m'${data[repo]}'\e[0m with comment \e[1;33m${data[comment]}\e[0m"
+					echo 'Install this plugin? [Y/N]'
+					yesNo=
+					while [[ -z "$yesNo" ]]; do
+						read yesNo
+						case "$yesNo" in
+							y|Y) yesNo=yes ;;
+							n|N) yesNo=no ;;
+							*) yesNo= ;;
+						esac
+					done
+					data[default]=$yesNo
+					;;
+				d) ;;
+			esac
+
 			# Place plugin in file (if requested) TODO: add ability to manually include/exclude plugins instead of using default
 			if [[ ${data[default]} == yes ]]; then
 				plug_line="Plug '${data[repo]}'"
@@ -52,10 +73,10 @@ for cat in {0..9}; do
 					#end_block="$end_block"$([[ $nerdtree_step -eq 2 ]] && echo "'"' |\\n\\t\\\\ '"'")"${plug_line}"
 				fi
 				[[ -f ${category}/settings/${plug}.vim ]] && cp ${category}/settings/${plug}.vim ../nvim/plug-set/$([[ $nerdtree_step -lt 2 ]] && echo "${cat}_" || echo 'nerdtree/')${plug}.vim
-			fi
 
-			# If plugin is a colorscheme (or adds one), add it to the array
-			[[ -n "${data[colorscheme]}" ]] && schemes+=("${data[colorscheme]}")
+				# If plugin is a colorscheme (or adds one), add it to the array
+				[[ -n "${data[colorscheme]}" ]] && schemes+=("${data[colorscheme]}")
+			fi
 
 			unset data
 

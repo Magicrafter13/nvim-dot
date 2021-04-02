@@ -8,7 +8,8 @@ while read line; do
 done < nvim/colorschemes.temp
 rm nvim/colorschemes.temp
 
-case ${#schemes} in
+
+case ${#schemes[@]} in
 	0)
 		echo 'No colorschemes were installed! :('
 		exit

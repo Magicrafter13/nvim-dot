@@ -36,7 +36,7 @@ let g:lightline = {
 
 function! GitBranch()
 	try
-		if expand('%:t') !~? 'Tagbar\|NERD' && &filetype !=# 'help' && exists ('*FugitiveHead)')
+		if expand('%:t') !~? 'Tagbar\|NERD' && &filetype !=# 'help' && exists ('*FugitiveHead')
 			let mark = ''
 			let branch = FugitiveHead()
 			return branch !=# '' ? mark.branch : ''
@@ -60,7 +60,7 @@ function! FormatAndType()
 	let fname = expand('%:t')
 	return fname =~# '^__Tagbar__\|NERD_tree' ? '' :
 		\ &filetype ==# 'help' ? 'help' :
-		\ winwidth(0) > 70 ? &fileformat . ' ' . WebDevIconsGetFileFormatSymbol() . '  ' . (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+		\ winwidth(0) > 70 ? &fileformat . (exists ('*WebDevIconsGetFileFormatSymbol') ? ' ' . WebDevIconsGetFileFormatSymbol() : '') . '  ' . (strlen(&filetype) ? &filetype . (exists ('*WebDevIconsGetFileTypeSymbol') ? ' ' . WebDevIconsGetFileTypeSymbol() : '') : 'no ft') : ''
 endfunction
 
 function! Encoding()
