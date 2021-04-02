@@ -1,5 +1,7 @@
 #!/bin/bash
 
+declare -A pluginChanges
+
 schemes=()
 
 nerdtree_step=0
@@ -15,6 +17,27 @@ while [[ "$whatToDo" != n && "$whatToDo" != l && "$whatToDo" != d ]]; do
 	read whatToDo
 done
 echo
+
+# Determine plugins if [n]ow selected
+if [[ $whatToDo == n ]]; then
+	echo "Please change plugin defaults using number pairs, like so: category plugin yes/no"
+	echo -e "Example:\n\t1 0 no\nto disable lightline."
+	echo "Press enter (on a blank line) when finished."
+	read request
+	while [[ "$request" != "" ]]; do
+		if [[ -z "$(sed -r 's/^[0-9]+ [0-9]+ (yes|no)( .*)?$//' <<< "$request")" ]]; then
+			array=()
+			for delim in $(xargs <<< $request); do
+				[[ ${#array[@]} -eq 3 ]] && continue
+				array+=($delim)
+			done
+			pluginChanges["${array[0]}, ${array[1]}"]=${array[2]}
+		else
+			echo "Invalid Input:\n\t$request"
+		fi
+		read request
+	done
+fi
 
 # nvim/vim-plug.vim
 echo 'Constructing nvim/vim-plug.vim, and copying custom plugin settings to nvim/plug-set/'
@@ -42,7 +65,10 @@ for cat in {0..9}; do
 
 			case $whatToDo in
 				n)
-					echo "Not implemented yet..."
+					plugNum="${plug%%_*}"
+					if [[ -n "${pluginChanges["${cat}, ${plugNum}"]}" ]]; then
+						data[default]=$pluginChanges["${cat}, ${plugNum}"]
+					fi
 					;;
 				l)
 					echo -e "Plugin \e[1;33m'${data[repo]}'\e[0m with comment \e[1;33m${data[comment]}\e[0m"
@@ -89,6 +115,8 @@ cd ..
 echo 'call plug#end()' >> nvim/vim-plug.vim
 echo
 
+unset pluginChanges
+
 # Create colorscheme file
 for scheme in ${schemes[@]}; do
 	echo "$scheme" >> nvim/colorschemes.temp
@@ -100,7 +128,7 @@ nvim -es -u nvim/init.vim -i NONE +qa
 echo 'Upgrading vim-plug if possible...'
 nvim -es -u nvim/init.vim -i NONE +PlugUpgrade +qa
 echo 'Cleaning plugins...'
-nvim -es -u nvim/init.vim -i NONE +PlugClean +qa
+nvim -es -u nvim/init.vim -i NONE +PlugClean +y +qa
 echo 'Updating plugins if possible...'
 nvim -es -u nvim/init.vim -i NONE +PlugInstall +qa
 #echo 'Upgrading vim-plug, cleaning plugins, updating plugins, and installing any new plugins...'
