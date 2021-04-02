@@ -14,6 +14,7 @@ whatToDo=
 while [[ "$whatToDo" != n && "$whatToDo" != l && "$whatToDo" != d ]]; do
 	read whatToDo
 done
+echo
 
 # nvim/vim-plug.vim
 echo 'Constructing nvim/vim-plug.vim, and copying custom plugin settings to nvim/plug-set/'
@@ -65,6 +66,7 @@ for cat in {0..9}; do
 done
 cd ..
 echo 'call plug#end()' >> nvim/vim-plug.vim
+echo
 
 # Create colorscheme file
 for scheme in ${schemes[@]}; do

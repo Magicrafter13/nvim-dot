@@ -4,7 +4,6 @@ all: nvim
 	# Checking setup
 	#if symlink exists ~/.config/nvim (and it links to $PWD/nvim) do nothing
 	#otherwise...
-	# Constructing nvim/init.vim
 	@./main/init.bash
 
 nvim:
