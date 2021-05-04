@@ -67,7 +67,7 @@ for cat in {0..9}; do
 				n)
 					plugNum="${plug%%_*}"
 					if [[ -n "${pluginChanges["${cat}, ${plugNum}"]}" ]]; then
-						data[default]=$pluginChanges["${cat}, ${plugNum}"]
+						data[default]=${pluginChanges["${cat}, ${plugNum}"]}
 					fi
 					;;
 				l)

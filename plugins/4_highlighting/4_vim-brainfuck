@@ -1,0 +1,5 @@
+repo=llathasa-veleth/vim-brainfuck
+params=
+default=yes
+comment=Brainfuck syntax highlighting. Yes. I'm serious.
+
