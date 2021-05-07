@@ -1,4 +1,4 @@
 repo=aurieh/discord.nvim
 params=
-default=yes
+default=no
 comment=Discord Rich Presence
