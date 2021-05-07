@@ -25,12 +25,11 @@ case ${#schemes[@]} in
 			echo -e "\t$((i + 1))) $scheme"
 			i=$((i + 1))
 		done
-		selection=0
-		while [[ $selection -lt 1 || $selection -gt $i ]]; do
-			read selection
-			selection=$((selection))
-		done
-		echo "colorscheme ${schemes[$((selection - 1))]}" >> nvim/init.vim
-		[[ -f nvim/plug-set/1_0_lightline.vim ]] && echo "let g:lightline.colorscheme = '${schemes[$((selection - 1))]}'" >> nvim/plug-set/1_0_lightline.vim
+		read selection
+		selection=$((selection))
+		if [[ $selection -ge 1 && $selection -le $i ]]; then
+			echo "colorscheme ${schemes[$((selection - 1))]}" >> nvim/init.vim
+			[[ -f nvim/plug-set/1_0_lightline.vim ]] && echo "let g:lightline.colorscheme = '${schemes[$((selection - 1))]}'" >> nvim/plug-set/1_0_lightline.vim
+		fi
 		;;
 esac
