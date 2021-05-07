@@ -45,7 +45,7 @@ fi
 } > /dev/stderr
 
 # nvim/vim-plug.vim
-echo 'Constructing nvim/vim-plug.vim + copying plugin settings to nvim/plug-set/'
+echo -e '\e[1;31mConstructing nvim/vim-plug.vim...\e[0m and copying plugin settings to nvim/plug-set/'
 echo -e "\"\n\" Vim-Plug\n\"\ncall plug#begin(stdpath('data') . '/plugged')" > nvim/vim-plug.vim
 cd plugins
 for cat in {0..9}; do
@@ -120,6 +120,7 @@ for cat in {0..9}; do
 done > /dev/stderr
 cd ..
 echo 'call plug#end()' >> nvim/vim-plug.vim
+echo -e '\e[1;31mDone\e[0m'
 
 unset pluginChanges
 
