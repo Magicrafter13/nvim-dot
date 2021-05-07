@@ -3,7 +3,7 @@ set laststatus=2
 let g:lightline = {
 	\   'active': {
 	\     'left':  [ [ 'mode', 'paste', 'filename' ],
-	\                [ 'modread', 'git' ],
+	\                [ 'modread', 'git', 'cocstatus' ],
 	\                [ 'message' ] ],
 	\     'right': [ [ 'lineinfo' ],
 	\                [ 'percent' ],
@@ -29,6 +29,7 @@ let g:lightline = {
 	\     'mode':     'Mode',
 	\     'filename': 'FileName',
 	\     'lineinfo': 'Lineinfo',
+	\     'cocstatus': 'CocStatus',
 	\   },
 	\   'separator':    { 'left': '', 'right': '' },
 	\   'subseparator': { 'left': '', 'right': '' },
@@ -85,4 +86,8 @@ endfunction
 function! Lineinfo()
 	let fname = expand('%:t')
 	return fname =~# '^__Tagbar__\|NERD_tree' ? '' : ' ' . printf('%3d', line('.')) . ':' . col('.')
+endfunction
+
+function! CocStatus()
+	return exists("*coc#status") ? coc#status() : ''
 endfunction
