@@ -22,7 +22,7 @@ echo
 } > /dev/stderr
 
 # Determine plugins if [n]ow selected
-(
+{
 if [[ $whatToDo == n ]]; then
 	echo "Please change plugin defaults using number pairs, like so: category plugin yes/no"
 	echo -e "Example:\n\t1 0 no\nto disable lightline."
@@ -42,7 +42,7 @@ if [[ $whatToDo == n ]]; then
 		read request
 	done
 fi
-) > /dev/stderr
+} > /dev/stderr
 
 # nvim/vim-plug.vim
 echo 'Constructing nvim/vim-plug.vim + copying plugin settings to nvim/plug-set/'
