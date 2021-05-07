@@ -11,7 +11,7 @@ while [[ "$num" == temp ]]; do
 		1)
 			echo 'Neovim will use Klipper to Copy/Paste.'
 			cp main/kde_clipboard.vim nvim/clipboard.vim
-			#cp main/klipperCopy ~/.local/bin/
+			[ -d ~/.local/bin/ ] && [ ! -f ~/.local/bin/klipperCopy ] && cp main/klipperCopy ~/.local/bin/
 			;;
 		2) echo 'Xfce4 clipboard should work with Neovim out-of-the-box.' ;;
 		*) num='temp'
