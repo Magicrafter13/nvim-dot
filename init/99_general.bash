@@ -32,4 +32,4 @@ case ${#schemes[@]} in
 			[[ -f nvim/plug-set/1_0_lightline.vim ]] && echo "let g:lightline.colorscheme = '${schemes[$((selection - 1))]}'" >> nvim/plug-set/1_0_lightline.vim
 		fi
 		;;
-esac
+esac > /dev/stderr

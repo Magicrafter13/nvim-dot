@@ -4,21 +4,25 @@ declare -A pluginChanges
 
 schemes=()
 
+coc_step=0
 nerdtree_step=0
 end_block=
-nerdtree_addon=' |\n\t\\ '
+addon=' |\n\t\\ '
 
 echo -e '\e[1;32mSetting up Plugins...\e[0m'
 
 # Ask about customization
+{
 echo 'Would you like to change which plugins to install [n]ow or during [l]oop, or use [d]efaults?'
 whatToDo=
 while [[ "$whatToDo" != n && "$whatToDo" != l && "$whatToDo" != d ]]; do
 	read whatToDo
 done
 echo
+} > /dev/stderr
 
 # Determine plugins if [n]ow selected
+(
 if [[ $whatToDo == n ]]; then
 	echo "Please change plugin defaults using number pairs, like so: category plugin yes/no"
 	echo -e "Example:\n\t1 0 no\nto disable lightline."
@@ -38,6 +42,7 @@ if [[ $whatToDo == n ]]; then
 		read request
 	done
 fi
+) > /dev/stderr
 
 # nvim/vim-plug.vim
 echo 'Constructing nvim/vim-plug.vim + copying plugin settings to nvim/plug-set/'
@@ -46,7 +51,8 @@ cd plugins
 for cat in {0..9}; do
 	category=`ls -d ${cat}_* 2>/dev/null`
 	if [[ -n "${category}" ]]; then
-		[[ "${category#*_}" == nerdtree ]] && nerdtree_step=1
+		[[ "${category#*_}" == coc ]] && coc_step=1
+		[[ "${category#*_}" == nerdtree ]] && coc_step=0 nerdtree_step=1 && echo >> ../nvim/vim-plug.vim
 		echo "\" $category" >> ../nvim/vim-plug.vim
 		for plug in ${category}/*; do
 			plug="${plug#${category}/}"
@@ -91,14 +97,14 @@ for cat in {0..9}; do
 			if [[ ${data[default]} == yes ]]; then
 				plug_line="Plug '${data[repo]}'"
 				[[ -n "${data[params]}" ]] && plug_line="${plug_line}, ${data[params]}"
-				if [[ $nerdtree_step -eq 0 ]]; then
+				if [[ $coc_step -eq 0 && $nerdtree_step -eq 0 ]]; then
 					echo "$plug_line \" ${data[comment]}" >> ../nvim/vim-plug.vim
 				else
-					echo -e "\" $([[ $nerdtree_step -eq 2 ]] && echo '\t')${data[comment]}" >> ../nvim/vim-plug.vim
-					[[ $nerdtree_step -eq 2 ]] && end_block="${end_block}${nerdtree_addon}${plug_line}" || end_block="$plug_line"
+					echo -e "\" $([[ $coc_step -eq 2 || $nerdtree_step -eq 2 ]] && echo '\t')${data[comment]}" >> ../nvim/vim-plug.vim
+					[[ $coc_step -eq 2 || $nerdtree_step -eq 2 ]] && end_block="${end_block}${addon}${plug_line}" || end_block="$plug_line"
 					#end_block="$end_block"$([[ $nerdtree_step -eq 2 ]] && echo "'"' |\\n\\t\\\\ '"'")"${plug_line}"
 				fi
-				[[ -f ${category}/settings/${plug}.vim ]] && cp ${category}/settings/${plug}.vim ../nvim/plug-set/$([[ $nerdtree_step -lt 2 ]] && echo "${cat}_" || echo 'nerdtree/')${plug}.vim
+				[[ -f ${category}/settings/${plug}.vim ]] && cp ${category}/settings/${plug}.vim ../nvim/plug-set/$([[ $coc_step -lt 2 && $nerdtree_step -lt 2 ]] && echo "${cat}_" || echo $([ $coc_step -eq 2 ] && echo 'coc' || echo 'nerdtree')'/')${plug}.vim
 
 				# If plugin is a colorscheme (or adds one), add it to the array
 				[[ -n "${data[colorscheme]}" ]] && schemes+=("${data[colorscheme]}")
@@ -106,11 +112,12 @@ for cat in {0..9}; do
 
 			unset data
 
+			[[ $coc_step -eq 1 && "${plug#*_}" == coc ]] && coc_step=2
 			[[ $nerdtree_step -eq 1 && "${plug#*_}" == nerdtree ]] && nerdtree_step=2
 		done
 	fi
 	echo -e "$end_block" >> ../nvim/vim-plug.vim
-done
+done > /dev/stderr
 cd ..
 echo 'call plug#end()' >> nvim/vim-plug.vim
 

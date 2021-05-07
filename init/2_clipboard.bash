@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo -e '\e[1;32mSetting up Clipboard Provider...\e[0m'
-echo -e 'Select System Environment\n\t0) None\n\t1) KDE\n\t2) Xfce'
+echo -e 'Select System Environment\n\t0) None\n\t1) KDE\n\t2) Xfce' > /dev/stderr
 
 num='temp'
 while [[ "$num" == temp ]]; do

@@ -8,7 +8,7 @@ all: nvim
 	@rm -rf nvim/*
 	@mkdir -p nvim/plug-set/nerdtree
 	@./main/link.bash
-	@./main/init.bash
+	-@./main/init.bash
 	@./main/cleanup.bash
 
 nvim:
@@ -18,10 +18,9 @@ uninstall:
 	@./main/uninstall.bash
 
 config:
-	@echo -e "\e[1;31mPress ^D when finished.\e[0m"
 	@echo > .tmp
-	@[ -n "$(color)" ] && echo $(color) >> .tmp
-	@cat $(cfgs:%=configs/%) .tmp $$([ -z "$(color)" ] && echo '-') | $(MAKE) all --no-print-directory
+	@[ -n "$(color)" ] && echo $(color) >> .tmp || echo -e "\e[1;31mPress ^D when finished.\e[0m"
+	@cat $(cfgs:%=configs/%) .tmp $$([ -z "$(color)" ] && echo '-') | $(MAKE) all --no-print-directory 2> /dev/null
 	@rm .tmp
 
 .PHONY: all uninstall config
