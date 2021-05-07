@@ -5,7 +5,6 @@ default:
 	@[ -f .cfgs ] && cfgs="$$(cat .cfgs)" color=$$([ -f .color ] && cat .color) $(MAKE) -e all --no-print-directory || $(MAKE) -e all --no-print-directory
 
 all: nvim
-	@rm -rf nvim/*
 	@mkdir -p nvim/plug-set/nerdtree
 	@if [ -n "$(cfgs)" ]; then echo > .tmp; [ -n "$(color)" ] && echo $(color) >> .tmp || echo -e "\e[1;31mPress ^D when finished.\e[0m"; fi
 	@./main/link.bash
@@ -20,7 +19,10 @@ all: nvim
 nvim:
 	@mkdir nvim
 
+clean:
+	@rm -rf nvim/*
+
 uninstall:
 	@./main/uninstall.bash
 
-.PHONY: all uninstall
+.PHONY: all clean uninstall
