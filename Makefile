@@ -1,14 +1,20 @@
-cfgs =
+cfgs  =
 color =
 
 default:
-	@[ -f .cfgs ] && cfgs="$$(cat .cfgs)" color=$$([ -f .color ] && cat .color) $(MAKE) -e config --no-print-directory || $(MAKE) -e all --no-print-directory
+	@[ -f .cfgs ] && cfgs="$$(cat .cfgs)" color=$$([ -f .color ] && cat .color) $(MAKE) -e all --no-print-directory || $(MAKE) -e all --no-print-directory
 
 all: nvim
 	@rm -rf nvim/*
 	@mkdir -p nvim/plug-set/nerdtree
+	@if [ -n "$(cfgs)" ]; then echo > .tmp; [ -n "$(color)" ] && echo $(color) >> .tmp || echo -e "\e[1;31mPress ^D when finished.\e[0m"; fi
 	@./main/link.bash
-	-@./main/init.bash
+	-@if [ -n "$(cfgs)" ]; then\
+			cat $(cfgs:%=configs/%) .tmp $$([ -z "$(color)" ] && echo '-') | ./main/init.bash $$([ -z "$(color)" ] && echo 'nocolor' || echo 'color'); \
+			rm .tmp; \
+		else \
+			./main/init.bash; \
+		fi
 	@./main/cleanup.bash
 
 nvim:
@@ -17,10 +23,4 @@ nvim:
 uninstall:
 	@./main/uninstall.bash
 
-config:
-	@echo > .tmp
-	@[ -n "$(color)" ] && echo $(color) >> .tmp || echo -e "\e[1;31mPress ^D when finished.\e[0m"
-	@cat $(cfgs:%=configs/%) .tmp $$([ -z "$(color)" ] && echo '-') | $(MAKE) all --no-print-directory 2> /dev/null
-	@rm .tmp
-
-.PHONY: all uninstall config
+.PHONY: all uninstall
