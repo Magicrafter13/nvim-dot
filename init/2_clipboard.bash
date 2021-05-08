@@ -7,13 +7,19 @@ num='temp'
 while [[ "$num" == temp ]]; do
 	read num
 	case "$num" in
-		0) echo 'Continuing without custom clipboard provider.' ;;
+		0)
+			echo 'Continuing without custom clipboard provider.'
+			rm -f nvim/clipboard.vim
+			;;
 		1)
 			echo 'Neovim will use Klipper to Copy/Paste.'
 			cp main/kde_clipboard.vim nvim/clipboard.vim
 			[ -d "$HOME"/.local/bin/ ] && [ ! -f "$HOME"/.local/bin/klipperCopy ] && cp main/klipperCopy "$HOME"/.local/bin/
 			;;
-		2) echo 'Xfce4 clipboard should work with Neovim out-of-the-box.' ;;
+		2)
+			echo 'Xfce4 clipboard should work with Neovim out-of-the-box.'
+			rm -f nvim/clipboard.vim
+			;;
 		*) num='temp'
 	esac
 done
