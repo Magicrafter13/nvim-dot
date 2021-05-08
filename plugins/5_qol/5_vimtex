@@ -1,4 +1,4 @@
 repo=lervag/vimtex
 params=
-default=yes
+default=no
 comment=Filetype plugin for LaTeX files
