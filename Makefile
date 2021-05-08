@@ -2,9 +2,11 @@ cfgs  =
 color =
 
 default:
-	@[ -f .cfgs ] && cfgs="$$(cat .cfgs)" color=$$([ -f .color ] && cat .color) $(MAKE) -e all --no-print-directory || $(MAKE) -e all --no-print-directory
+	@[ -f .config ] && cfgs="$$(sed -nr '/^base=/{s/^base=([^ ]+).*/base_\1/p;q}' .config) $$(sed -nr '/^envs=/{s/^envs=//;s/([^ ]+)/env_\1/g;p;q}' .config) $$(sed -nr '/^yes=/{s/^yes=//;s/([^ ]+)/yes-\1/g;p;q}' .config) $$(sed -nr '/^no=/{s/^no=//;s/([^ ]+)/no-\1/g;p;q}' .config) $$(sed -nr '/^dev=/{s/^dev=//;s/([^ ]+)/dev-\1/g;p;q}' .config)" color=$$(sed -nr '/^color=/{s/^color=([^ ]+).*/\1/p;q}' .config) $(MAKE) -e all --no-print-directory
 
 all: nvim
+	@echo $(cfgs)
+	@echo $(color)
 	@$(MAKE) clean-partial --no-print-directory
 	@mkdir -p nvim/plug-set/nerdtree
 	@if [ -n "$(cfgs)" ]; then echo > .tmp; [ -n "$(color)" ] && echo $(color) >> .tmp || echo -e "\e[1;31mPress ^D when finished.\e[0m"; fi
@@ -30,4 +32,4 @@ clean-partial:
 uninstall:
 	@./main/uninstall.bash
 
-.PHONY: all clean uninstall
+.PHONY: all clean clean-partial uninstall
