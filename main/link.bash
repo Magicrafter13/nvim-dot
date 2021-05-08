@@ -1,6 +1,6 @@
 #!/bin/bash
 
-config="${XDG_CONFIG_HOME:-~/.config}"
+config="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 # Checking setup
 if [[ -L "$config"/nvim ]]; then

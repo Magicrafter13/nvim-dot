@@ -5,7 +5,7 @@ echo 'Clearing out ./nvim/'
 make clean --no-print-directory
 
 # Check for ${XDG_DATA_DIR}/nvim/plugged, and delete
-data="${XDG_DATA_DIR:-~/.local/share}"
+data="${XDG_DATA_DIR:-$HOME/.local/share}"
 if [[ -d "$data" ]]; then
 	echo 'Deleting plugins'
 	rm -rf "$data"/nvim/plugged
@@ -13,7 +13,7 @@ if [[ -d "$data" ]]; then
 fi
 
 # Remove symlink
-config="${XDG_CONFIG_HOME:-~/.config}"
+config="${XDG_CONFIG_HOME:-$HOME/.config}"
 if [[ -L "$config"/nvim ]]; then
 	if [[ ! "$config"/nvim/ -ef ./nvim/ ]]; then
 		echo "${config}/nvim exists, and is a symbolic link, but does not point to ${PWD}/nvim?"
