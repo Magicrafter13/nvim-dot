@@ -25,6 +25,7 @@ clean:
 
 clean-partial:
 	@rm -f nvim/init.vim
+	@rm -f nvim/coc-settings.json
 	@rm -rf nvim/plug-set/*
 
 uninstall:

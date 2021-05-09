@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 declare -A pluginChanges
 
@@ -101,17 +101,21 @@ for cat in {0..9}; do
 				plug_line="Plug '${data[repo]}'"
 				[[ -n "${data[params]}" ]] && plug_line="${plug_line}, ${data[params]}"
 				if [[ $coc_step -eq 0 && $nerdtree_step -eq 0 ]]; then
-					[[ $plugNum -eq 0 && $cat -eq 8 ]] && coc_enabled=yes
 					echo "$plug_line \" ${data[comment]}" >> ../nvim/vim-plug.vim
 					[[ -f ${category}/settings/${plug}.vim ]] && cp ${category}/settings/${plug}.vim ../nvim/plug-set/${cat}_${plug}.vim
-				elif [[ $cat -eq 8 && $coc_enabled == yes ]] || [[ $cat -ne 8 ]]; then
-					echo -e "\" $([[ $coc_step -eq 2 || $nerdtree_step -eq 2 ]] && echo '\t')${data[comment]}" >> ../nvim/vim-plug.vim
+				else
+					if [[ $cat -ne 8 ]] || [[ $plugNum -eq 0 || $coc_enabled == yes ]]; then
+						echo -e "\" $([[ $coc_step -eq 2 || $nerdtree_step -eq 2 ]] && echo '\t')${data[comment]}" >> ../nvim/vim-plug.vim
+					fi
 					case $coc_step in
 						2)
 							coc_block="${coc_block}${addon}${plug_line}"
 							coc_extra="$([[ -z "$coc_extra" ]]  && echo 'let g:coc_global_extensions = [' || echo "${coc_extra}, ")'${data[cocinstall]}'"
 							;;
-						1) coc_block="$plug_line" ;;
+						1)
+							coc_block="$plug_line"
+							coc_enabled=yes
+							;;
 					esac
 					case $nerdtree_step in
 						2) nerdtree_block="${nerdtree_block}${addon}${plug_line}" ;;
@@ -131,14 +135,14 @@ for cat in {0..9}; do
 			[[ $nerdtree_step -eq 1 && "${plug#*_}" == nerdtree ]] && nerdtree_step=2
 		done
 	fi
-	[[ -n "$coc_block" ]] && echo -e "$coc_block" >> ../nvim/vim-plug.vim && coc_block=
+	[[ $coc_enabled == yes && -n "$coc_block" ]] && echo -e "$coc_block" >> ../nvim/vim-plug.vim && coc_block=
 	echo -e "$nerdtree_block" >> ../nvim/vim-plug.vim
 done > /dev/stderr
 cd ..
 echo 'call plug#end()' >> nvim/vim-plug.vim
 echo -e '\e[1;31mDone\e[0m'
-[[ $coc_enabled == yes ]] && coc_extra="${coc_extra}]"
-echo "$coc_extra" >> nvim/vim-plug.vim
+coc_extra="${coc_extra}]"
+[[ $coc_enabled == yes ]] && echo "$coc_extra" >> nvim/vim-plug.vim
 
 unset pluginChanges
 
