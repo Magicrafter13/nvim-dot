@@ -1,0 +1,4 @@
+"rpc.workspaceElapsedTime": true,
+"rpc.checkIdle": 10,
+"rpc.idleText": "Checking StackOverflow...",
+"rpc.lowerDetailsIdle": "Checking StackOverflow...",
