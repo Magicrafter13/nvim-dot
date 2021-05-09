@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 declare -A pluginChanges
 
@@ -115,6 +115,7 @@ for cat in {0..9}; do
 						1)
 							coc_block="$plug_line"
 							coc_enabled=yes
+							echo '{' > ../nvim/coc-settings.json
 							;;
 					esac
 					case $nerdtree_step in
@@ -142,7 +143,7 @@ cd ..
 echo 'call plug#end()' >> nvim/vim-plug.vim
 echo -e '\e[1;31mDone\e[0m'
 [[ -n "$coc_extra" ]] && coc_extra="${coc_extra}]"
-[[ $coc_enabled == yes ]] && echo "$coc_extra" >> nvim/vim-plug.vim
+[[ $coc_enabled == yes ]] && echo "$coc_extra" >> nvim/vim-plug.vim && echo '}' >> nvim/coc-settings.json
 
 unset pluginChanges
 
