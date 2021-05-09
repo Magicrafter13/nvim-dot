@@ -109,7 +109,7 @@ for cat in {0..9}; do
 					fi
 					case $coc_step in
 						2)
-							coc_block="${coc_block}${addon}${plug_line}"
+							#coc_block="${coc_block}${addon}${plug_line}"
 							coc_extra="$([[ -z "$coc_extra" ]]  && echo 'let g:coc_global_extensions = [' || echo "${coc_extra}, ")'${data[cocinstall]}'"
 							;;
 						1)
@@ -123,7 +123,11 @@ for cat in {0..9}; do
 						1) nerdtree_block="$plug_line" ;;
 					esac
 					[[ -f ${category}/settings/${plug}.vim ]] && cp ${category}/settings/${plug}.vim ../nvim/plug-set/$([[ $coc_step -lt 2 && $nerdtree_step -lt 2 ]] && echo "${cat}_" || echo $([ $coc_step -eq 2 ] && echo 'coc' || echo 'nerdtree')'/')${plug}.vim
-					[[ $coc_step -gt 0 ]] && [[ -f ${category}/settings/${plug}.json ]] && sed -r 's/^/\t/' ${category}/settings/${plug}.json >> ../nvim/coc-settings.json
+					if [[ $coc_step -gt 0 ]] && [[ -f ${category}/settings/${plug}.json ]]; then
+						echo -e "\t// ${plug}" >> ../nvim/coc-settings.json
+						sed -r 's/^/\t/' ${category}/settings/${plug}.json >> ../nvim/coc-settings.json
+						echo >> ../nvim/coc-settings.json
+					fi
 				fi
 
 				# If plugin is a colorscheme (or adds one), add it to the array
@@ -161,3 +165,13 @@ echo 'Cleaning plugins...'
 nvim -es -u nvim/init.vim -i NONE +PlugClean! +qa! <<< "y"
 echo 'Updating plugins...'
 nvim -es -u nvim/init.vim -i NONE +PlugUpdate +qa <<< ""
+
+# Clean coc extensions
+if [[ $coc_enabled == yes && -f "$HOME"/.config/coc/extensions/package.json ]]; then
+	echo 'Cleaning coc extensions'
+	for extension in $(sed -nr '/    "/{s/^\s+"([^"]+)":.*/\1/; p}' "$HOME"/.config/coc/extensions/package.json); do
+		if [[ "$coc_extra" != *"'$extension'"* ]]; then
+			sed -nri.bak "/    \"$extension\"/d;p" "$HOME"/.config/coc/extensions/package.json
+		fi
+	done
+fi

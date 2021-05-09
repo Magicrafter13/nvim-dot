@@ -1,0 +1,6 @@
+repo=LeonardSSH/coc-discord-rpc
+params=
+default=no
+comment=Fully customizable Discord Rich Presence integration for NeoVim and coc.
+
+cocinstall=coc-discord-rpc
