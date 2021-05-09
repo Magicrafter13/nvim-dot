@@ -103,6 +103,7 @@ for cat in {0..9}; do
 				if [[ $coc_step -eq 0 && $nerdtree_step -eq 0 ]]; then
 					[[ $plugNum -eq 0 && $cat -eq 8 ]] && coc_enabled=yes
 					echo "$plug_line \" ${data[comment]}" >> ../nvim/vim-plug.vim
+					[[ -f ${category}/settings/${plug}.vim ]] && cp ${category}/settings/${plug}.vim ../nvim/plug-set/${cat}_${plug}.vim
 				elif [[ $cat -eq 8 && $coc_enabled == yes ]] || [[ $cat -ne 8 ]]; then
 					echo -e "\" $([[ $coc_step -eq 2 || $nerdtree_step -eq 2 ]] && echo '\t')${data[comment]}" >> ../nvim/vim-plug.vim
 					case $coc_step in
@@ -116,9 +117,9 @@ for cat in {0..9}; do
 						2) nerdtree_block="${nerdtree_block}${addon}${plug_line}" ;;
 						1) nerdtree_block="$plug_line" ;;
 					esac
+					[[ -f ${category}/settings/${plug}.vim ]] && cp ${category}/settings/${plug}.vim ../nvim/plug-set/$([[ $coc_step -lt 2 && $nerdtree_step -lt 2 ]] && echo "${cat}_" || echo $([ $coc_step -eq 2 ] && echo 'coc' || echo 'nerdtree')'/')${plug}.vim
+					[[ $coc_step -gt 0 ]] && [[ -f ${category}/settings/${plug}.json ]] && cat ${category}/settings/${plug}.json >> ../nvim/coc-settings.json
 				fi
-				[[ -f ${category}/settings/${plug}.vim ]] && cp ${category}/settings/${plug}.vim ../nvim/plug-set/$([[ $coc_step -lt 2 && $nerdtree_step -lt 2 ]] && echo "${cat}_" || echo $([ $coc_step -eq 2 ] && echo 'coc' || echo 'nerdtree')'/')${plug}.vim
-				[[ $coc_step -gt 0 ]] && [[ -f ${category}/settings/${plug}.json ]] && cat ${category}/settings/${plug}.json >> ../nvim/coc-settings.json
 
 				# If plugin is a colorscheme (or adds one), add it to the array
 				[[ -n "${data[colorscheme]}" ]] && schemes+=("${data[colorscheme]}")
