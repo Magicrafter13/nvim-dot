@@ -123,7 +123,7 @@ for cat in {0..9}; do
 						1) nerdtree_block="$plug_line" ;;
 					esac
 					[[ -f ${category}/settings/${plug}.vim ]] && cp ${category}/settings/${plug}.vim ../nvim/plug-set/$([[ $coc_step -lt 2 && $nerdtree_step -lt 2 ]] && echo "${cat}_" || echo $([ $coc_step -eq 2 ] && echo 'coc' || echo 'nerdtree')'/')${plug}.vim
-					[[ $coc_step -gt 0 ]] && [[ -f ${category}/settings/${plug}.json ]] && cat ${category}/settings/${plug}.json >> ../nvim/coc-settings.json
+					[[ $coc_step -gt 0 ]] && [[ -f ${category}/settings/${plug}.json ]] && sed -r 's/^/\t/' ${category}/settings/${plug}.json >> ../nvim/coc-settings.json
 				fi
 
 				# If plugin is a colorscheme (or adds one), add it to the array
@@ -143,7 +143,7 @@ cd ..
 echo 'call plug#end()' >> nvim/vim-plug.vim
 echo -e '\e[1;31mDone\e[0m'
 [[ -n "$coc_extra" ]] && coc_extra="${coc_extra}]"
-[[ $coc_enabled == yes ]] && echo "$coc_extra" >> nvim/vim-plug.vim && echo '}' >> nvim/coc-settings.json
+[[ $coc_enabled == yes ]] && echo "$coc_extra" >> nvim/vim-plug.vim && echo -e '\t"": ""\n}' >> nvim/coc-settings.json
 
 unset pluginChanges
 
