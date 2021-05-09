@@ -2,3 +2,5 @@ repo=neoclide/coc-java
 params=
 default=no
 comment=Java extension for coc.nvim
+
+cocinstall=coc-java
