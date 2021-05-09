@@ -141,7 +141,7 @@ done > /dev/stderr
 cd ..
 echo 'call plug#end()' >> nvim/vim-plug.vim
 echo -e '\e[1;31mDone\e[0m'
-coc_extra="${coc_extra}]"
+[[ -n "$coc_extra" ]] && coc_extra="${coc_extra}]"
 [[ $coc_enabled == yes ]] && echo "$coc_extra" >> nvim/vim-plug.vim
 
 unset pluginChanges
