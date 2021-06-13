@@ -1,6 +1,6 @@
 repo=kyoz/purify
 params={ 'rtp': 'vim' }
-default=yes
+default=no
 comment=Bright, vibrant theme for ViM
 
 colorscheme=purify

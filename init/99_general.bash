@@ -2,11 +2,13 @@
 
 echo -e '\e[1;32mSetting colorscheme\e[0m'
 
-schemes=()
+declare -A schemes
 while read line; do
-	schemes+=("$line")
+	num=${line%% *}
+	name=${line#* }
+	schemes[$num]="$name"
 done < nvim/colorschemes.temp
-rm nvim/colorschemes.temp
+rm -f nvim/colorschemes.temp
 
 
 case ${#schemes[@]} in
@@ -15,21 +17,21 @@ case ${#schemes[@]} in
 		exit
 		;;
 	1)
-		echo "colorscheme ${schemes[0]}" >> nvim/init.vim
-		[[ -f nvim/plug-set/1_0_lightline.vim ]] && echo "let g:lightline.colorscheme = '${schemes[0]}'" >> nvim/plug-set/1_0_lightline.vim
+		echo "colorscheme ${schemes[@]}" >> nvim/init.vim
+		[[ -f nvim/plug-set/1_0_lightline.vim ]] && echo "let g:lightline.colorscheme = '${schemes[@]}'" >> nvim/plug-set/1_0_lightline.vim
 		;;
 	*)
 		echo 'More than 1 colorscheme installed, please select one to use by default:'
-		i=0
-		for scheme in "${schemes[@]}"; do
-			echo -e "\t$((i + 1))) $scheme"
-			i=$((i + 1))
+		for num in "${!schemes[@]}"; do
+			echo -e "\t$num) ${schemes[$num]}"
 		done
 		read selection
 		selection=$((selection))
-		if [[ $selection -ge 1 && $selection -le $i ]]; then
-			echo "colorscheme ${schemes[$((selection - 1))]}" >> nvim/init.vim
-			[[ -f nvim/plug-set/1_0_lightline.vim ]] && echo "let g:lightline.colorscheme = '${schemes[$((selection - 1))]}'" >> nvim/plug-set/1_0_lightline.vim
+		if [[ -n "${schemes[$selection]}" ]]; then
+			echo "colorscheme ${schemes[$selection]}" >> nvim/init.vim
+			[[ -f nvim/plug-set/1_0_lightline.vim ]] && echo "let g:lightline.colorscheme = '${schemes[$selection]}'" >> nvim/plug-set/1_0_lightline.vim
 		fi
 		;;
 esac > /dev/stderr
+
+unset schemes

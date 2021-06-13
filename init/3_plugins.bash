@@ -26,13 +26,14 @@ echo
 
 # Determine plugins if [n]ow selected
 {
+set -f
 if [[ $whatToDo == n ]]; then
 	echo "Please change plugin defaults using number pairs, like so: category plugin yes/no"
 	echo -e "Example:\n\t1 0 no\nto disable lightline."
 	echo "Press enter (on a blank line) when finished."
 	read request
 	while [[ "$request" != "" ]]; do
-		if [[ -z "$(sed -r 's/^[0-9]+ [0-9]+ (yes|no)( .*)?$//' <<< "$request")" ]]; then
+		if [[ -z "$(sed -r 's/^[0-9]+ ([0-9]+|\*) (yes|no)( .*)?$//' <<< "$request")" ]]; then
 			array=()
 			for delim in $(xargs <<< $request); do
 				[[ ${#array[@]} -eq 3 ]] && continue
@@ -40,15 +41,16 @@ if [[ $whatToDo == n ]]; then
 			done
 			pluginChanges["${array[0]}, ${array[1]}"]=${array[2]}
 		else
-			echo "Invalid Input:\n\t$request"
+			echo -e "Invalid Input:\n\t$request"
 		fi
 		read request
 	done
 fi
+set +f
 } > /dev/stderr
 
 # nvim/vim-plug.vim
-echo -e '\e[1;31mConstructing nvim/vim-plug.vim...\e[0m and copying plugin settings to nvim/plug-set/'
+echo -e '\e[1;31mConstructing nvim/vim-plug.vim... and copying plugin settings to nvim/plug-set/\e[0m'
 echo -e "\"\n\" Vim-Plug\n\"\ncall plug#begin(stdpath('data') . '/plugged')" > nvim/vim-plug.vim
 cd plugins
 for cat in {0..9}; do
@@ -75,7 +77,9 @@ for cat in {0..9}; do
 			case $whatToDo in
 				n)
 					plugNum="${plug%%_*}"
-					if [[ -n "${pluginChanges["${cat}, ${plugNum}"]}" ]]; then
+					if [[ -n "${pluginChanges["${cat}, *"]}" ]]; then
+						data[default]=${pluginChanges["${cat}, *"]}
+					elif [[ -n "${pluginChanges["${cat}, ${plugNum}"]}" ]]; then
 						data[default]=${pluginChanges["${cat}, ${plugNum}"]}
 					fi
 					;;
@@ -131,7 +135,7 @@ for cat in {0..9}; do
 				fi
 
 				# If plugin is a colorscheme (or adds one), add it to the array
-				[[ -n "${data[colorscheme]}" ]] && schemes+=("${data[colorscheme]}")
+				[[ -n "${data[colorscheme]}" ]] && schemes+=("$plugNum ${data[colorscheme]}")
 			fi
 
 			unset data
@@ -152,7 +156,7 @@ echo -e '\e[1;31mDone\e[0m'
 unset pluginChanges
 
 # Create colorscheme file
-for scheme in ${schemes[@]}; do
+for scheme in "${schemes[@]}"; do
 	echo "$scheme" >> nvim/colorschemes.temp
 done
 

@@ -1,6 +1,6 @@
 repo=arcticicestudio/nord-vim
 params=
-default=yes
+default=no
 comment=Nord Vim
 
 colorscheme=nord
