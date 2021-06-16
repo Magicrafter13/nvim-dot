@@ -20,4 +20,5 @@ set noruler " [DEFAULT] doesn't show position in file - covered by lightline
 set noconfirm " [DEFAULT] don't automatically confirm y/n actions
 set history=2000
 set nospell " [DEFAULT] disables spellcheck - who the hell would use this in a code editor???
+set mouse=nvc " Allow mouse input for normal, visual, and command modes (excluding insert)
 
