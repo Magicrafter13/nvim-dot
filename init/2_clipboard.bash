@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo -e '\e[1;32mSetting up Clipboard Provider...\e[0m'
-echo -e 'Select System Environment\n\t0) None\n\t1) KDE\n\t2) Xfce' > /dev/stderr
+echo -e 'Select System Environment\n\t0) None\n\t1) KDE\n\t2) Xfce\n\t3) Termux' > /dev/stderr
 
 num='temp'
 while [[ "$num" == temp ]]; do
@@ -19,6 +19,10 @@ while [[ "$num" == temp ]]; do
 		2)
 			echo 'Xfce4 clipboard should work with Neovim out-of-the-box.'
 			rm -f nvim/clipboard.vim
+			;;
+		3)
+			echo 'Neovim will use Termux API. Make sure to install the package, and the corresponding Android package!'
+			cp main/termux_clipboard.vim nvim/clipboard.vim
 			;;
 		*) num='temp'
 	esac
