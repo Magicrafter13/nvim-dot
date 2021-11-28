@@ -1,0 +1,6 @@
+repo=neoclide/coc-eslint
+params=
+default=no
+comment=Eslint language server extension for coc.nvim
+
+cocinstall=coc-eslint
