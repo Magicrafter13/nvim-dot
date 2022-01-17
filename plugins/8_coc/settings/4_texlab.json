@@ -1,2 +1,4 @@
-"latex.build.onSave": true,
-"latex.lint.onChange": true,
+"texlab.build.onSave": true,
+"texlab.lint.onChange": true,
+"texlab.auxDirectory": ".latex",
+"texlab.formatterLineLength": 80,
