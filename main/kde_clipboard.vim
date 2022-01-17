@@ -2,11 +2,11 @@
 let g:clipboard = {
 	\   'name': 'klipper',
 	\   'copy': {
-	\     '+': 'klipperCopy 2> ~/klipper.log',
-	\     '*': 'klipperCopy > ~/klipper.log',
+	\     '+': 'klipperCopy',
+	\     '*': 'xclip -i',
 	\   },
 	\   'paste': {
 	\     '+': 'qdbus org.kde.klipper /klipper getClipboardContents',
-	\     '*': 'qdbus org.kde.klipper /klipper getClipboardContents',
+	\     '*': 'xclip -o',
 	\   },
 	\ }
