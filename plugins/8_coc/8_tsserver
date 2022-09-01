@@ -1,0 +1,6 @@
+repo=neoclide/coc-tsserver
+params=
+default=no
+comment=Tsserver extension for coc.nvim, for javascript and typescript
+
+cocinstall=coc-tsserver
