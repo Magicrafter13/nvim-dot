@@ -1,0 +1,5 @@
+"eslint.enable": true,
+"eslint.run": "onType",
+"eslint.autoFixOnSave": false,
+"eslint.quiet": false,
+"eslint.format.enable": true,
