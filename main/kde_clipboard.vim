@@ -3,10 +3,10 @@ let g:clipboard = {
 	\   'name': 'klipper',
 	\   'copy': {
 	\     '+': 'klipperCopy',
-	\     '*': 'xclip -i',
+	\     '*': 'xclip -i -selection clipboard',
 	\   },
 	\   'paste': {
 	\     '+': 'qdbus org.kde.klipper /klipper getClipboardContents',
-	\     '*': 'xclip -o',
+	\     '*': 'xclip -o -selection clipboard',
 	\   },
 	\ }
