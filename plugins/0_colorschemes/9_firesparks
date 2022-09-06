@@ -1,0 +1,6 @@
+repo=dsalychev/firesparks
+params=
+default=no
+comment=A fireplace-like ViM colorscheme
+
+colorscheme=firesparks-256-bright

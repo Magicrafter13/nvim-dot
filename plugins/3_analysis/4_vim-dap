@@ -1,0 +1,4 @@
+repo=dradtke/vim-dap
+params=
+default=no
+comment=Vim plugin for integration with DAP (Debug Adapter Protocol)
