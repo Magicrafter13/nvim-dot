@@ -137,12 +137,13 @@ def build_plugins():
                     line += f" \" {plugin['comment']}"
                 file.write(f'{line}\n')
                 copy_vim_script(category, plug)
+    if plugins['nerdtree']['nerdtree']['default']:
+        file.write('\n')
+    file.write('call plug#end()\n')
     if plugins['coc']['coc']['default']:
-        file.write('\ncall plug#end()\nlet g:coc_global_extensions = [')
+        file.write('let g:coc_global_extensions = [')
         file.write(', '.join(["'" + obj['cocinstall'] + "'" for name, obj in plugins['coc'].items() if name != 'coc' and obj['default']]))
         file.write(']\n')
-    else:
-        file.write('call plug#end()\n')
     print('\033[1;31mDone\033[0m')
     file.close()
     #os.chdir(original_dir)
@@ -200,7 +201,7 @@ def create_init():
     if len(schemes_installed) == 0:
         print("No colorschemes were installed! :(")
     elif len(schemes_installed) == 1:
-        set_colorscheme(rc, schemes_installed.values()[0]['colorscheme'])
+        set_colorscheme(rc, list(schemes_installed.values())[0]['colorscheme'])
     elif len(config['colors']) > 0:
         set_colorscheme(rc, schemes_installed[config['colors'][0]]['colorscheme'])
     else:
