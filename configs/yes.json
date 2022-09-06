@@ -1,0 +1,16 @@
+{
+	"all-color": {
+		"colorschemes": true
+	},
+	"coc": {
+		"coc": {
+			"coc": true,
+			"json": true
+		}
+	},
+	"intellij": {
+		"misc": {
+			"comrade": true
+		}
+	}
+}

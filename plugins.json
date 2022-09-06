@@ -1,0 +1,307 @@
+{
+	"colorschemes": {
+		"purify": {
+			"repo": "kyoz/purify",
+			"params": "{ 'rtp': 'vim' }",
+			"default": false,
+			"comment": "Bright, vibrant theme for ViM",
+			"colorscheme": "purify"
+		},
+		"dracula": {
+			"repo": "dracula/vim",
+			"params": "{ 'as': 'dracula' }",
+			"default": false,
+			"comment": "Dracula ViM theme",
+			"colorscheme": "dracula"
+		},
+		"onedark": {
+			"repo": "joshdick/onedark.vim",
+			"default": false,
+			"comment": "Inspired by Atom's One Dark theme",
+			"colorscheme": "onedark"
+		},
+		"nord-vim": {
+			"repo": "arcticicestudio/nord-vim",
+			"default": false,
+			"comment": "Nord Vim",
+			"colorscheme": "nord"
+		},
+		"oldhope": {
+			"repo": "j-tom/vim-old-hope",
+			"default": false,
+			"comment": "An Old Hope ported to ViM. Colors based on Star Wars: A New Hope",
+			"colorscheme": "OldHope"
+		},
+		"tokyonight": {
+			"repo": "ghifarit53/tokyonight-vim",
+			"default": false,
+			"comment": "VS Code inspired theme",
+			"colorscheme": "tokyonight"
+		},
+		"dzo": {
+			"repo": "Blevs/vim-dzo",
+			"default": false,
+			"comment": "A dark color scheme for vim.",
+			"colorscheme": "dzo"
+		},
+		"solas": {
+			"repo": "damage220/solas.vim",
+			"default": false,
+			"comment": "Dark color scheme based on PhpStorm.",
+			"colorscheme": "solas"
+		},
+		"vorange": {
+			"repo": "Marfisc/vorange",
+			"default": false,
+			"comment": "Minimalist dark colorscheme based on Srcery.",
+			"colorscheme": "vorange"
+		},
+		"firesparks": {
+			"repo": "dsalychev/firesparks",
+			"default": false,
+			"comment": "A fireplace-like ViM colorscheme",
+			"colorscheme": "firesparks-256-bright"
+		}
+	},
+	"statusbar": {
+		"lightline": {
+			"repo": "itchyny/lightline.vim",
+			"default": true,
+			"comment": "Fancy status bar at bottom of screen"
+		},
+		"vim-gitbranch": {
+			"repo": "itchyny/vim-gitbranch",
+			"default": false,
+			"comment": "Shows current git branch (integrated with lightline)"
+		}
+	},
+	"source": {
+		"vim-fugitive": {
+			"repo": "tpope/vim-fugitive",
+			"default": true,
+			"comment": "Allows running git commands from ViM, with :Git"
+		},
+		"vim-gitgutter": {
+			"repo": "airblade/vim-gitgutter",
+			"default": true,
+			"comment": "When looking at modified file in git repo, shows markings (+, -, ~) on side to indicate changes"
+		},
+		"undotree": {
+			"repo": "mbbill/undotree",
+			"default": true,
+			"comment": "Visual Undo Tree"
+		},
+		"tagbar": {
+			"repo": "majutsushi/tagbar",
+			"default": true,
+			"comment": "Browse tags of file (like classes, variables, and functions)"
+		},
+		"taglist": {
+			"repo": "vim-scripts/taglist.vim",
+			"default": false
+		}
+	},
+	"analysis": {
+		"ale": {
+			"repo": "dense-analysis/ale",
+			"default": true,
+			"comment": "Code linter"
+		},
+		"syntastic": {
+			"repo": "scrooloose/syntastic",
+			"default": true,
+			"comment": "Syntax checking plugin, that runs through external syntax checkers"
+		},
+		"vim-classpath": {
+			"repo": "tpope/vim-classpath",
+			"default": false,
+			"comment": "Set Java classpath"
+		},
+		"nvim-gdb": {
+			"repo": "sakhnik/nvim-gdb",
+			"params": "{ 'do': ':!./install.sh' }",
+			"default": false,
+			"comment": "gdb integration with NeoVim"
+		},
+		"vim-dap": {
+			"repo": "dradtke/vim-dap",
+			"default": false,
+			"comment": "Vim plugin for integration with DAP (Debug Adapter Protocol)"
+		},
+		"vim-jdb": {
+			"repo": "https://gitlab.com/Dica-Developer/vim-jdb",
+			"default": false,
+			"comment": "Java debugger (jdb) integration for ViM"
+		}
+	},
+	"highlighting": {
+		"vim-rainbow": {
+			"repo": "frazrepo/vim-rainbow",
+			"default": true,
+			"comment": "Multi-color brackets for ease-of-use"
+		},
+		"vim-css-color": {
+			"repo": "ap/vim-css-color",
+			"default": false,
+			"comment": "Realtime CSS color preview (RGB hex)"
+		},
+		"vim-css3-syntax": {
+			"repo": "hail2u/vim-css3-syntax",
+			"default": false,
+			"comment": "Improved CSS syntax highlighting"
+		},
+		"vim-rockstar": {
+			"repo": "sirosen/vim-rockstar",
+			"default": false,
+			"comment": "Rockstar syntax highlighting ..."
+		},
+		"vim-brainfuck": {
+			"repo": "llathasa-veleth/vim-brainfuck",
+			"default": false,
+			"comment": "Brainfuck syntax highlighting. Yes. I'm serious."
+		},
+		"vim-glsl": {
+			"repo": "tikhomirov/vim-glsl",
+			"default": false,
+			"comment": "OpenGL Shading Language syntax highlighting"
+		}
+	},
+	"qol": {
+		"vim-eunuch": {
+			"repo": "tpope/vim-eunuch",
+			"default": false,
+			"comment": "'Vim sugar for the UNIX shell commands that need it most'"
+		},
+		"suda": {
+			"repo": "lambdalisue/suda.vim",
+			"default": true,
+			"comment": "Alternative for suda.vim, adds :SudaWrite (Neovim specific, workaround for bug)"
+		},
+		"auto-pairs": {
+			"repo": "jiangmiao/auto-pairs",
+			"default": true,
+			"comment": "Automatically creates the closing brackets when the first one is typed"
+		},
+		"vim-float-terminal": {
+			"repo": "ZhiyuanLck/vim-float-terminal",
+			"default": false,
+			"comment": "[CURRENTLY DOESN'T SUPPORT NEOVIM] No longer required to open a new Window to use :term"
+		},
+		"vim-numbertoggle": {
+			"repo": "jeffkreeftmeijer/vim-numbertoggle",
+			"default": true,
+			"comment": "Toggle relativenumber based on current context"
+		},
+		"vimtex": {
+			"repo": "lervag/vimtex",
+			"default": false,
+			"comment": "Filetype plugin for LaTeX files"
+		}
+	},
+	"misc": {
+		"discord0": {
+			"repo": "ObserverOfTime/discord.nvim",
+			"default": false,
+			"comment": "Discord Rich Presence"
+		},
+		"discord1": {
+			"repo": "aurieh/discord.nvim",
+			"default": false,
+			"comment": "Discord Rich Presence"
+		},
+		"firenvim": {
+			"repo": "glacambre/firenvim",
+			"params": "{ 'do': { _ -> firenvim#install(0) } }",
+			"default": false,
+			"comment": "Embed NeoVim in Firefox browser!"
+		},
+		"comrade": {
+			"repo": "beeender/Comrade",
+			"default": false,
+			"comment": "Android Studio (IntelliJ) \"Magic\" with NeoVim."
+		},
+		"latex-live": {
+			"repo": "xuhdev/vim-latex-live-preview",
+			"default": false,
+			"comment": "Live Previewing of LaTeX PDF Output"
+		}
+	},
+	"coc": {
+		"coc": {
+			"repo": "neoclide/coc.nvim",
+			"params": "{ 'branch': 'release' }",
+			"default": false,
+			"comment": "Intellisense engine (code completion)"
+		},
+		"java": {
+			"repo": "neoclide/coc-java",
+			"default": false,
+			"comment": "Java extension for coc.nvim",
+			"cocinstall": "coc-java"
+		},
+		"discord": {
+			"repo": "LeonardSSH/coc-discord-rpc",
+			"default": false,
+			"comment": "Fully customizable Discord Rich Presence integration for NeoVim and coc.",
+			"cocinstall": "coc-discord-rpc"
+		},
+		"clangd": {
+			"repo": "clangd/coc-clangd",
+			"default": false,
+			"comment": "clangd language extension for coc (C/C++)",
+			"cocinstall": "coc-clangd"
+		},
+		"texlab": {
+			"repo": "fannheyward/coc-texlab",
+			"default": false,
+			"comment": "TexLab extension for coc (LaTeX)",
+			"cocinstall": "coc-texlab"
+		},
+		"html": {
+			"repo": "neoclide/coc-html",
+			"default": false,
+			"comment": "HTML extension for coc.nvim",
+			"cocinstall": "coc-html"
+		},
+		"json": {
+			"repo": "neoclide/coc-json",
+			"default": false,
+			"comment": "json extension for coc.nvim",
+			"cocinstall": "coc-json"
+		},
+		"eslint": {
+			"repo": "neoclide/coc-eslint",
+			"default": false,
+			"comment": "Eslint language server extension for coc.nvim",
+			"cocinstall": "coc-eslint"
+		},
+		"tsserver": {
+			"repo": "neoclide/coc-tsserver",
+			"default": false,
+			"comment": "Tsserver extension for coc.nvim, for javascript and typescript",
+			"cocinstall": "coc-tsserver"
+		}
+	},
+	"nerdtree": {
+		"nerdtree": {
+			"repo": "preservim/nerdtree",
+			"default": true,
+			"comment": "File tree explorer. Open with :NERDTree"
+		},
+		"nerdtree-git-plugin": {
+			"repo": "Xuyuanp/nerdtree-git-plugin",
+			"default": true,
+			"comment": "Adds git markers to NERDTree (like showing changes, or ignored files)"
+		},
+		"vim-devicons": {
+			"repo": "ryanoasis/vim-devicons",
+			"default": true,
+			"comment": "Icons for the fonts for other plugins...? something like that"
+		},
+		"vim-nerdtree-syntax-highlight": {
+			"repo": "tiagofumo/vim-nerdtree-syntax-highlight",
+			"default": true,
+			"comment": "Colors devicons based on filetype"
+		}
+	}
+}

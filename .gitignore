@@ -1,5 +1,4 @@
 /nvim/
-/.cfgs
-/.color
-/.config
+/config.json
 /config.ini
+Session.vim

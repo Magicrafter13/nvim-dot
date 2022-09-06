@@ -1,0 +1,25 @@
+{
+	"manjaroKDE": {
+		"clipboard": 1,
+		"plugins": {
+			"misc": {
+				"firenvim": true
+			},
+			"coc": {
+				"discord": true
+			}
+		}
+	},
+	"manjaroXfce": {
+		"clipboard": 2,
+		"plugins": {}
+	},
+	"headless": {
+		"clipboard": 0,
+		"plugins": {}
+	},
+	"termux": {
+		"clipboard": 3,
+		"plugins": {}
+	}
+}

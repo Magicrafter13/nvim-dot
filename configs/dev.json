@@ -1,0 +1,52 @@
+{
+	"c": {
+		"analysis": {
+			"nvim-gdb": true
+		},
+		"coc": {
+			"clangd": true
+		}
+	},
+	"fun": {
+		"highlighting": {
+			"vim-rockstar": true,
+			"vim-brainfuck": true
+		}
+	},
+	"java": {
+		"analysis": {
+			"vim-classpath": true,
+			"vim-jdb": true
+		},
+		"coc": {
+			"java": true
+		}
+	},
+	"latex": {
+		"qol": {
+			"vimtex": true
+		},
+		"misc": {
+			"latex-live": true
+		},
+		"coc": {
+			"texlab": true
+		}
+	},
+	"opengl": {
+		"highlighting": {
+			"vim-glsl": true
+		}
+	},
+	"web": {
+		"highlighting": {
+			"vim-css-color": true,
+			"vim-css3-syntax": true
+		},
+		"coc": {
+			"html": true,
+			"eslint": true,
+			"tsserver": true
+		}
+	}
+}
