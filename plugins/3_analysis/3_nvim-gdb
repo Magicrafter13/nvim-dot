@@ -1,4 +1,0 @@
-repo=sakhnik/nvim-gdb
-params={ 'do': ':!./install.sh' }
-default=no
-comment=gdb integration with NeoVim

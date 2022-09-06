@@ -1,6 +1,0 @@
-repo=neoclide/coc-html
-params=
-default=no
-comment=HTML extension for coc.nvim
-
-cocinstall=coc-html

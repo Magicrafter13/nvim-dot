@@ -1,4 +1,0 @@
-repo=ap/vim-css-color
-params=
-default=no
-comment=Realtime CSS color preview (RGB hex)

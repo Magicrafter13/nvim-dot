@@ -1,4 +1,0 @@
-repo=lambdalisue/suda.vim
-params=
-default=yes
-comment=Alternative for suda.vim, adds :SudaWrite (Neovim specific, workaround for bug)

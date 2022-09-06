@@ -1,4 +1,0 @@
-repo=airblade/vim-gitgutter
-params=
-default=yes
-comment=When looking at modified file in git repo, shows markings (+, -, ~) on side to indicate changes

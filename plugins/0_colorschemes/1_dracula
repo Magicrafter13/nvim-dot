@@ -1,6 +1,0 @@
-repo=dracula/vim
-params={ 'as': 'dracula' }
-default=no
-comment=Dracula ViM theme
-
-colorscheme=dracula

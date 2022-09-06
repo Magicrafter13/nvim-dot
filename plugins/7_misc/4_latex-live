@@ -1,4 +1,0 @@
-repo=xuhdev/vim-latex-live-preview
-params=
-default=no
-comment=Live Previewing of LaTeX PDF Output

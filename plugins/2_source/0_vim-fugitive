@@ -1,4 +1,0 @@
-repo=tpope/vim-fugitive
-params=
-default=yes
-comment=Allows running git commands from ViM, with :Git

@@ -1,4 +1,0 @@
-repo=dense-analysis/ale
-params=
-default=yes
-comment=Code linter

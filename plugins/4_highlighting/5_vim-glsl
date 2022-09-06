@@ -1,4 +1,0 @@
-repo=tikhomirov/vim-glsl
-params=
-default=no
-comment=OpenGL Shading Language syntax highlighting

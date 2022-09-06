@@ -1,6 +1,0 @@
-repo=fannheyward/coc-texlab
-params=
-default=no
-comment=TexLab extension for coc (LaTeX)
-
-cocinstall=coc-texlab

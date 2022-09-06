@@ -1,6 +1,0 @@
-repo=j-tom/vim-old-hope
-params=
-default=no
-comment=An Old Hope ported to ViM. Colors based on Star Wars: A New Hope
-
-colorscheme=OldHope

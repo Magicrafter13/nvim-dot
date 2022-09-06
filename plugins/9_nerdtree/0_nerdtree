@@ -1,4 +1,0 @@
-repo=preservim/nerdtree
-params=
-default=yes
-comment=File tree explorer. Open with :NERDTree

@@ -1,6 +1,0 @@
-repo=damage220/solas.vim
-params=
-default=no
-comment=Dark color scheme based on PhpStorm.
-
-colorscheme=solas

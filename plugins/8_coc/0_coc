@@ -1,4 +1,0 @@
-repo=neoclide/coc.nvim
-params={'branch': 'release'}
-default=no
-comment=Intellisense engine (code completion)

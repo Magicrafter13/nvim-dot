@@ -1,4 +1,0 @@
-repo=glacambre/firenvim
-params={ 'do': { _ -> firenvim#install(0) } }
-default=no
-comment=Embed NeoVim in Firefox browser!

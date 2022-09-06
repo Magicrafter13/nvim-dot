@@ -1,4 +1,0 @@
-repo=tpope/vim-classpath
-params=
-default=no
-comment=Set Java classpath

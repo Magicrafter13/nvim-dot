@@ -1,4 +1,0 @@
-repo=ZhiyuanLck/vim-float-terminal
-params=
-default=no
-comment=[CURRENTLY DOESN'T SUPPORT NEOVIM] No longer required to open a new Window to use :term

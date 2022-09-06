@@ -1,4 +1,0 @@
-repo=https://gitlab.com/Dica-Developer/vim-jdb
-params=
-default=no
-comment=Java debugger (jdb) integration for ViM

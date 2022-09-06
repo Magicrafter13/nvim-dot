@@ -1,6 +1,0 @@
-repo=neoclide/coc-json
-params=
-default=no
-comment=json extension for coc.nvim
-
-cocinstall=coc-json

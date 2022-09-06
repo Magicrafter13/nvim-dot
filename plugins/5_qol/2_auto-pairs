@@ -1,4 +1,0 @@
-repo=jiangmiao/auto-pairs
-params=
-default=yes
-comment=Automatically creates the closing brackets when the first one is typed

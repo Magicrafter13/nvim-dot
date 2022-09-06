@@ -1,6 +1,0 @@
-repo=Blevs/vim-dzo
-params=
-default=no
-comment=A dark color scheme for vim.
-
-colorscheme=dzo

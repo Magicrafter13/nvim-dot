@@ -1,4 +1,0 @@
-repo=itchyny/vim-gitbranch
-params=
-default=no
-comment=Shows current git branch (integrated with lightline)

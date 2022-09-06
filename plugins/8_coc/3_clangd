@@ -1,6 +1,0 @@
-repo=clangd/coc-clangd
-params=
-default=no
-comment=clangd language extension for coc (C/C++)
-
-cocinstall=coc-clangd
