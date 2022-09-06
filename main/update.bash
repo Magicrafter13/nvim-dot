@@ -1,7 +1,9 @@
 #!/bin/bash
 
 echo 'Installing vim-plug + new plugins...'
-nvim -es -u nvim/init.vim -i NONE +qa <<< ""
+if ! nvim -es -u nvim/init.vim -i NONE +qa <<< ""; then
+	nvim -es -u nvim/init.vim -i NONE +PlugInstall +qa <<< ""
+fi
 echo 'Updating vim-plug...'
 nvim -es -u nvim/init.vim -i NONE +PlugUpgrade +qa <<< ""
 echo 'Cleaning plugins...'
