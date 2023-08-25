@@ -9,7 +9,7 @@ def draw_single_selection_menu(stdscr, things, title):
     """Create a menu where the user selects a single option (either with space
     or enter)"""
     last_idx = len(things.keys()) - 1
-    iterate = enumerate(things.keys())
+    iterate = list(enumerate(things.keys()))
 
     highlighted_row = 0
     while True:
@@ -35,9 +35,10 @@ def draw_single_selection_menu(stdscr, things, title):
         stdscr.refresh()
 
         key = stdscr.getch()
-        if key == curses.KEY_UP and highlighted_row > 0:
+        if (key == curses.KEY_UP or key == ord('k')) and highlighted_row > 0:
             highlighted_row -= 1
-        elif key == curses.KEY_DOWN and highlighted_row < last_idx:
+        elif (key == curses.KEY_DOWN or
+                key == ord('j')) and highlighted_row < last_idx:
             highlighted_row += 1
         elif key == ord('\n') or key == ord(' '):
             break
@@ -51,7 +52,7 @@ def draw_checkbox_menu(stdscr, things, title):
     also press a to quickly check all options"""
     # pylint: disable=too-many-locals
     last_idx = len(things.keys()) - 1
-    iterate = enumerate(things.keys())
+    iterate = list(enumerate(things.keys()))
 
     highlighted_row = 0
     selected_rows = set()
@@ -81,9 +82,10 @@ def draw_checkbox_menu(stdscr, things, title):
         stdscr.refresh()
 
         key = stdscr.getch()
-        if key == curses.KEY_UP and highlighted_row > 0:
+        if (key == curses.KEY_UP or key == ord('k')) and highlighted_row > 0:
             highlighted_row -= 1
-        elif key == curses.KEY_DOWN and highlighted_row < last_idx:
+        elif (key == curses.KEY_DOWN or
+                key == ord('j')) and highlighted_row < last_idx:
             highlighted_row += 1
         elif key == ord(' '):
             if highlighted_row in selected_rows:
