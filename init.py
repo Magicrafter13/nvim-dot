@@ -223,9 +223,11 @@ def main(stdscr):
         elif key == ord('\n'):
             break
 
-    colors = selected_rows
+    colors = []
+    for idx in selected_rows:
+        colors.append(list(colors_list.keys())[idx])
     for idx in range(0, len(colors_list))[::-1]:
-        if idx not in colors:
+        if idx not in selected_rows:
             colors_list.pop(list(colors_list.keys())[idx])
     # stdscr.addstr(0, 0, f"Envs selected: {colors}")
     # stdscr.getch()
@@ -249,27 +251,24 @@ def main(stdscr):
             elif key == ord('\n'):
                 break
 
-        color = list(colors)[selected_row]
+        color = selected_row
 
     #
     # End
     #
 
-    with open(".config", "w", encoding="UTF-8") as config:
+    with open("config.json", "w", encoding="UTF-8") as config:
         if len(colors) > 0:
-            colors.remove(color)
-        config.write(f"""[System]
-base={base}
-envs={' '.join(envs)}
-
-[Additional]
-yes={' '.join(yes)}
-no={' '.join(_no)}
-dev={' '.join(dev)}
-
-[Color]
-colors={(str(color) + ' ' + ' '.join(str(_n) for _n in colors)) if len(colors) > 0 else ''}
-""")  # noqa: E501
+            colors.insert(0, colors.pop(color))
+        config.write(f"""{{
+    "base": "{base}",
+    "environment": [{", ".join(f'"{token}"' for token in envs)}],
+    "yes": [{", ".join(f'"{token}"' for token in yes)}],
+    "no": [{", ".join(f'"{token}"' for token in _no)}],
+    "dev": [{", ".join(f'"{token}"' for token in dev)}],
+    "colors": [{", ".join(f'"{token}"' for token in colors)}]
+}}
+""")
 
 
 if __name__ == "__main__":
