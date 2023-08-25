@@ -1,11 +1,7 @@
 default:
 	@$(MAKE) -e all --no-print-directory
 
-all: nvim
-# Create config file if it doesn't exist
-ifeq ("$(wildcard .config)","")
-	@./init.py
-endif
+all: config.json nvim
 # Clean some files
 	@$(MAKE) clean-partial --no-print-directory
 	@mkdir -p nvim/plug-set/coc nvim/plug-set/nerdtree
@@ -17,9 +13,6 @@ endif
 	@./main/update.bash
 # Final cleanup
 	@./main/cleanup.bash
-
-nvim:
-	@mkdir nvim
 
 clean:
 	@rm -rf nvim/*
@@ -33,3 +26,9 @@ uninstall:
 	@./main/uninstall.bash
 
 .PHONY: all clean clean-partial uninstall
+
+nvim:
+	@mkdir nvim
+
+config.json:
+	@./init.py
