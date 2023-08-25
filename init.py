@@ -57,26 +57,6 @@ def main(stdscr):
     curses.curs_set(0)  # Hide the cursor
     stdscr.clear()      # Clear the screen
 
-    # Get the screen dimensions
-    height, width = stdscr.getmaxyx()
-
-    # Print something in the center of the screen
-    message = "Welcome to My Ncurses App!"
-    _x = width // 2 - len(message) // 2
-    _y = height // 2
-
-    stdscr.addstr(_y, _x, message)
-
-    # Refresh the screen to display changes
-    stdscr.refresh()
-
-    # Wait for user input
-    key = stdscr.getch()
-
-    # Exit the loop if the user presses 'q'
-    if key == ord('q'):
-        return
-
     #
     # [System]
     #

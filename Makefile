@@ -2,6 +2,10 @@ default:
 	@$(MAKE) -e all --no-print-directory
 
 all: nvim
+# Create config file if it doesn't exist
+ifeq ("$(wildcard .config)","")
+	@./init.py
+endif
 # Clean some files
 	@$(MAKE) clean-partial --no-print-directory
 	@mkdir -p nvim/plug-set/coc nvim/plug-set/nerdtree
