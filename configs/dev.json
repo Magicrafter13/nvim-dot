@@ -48,5 +48,10 @@
 			"eslint": true,
 			"tsserver": true
 		}
+	},
+	"rust": {
+		"coc": {
+			"rust": true
+		}
 	}
 }

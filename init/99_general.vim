@@ -14,7 +14,7 @@ set hlsearch
 set incsearch " show search results as soon as typing begins, instead of waiting for <CR>
 set noignorecase " [DEFAULT] don't ignore case when searching
 set noautoindent
-set titlestring=%t
+let &titlestring="vim - " . expand("%:t")
 set title
 set noruler " [DEFAULT] doesn't show position in file - covered by lightline
 set noconfirm " [DEFAULT] don't automatically confirm y/n actions

@@ -99,6 +99,12 @@
 		"taglist": {
 			"repo": "vim-scripts/taglist.vim",
 			"default": false
+		},
+		"treesitter": {
+			"repo": "nvim-treesitter/nvim-treesitter",
+			"params": "{ 'do': ':TSUpdate' }",
+			"default": false,
+			"comment": "Code folding"
 		}
 	},
 	"analysis": {
@@ -280,6 +286,12 @@
 			"default": false,
 			"comment": "Tsserver extension for coc.nvim, for javascript and typescript",
 			"cocinstall": "coc-tsserver"
+		},
+		"rust": {
+			"repo": "fannheyward/coc-rust-analyzer",
+			"default": false,
+			"comment": "Analysis/linting through rust-analyzer package.",
+			"cocinstall": "coc-rust-analyzer"
 		}
 	},
 	"nerdtree": {
