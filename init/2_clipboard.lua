@@ -1,3 +1,2 @@
-" Setup system clipboard if needed
-runtime! clipboard.vim
-
+-- Setup system clipboard if needed
+require("clipboard")

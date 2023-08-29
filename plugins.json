@@ -1,15 +1,17 @@
 {
-	"colorschemes": {
-		"purify": {
+	"broken": {
+		"colorschemes/purify": {
 			"repo": "kyoz/purify",
 			"params": "{ 'rtp': 'vim' }",
 			"default": false,
 			"comment": "Bright, vibrant theme for ViM",
 			"colorscheme": "purify"
-		},
+		}
+	},
+	"colorschemes": {
 		"dracula": {
 			"repo": "dracula/vim",
-			"params": "{ 'as': 'dracula' }",
+			"params": "name = 'dracula'",
 			"default": false,
 			"comment": "Dracula ViM theme",
 			"colorscheme": "dracula"
@@ -22,6 +24,7 @@
 		},
 		"nord-vim": {
 			"repo": "arcticicestudio/nord-vim",
+			"params": "lazy = false",
 			"default": false,
 			"comment": "Nord Vim",
 			"colorscheme": "nord"
@@ -102,7 +105,7 @@
 		},
 		"treesitter": {
 			"repo": "nvim-treesitter/nvim-treesitter",
-			"params": "{ 'do': ':TSUpdate' }",
+			"params": "build = function() vim.cmd('TSUpdate') end",
 			"default": false,
 			"comment": "Code folding"
 		}
@@ -125,7 +128,7 @@
 		},
 		"nvim-gdb": {
 			"repo": "sakhnik/nvim-gdb",
-			"params": "{ 'do': ':!./install.sh' }",
+			"params": "build = function() vim.cmd('!./install.sh') end",
 			"default": false,
 			"comment": "gdb integration with NeoVim"
 		},
@@ -135,7 +138,8 @@
 			"comment": "Vim plugin for integration with DAP (Debug Adapter Protocol)"
 		},
 		"vim-jdb": {
-			"repo": "https://gitlab.com/Dica-Developer/vim-jdb",
+			"repo": "Dica-Developer/vim-jdb",
+			"params": "url = 'https://gitlab.com/Dica-Developer/vim-jdb', lazy = false",
 			"default": false,
 			"comment": "Java debugger (jdb) integration for ViM"
 		}
@@ -217,7 +221,7 @@
 		},
 		"firenvim": {
 			"repo": "glacambre/firenvim",
-			"params": "{ 'do': { _ -> firenvim#install(0) } }",
+			"params": "lazy = not vim.g.started_by_firenvim, build = function() vim.fn['firenvim#install'](0) end",
 			"default": false,
 			"comment": "Embed NeoVim in Firefox browser!"
 		},
@@ -235,7 +239,7 @@
 	"coc": {
 		"coc": {
 			"repo": "neoclide/coc.nvim",
-			"params": "{ 'branch': 'release' }",
+			"params": "branch = 'release'",
 			"default": false,
 			"comment": "Intellisense engine (code completion)"
 		},

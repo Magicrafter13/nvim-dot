@@ -1,16 +1,18 @@
-" Make sure vim-plug is installed
-let data_dir = stdpath('data') . '/site'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-	silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-"" Install any new plugins
-"autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-"	\| PlugInstall --sync | source $MYVIMRC
-"\| endif
+-- Make sure lazy.nvim is installed (bootstrap)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
 
-" Initialize Plugins
-runtime! vim-plug.vim
-" Plugin settings
-runtime! plug-set/*.vim
-
+-- Initialize plugins
+require("lazy-init")
+-- Plugin settings
+require("plug-set")

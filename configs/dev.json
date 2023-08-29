@@ -16,7 +16,7 @@
 	"java": {
 		"analysis": {
 			"vim-classpath": true,
-			"vim-jdb": true
+			"vim-jdb": false
 		},
 		"coc": {
 			"java": true

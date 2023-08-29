@@ -74,105 +74,74 @@ def parse_config():
             plugins['colorschemes'][color]['default'] = True
 
 
-def copy_vim_script(category, plug):
-    """Copy over the vim-script file for a designated plugin (if it exists)"""
-    src = f"settings/{category}/{plug}.vim"
+def copy_lua_script(category, plug):
+    """Copy over the lua script file for a designated plugin (if it exists)"""
+    src = f"settings/{category}/{plug}.lua"
     if os.path.exists(src):
-        dst = 'nvim/plug-set'
+        name = ""
         if category in {"coc", "nerdtree"}:
             if category == plug:
-                dst += f"/{category}.vim"
+                name = category
             else:
-                dst += f"/{category}/{plug}.vim"
+                name = f"{category}/{plug}"
         else:
-            dst += f"/{category}_{plug}.vim"
-        os.system(f"cp {src} {dst}")
+            name = f"{category}_{plug}"
+        os.system(f"cp {src} nvim/lua/plug-set/{name}.lua")
+        with open("nvim/lua/plug-set/init.lua", 'a', encoding="UTF-8") as _f:
+            _f.write(f'require("plug-set/{name}")\n')
 
 
 _NL = '\n'
 
 
 def construct_plugin_line(category: str, plug: str, plugin: dict):
-    """Construct a "Plug ..." line for use with Vim-Plug"""
-    line = ""
-    if category == "nerdtree":
-        if plug != "nerdtree":
-            line += " |\n\t\\ "
-        line += f'Plug \'{plugin["repo"]}\''
-        if "params" in plugin:
-            line += f', {plugin["params"]}'
-        return line, False
-    line = f'Plug \'{plugin["repo"]}\''
+    """Construct a plugin spec line for use with lazy.nvim"""
+    line = f'"{plugin["repo"]}",'
     if "params" in plugin:
-        line += f', {plugin["params"]}'
+        line = f'{{ {line} {plugin["params"]} }},'
+    elif category == "nerdtree" and not plug == "nerdtree":
+        line = f'{{ {line} dependencies = { "nerdtree" } }},'
     if "comment" in plugin:
-        line += f" \" {plugin['comment']}"
-    return line, True
+        line += f" -- {plugin['comment']}"
+    return line
 
 
 def build_plugins():
-    """Construct the vim-plug.vim file (plugin loader)"""
+    """Construct the lazy_init.lua file (plugin loader)"""
     print("\033[1;32mSetting up Plugins...\033[0m")
     print(
-        "\033[1;31mConstructing nvim/vim-plug.vim... and copying plugin "
-        "settings to nvim/plug-set/\033[0m")
-    data = """"
-" Vim-Plug
-"
-call plug#begin(stdpath('data') . '/plugged')"""
+        "\033[1;31mConstructing nvim/lua/lazy_init.lua... and copying plugin "
+        "settings to\n\tnvim/lua/plug-set/\033[0m")
+    data = """--
+-- lazy.nvim
+--
+vim.g.mapleader = " "
+
+require("lazy").setup({"""
     # Go through plugins dir
     # original_dir = os.getcwd()
     # os.chdir(original_dir + "/plugins")
     # Variable init
     for category in list(plugins):
-        data += f"\n\" {category}\n"
-        # Special category rules
-        if category in {"coc", "nerdtree"}:
-            if not plugins[category][category]['default']:
-                continue
-            data += f'" {plugins[category][category]["comment"]}\n'
-            for sub, obj in plugins[category].items():
-                if sub != category and obj['default']:
-                    data += f'" \t{plugins[category][sub]["comment"]}\n'
-                    copy_vim_script(category, sub)
-            copy_vim_script(category, category)
-            if category == "coc":
-                plugin = plugins[category][category]
-                data += f'Plug \'{plugin["repo"]}\'' + (
-                    f', {plugin["params"]}\n' if "params" in plugin else "\n")
-                # Gather settings
-                coc_settings = [
-                    f"// {name}\n"
-                    f"{read_file(f'settings/{category}/{name}.json')}"
-                    for name, obj in plugins[category].items()
-                    if obj['default'] and os.path.exists(
-                        f"settings/{category}/{name}.json")]
-                if len(coc_settings) > 0:
-                    write_file(
-                        "nvim/coc-settings.json",
-                        f'{{\n{_NL.join(coc_settings)}\n"": ""\n}}\n')
-                continue
+        data += f"\n\t-- {category}\n"
         for plug in list(plugins[category]):
             # Read file?
             plugin = plugins[category][plug]
             if plugin['default']:
-                line, _nc = construct_plugin_line(category, plug, plugin)
-                if not _nc:
-                    data += line
-                    continue
-                data += f'{line}\n'
-                copy_vim_script(category, plug)
+                line = construct_plugin_line(category, plug, plugin)
+                data += f"\t{line}\n"
+                copy_lua_script(category, plug)
     if plugins['nerdtree']['nerdtree']['default']:
         data += '\n'
-    data += 'call plug#end()\n'
+    data += "})\n"
     if plugins['coc']['coc']['default']:
-        data += 'let g:coc_global_extensions = ['
-        data += ', '.join([
+        data += "vim.g.coc_global_extensions = {"
+        data += ", ".join([
             f"'{obj['cocinstall']}'"
             for name, obj in plugins['coc'].items()
             if name != 'coc' and obj['default']])
-        data += ']\n'
-    write_file("nvim/vim-plug.vim", data)
+        data += "}\n"
+    write_file("nvim/lua/lazy-init.lua", data)
     print('\033[1;31mDone\033[0m')
     # os.chdir(original_dir)
     # Install/Update
@@ -183,26 +152,28 @@ def set_colorscheme(name):
     """Set the colorscheme for NeoVim and lightline"""
     if plugins['statusbar']['lightline']['default']:
         with open(
-            'nvim/plug-set/statusbar_lightline.vim',
+            'nvim/lua/plug-set/statusbar_lightline.lua',
             'a',
             encoding="UTF-8"
         ) as _vs:
-            _vs.write(f"let g:lightline.colorscheme = '{name}'")
-    return f"colorscheme {name}\n"
+            _vs.write(f'''local old_lightline = vim.g.lightline or {{}}
+old_lightline.colorscheme = "{name}"
+vim.g.lightline = old_lightline''')
+    return f'vim.cmd("colorscheme {name}")\n'
 
 
 def create_init():
-    """Construct the primary NeoVim config file (init.vim)"""
+    """Construct the primary NeoVim config file (init.lua)"""
     # TO-DO: make this more adaptable
-    data = "".join(read_file(f"init/{_p}") for _p in [
-        '0_truecolor.vim',
-        '1_cursor.vim',
-        '2_clipboard.vim',
-        '3_plugins.vim',
-        '80_binary.vim',
-        '81_spell.vim',
-        '90_remaps.vim',
-        '99_general.vim'
+    data = "\n".join(read_file(f"init/{_p}") for _p in [
+        '0_truecolor.lua',
+        '1_cursor.lua',
+        '2_clipboard.lua',
+        '3_plugins.lua',
+        '80_binary.lua',
+        '81_spell.lua',
+        '90_remaps.lua',
+        '99_general.lua'
     ])
 
     # Read config files
@@ -221,10 +192,10 @@ def create_init():
         selected_base['clipboard'] = int(input())
     if selected_base['clipboard'] == 0:
         print("Continuing without custom clipboard provider.")
-        os.system('rm -f nvim/clipboard.vim')
+        os.system('rm -f nvim/lua/clipboard.lua')
     elif selected_base['clipboard'] == 1:
         print("Neovim will use Klipper to Copy/Paste.")
-        os.system('cp main/kde_clipboard.vim nvim/clipboard.vim')
+        os.system('cp main/kde_clipboard.lua nvim/lua/clipboard.lua')
         home = os.path.expanduser('~')
         if (
             os.path.exists(home + '/.local/bin')
@@ -234,12 +205,12 @@ def create_init():
             os.system(f'cp main/klipperCopy {home}/.local/bin/')
     elif selected_base['clipboard'] == 2:
         print("Xfce4 clipboard should work with Neovim out-of-the-box.")
-        os.system('rm -f nvim/clipboard.vim')
+        os.system('rm -f nvim/lua/clipboard.lua')
     elif selected_base['clipboard'] == 3:
         print(
             "Neovim will use Termux API. Make sure to install the "
             "package, and the corresponding Android package!")
-        os.system('cp main/termux_clipboard.vim nvim/clipboard.vim')
+        os.system('cp main/termux_clipboard.lua nvim/lua/clipboard.lua')
     else:
         print("Invalid environment - continuing with setup.")
 
@@ -271,7 +242,7 @@ def create_init():
             set_colorscheme(schemes_installed[selection]['colorscheme'])
             if selection in schemes_installed else "")
 
-    write_file("nvim/init.vim", data)
+    write_file("nvim/init.lua", data)
 
 
 def check_valid_config():

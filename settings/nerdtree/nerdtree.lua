@@ -1,7 +1,5 @@
-" nerdtree
-let g:plug_window = 'noautocmd vertical topleft new'
-" let g:NERDTreeGitStatusUseNerdFonts = 1
+-- nerdtree
+vim.g.plug_window = "noautocmd vertical topleft new"
+-- vim.g.NERDTreeGitStatusUseNerdFonts = 1
 
-runtime! plug-set/nerdtree/*.vim
-
-nmap <F5> :NERDTreeToggle<CR>
+vim.keymap.set("n", "<F5>", ":NERDTreeToggle<CR>", { remap = true })

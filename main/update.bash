@@ -1,12 +1,14 @@
 #!/bin/bash
 
-echo 'Installing vim-plug + new plugins...'
-if ! nvim -es -u nvim/init.vim -i NONE +qa <<< ""; then
-	nvim -es -u nvim/init.vim -i NONE +PlugInstall +qa <<< ""
-fi
-echo 'Updating vim-plug...'
-nvim -es -u nvim/init.vim -i NONE +PlugUpgrade +qa <<< ""
+# Original form: nvim -es -u nvim/init.lua -i NONE +qa <<< ""
+
+echo 'Installing lazy.nvim + new plugins...'
+#if ! nvim -es -u nvim/init.lua -i NONE +qa <<< ""; then
+nvim -u nvim/init.lua -i NONE --headless "+Lazy! install" +qa
+#fi
+#echo 'Updating vim-plug...'
+#nvim -es -u nvim/init.lua -i NONE +PlugUpgrade +qa <<< ""
 echo 'Cleaning plugins...'
-nvim -es -u nvim/init.vim -i NONE +PlugClean! +qa! <<< "y"
+nvim -u nvim/init.lua -i NONE --headless "+Lazy! clean" +qa
 echo 'Updating plugins...'
-nvim -es -u nvim/init.vim -i NONE +PlugUpdate +qa <<< ""
+nvim -u nvim/init.lua -i NONE --headless "+Lazy! update" +qa

@@ -1,3 +1,3 @@
-" tagbar
-" Map F8 to this editor command
-nmap <F7> :TagbarToggle<CR>
+-- tagbar
+-- Map F8 to this editor command
+vim.keymap.set('n', "<F7>", ":TagbarToggle<CR>", { remap = true })

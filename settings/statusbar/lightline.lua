@@ -1,5 +1,6 @@
-" lightline
-set laststatus=2
+-- lightline
+vim.opt.laststatus = 2
+vim.api.nvim_exec([[
 let g:lightline = {
 	\   'active': {
 	\     'left':  [ [ 'mode', 'paste', 'filename' ],
@@ -34,7 +35,41 @@ let g:lightline = {
 	\   'separator':    { 'left': '', 'right': '' },
 	\   'subseparator': { 'left': '', 'right': '' },
 	\ }
+]], true)
 
+function NameTime()
+	local w = vim.fn.winwidth(0)
+	if w < 89 then return "" end
+	local name = " Matthew Rease"
+	if vim.fn.winwidth(0) > 107 then
+		name = name .. ' ' .. vim.fn.strftime("%b %d %H:%M")
+	end
+	return name
+end
+
+-- It's just not worth making these all lua, honestly
+
+--function ModifiedReadonly()
+--	local modside = ""
+--	local help = vim.o.filetype == "help"
+--	if not help and vim.o.modifiable and vim.o.modified then
+--		modside = "!"
+--	end
+--	local rdlside = ""
+--	if vim.o.readonly then
+--		if help then
+--			rdlside = ""
+--		else
+--			rdlside = ""
+--		end
+--	end
+--	if not modside == "" and not rdlside == "" then
+--		return modside .. ' | ' .. rdlside
+--	end
+--	return modside .. rdlside
+--end
+
+vim.api.nvim_exec([[
 function! GitBranch()
 	try
 		if expand('%:t') !~? 'Tagbar\|NERD' && &filetype !=# 'help' && exists ('*FugitiveHead')
@@ -48,7 +83,7 @@ function! GitBranch()
 endfunction
 
 function! NameTime()
-	return winwidth(0) > 88 ? (' Matthew Rease' . (winwidth(0) > 107 ? (' ' . strftime("%b %d %H:%M")) : '') . ' ') : ''
+	return v:lua.NameTime()
 endfunction
 
 function! ModifiedReadonly()
@@ -91,3 +126,4 @@ endfunction
 function! CocStatus()
 	return exists("*coc#status") ? coc#status() : ''
 endfunction
+]], true)

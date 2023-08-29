@@ -1,3 +1,5 @@
-" Set cursor on exit
-au VimLeave,VimSuspend * set guicursor=a:ver1-blinkon400
-
+-- Set cursor on exit
+vim.api.nvim_create_autocmd({"VimLeave", "VimSuspend"}, {
+	pattern = { "*" },
+	command = "set guicursor=a:ver1-blinkon400"
+})
