@@ -1,8 +1,5 @@
 {
 	"git": {
-		"statusbar": {
-			"vim-gitbranch": false
-		},
 		"source": {
 			"vim-fugitive": false,
 			"vim-gitgutter": false

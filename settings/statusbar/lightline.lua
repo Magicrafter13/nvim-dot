@@ -1,41 +1,39 @@
 -- lightline
 vim.opt.laststatus = 2
-vim.api.nvim_exec([[
-let g:lightline = {
-	\   'active': {
-	\     'left':  [ [ 'mode', 'paste', 'filename' ],
-	\                [ 'modread', 'git', 'cocstatus' ],
-	\                [ 'message' ] ],
-	\     'right': [ [ 'lineinfo' ],
-	\                [ 'percent' ],
-	\                [ 'charhex', 'formtype', 'encoding' ] ],
-	\   },
-	\   'inactive': {
-	\     'left':  [ [ 'filename' ],
-	\                [ 'git', 'modread' ],
-	\                [ ] ],
-	\     'right': [ [ 'lineinfo' ],
-	\                [ 'percent' ],
-	\                [ 'charhex', 'formtype', 'encoding' ] ],
-	\   },
-	\   'component': {
-	\     'charhex':  '0x%B',
-	\   },
-	\   'component_function': {
-	\     'git':      'GitBranch',
-	\     'message':  'NameTime',
-	\     'modread':  'ModifiedReadonly',
-	\     'encoding': 'Encoding',
-	\     'formtype': 'FormatAndType',
-	\     'mode':     'Mode',
-	\     'filename': 'FileName',
-	\     'lineinfo': 'Lineinfo',
-	\     'cocstatus': 'CocStatus',
-	\   },
-	\   'separator':    { 'left': '', 'right': '' },
-	\   'subseparator': { 'left': '', 'right': '' },
-	\ }
-]], true)
+vim.g.lightline = {
+	active = {
+		left = { { "mode", "paste", "filename" },
+		         { "modread", "git", "cocstatus" },
+		         { "message" } },
+		right = { { "lineinfo" },
+		          { "percent" },
+		          { "charhex", "formtype", "encoding" } },
+	},
+	inactive = {
+		left = { { "filename" },
+		         { "git", "modread" },
+		         { } },
+		right = { { "lineinfo" },
+		          { "percent" },
+		          { "charhex", "formtype", "encoding" } },
+	},
+	component = {
+		charhex = "0x%B"
+	},
+	component_function = {
+		git       = "GitBranch",
+		message   = "NameTime",
+		modread   = "ModifiedReadOnly",
+		encoding  = "Encoding",
+		formtype  = "FormatAndType",
+		mode      = "Mode",
+		filename  = "FileName",
+		lineinfo  = "Lineinfo",
+		cocstatus = "CocStatus"
+	},
+	separator    = { left = "", right = "" },
+	subseparator = { left = "", right = "" }
+}
 
 function NameTime()
 	local w = vim.fn.winwidth(0)

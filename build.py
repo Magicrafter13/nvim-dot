@@ -98,7 +98,7 @@ def construct_plugin_line(category: str, plug: str, plugin: dict):
     """Construct a plugin spec line for use with lazy.nvim"""
     line = f'"{plugin["repo"]}",'
     if "params" in plugin:
-        line = f'{{ {line} {plugin["params"]} }},'
+        line = f'{{ {line} {", ".join(plugin["params"])} }},'
     elif category == "nerdtree" and not plug == "nerdtree":
         line = f'{{ {line} dependencies = { "nerdtree" } }},'
     if "comment" in plugin:
