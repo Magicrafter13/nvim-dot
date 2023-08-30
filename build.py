@@ -29,10 +29,10 @@ d = {
 base['default'] = d
 env = json.loads(read_file(("configs/env.json")))
 yes = json.loads(read_file(("configs/yes.json")))
-_no = json.loads(read_file(("configs/no.json")))
 dev = json.loads(read_file(("configs/dev.json")))
 
 plugins = json.loads(read_file(("plugins.json")))
+install = {}
 
 
 def set_plugins(changes):
@@ -40,14 +40,17 @@ def set_plugins(changes):
     for category, c_obj in changes.items():
         if isinstance(c_obj, bool):
             for plugin in plugins[category]:
-                plugins[category][plugin]['default'] = True
+                install[category][plugin] = True
         else:
-            for plugin, status in c_obj.items():
-                plugins[category][plugin]['default'] = status
+            for plugin in c_obj:
+                install[category][plugin] = True
 
 
 def parse_config():
     """Read through user's config file and set plugin data accordingly"""
+    for key, _ in plugins.items():
+        install[key] = {}
+
     # Base
     if len(config['base']) == 0 or not config['base'] in base:
         config['base'] = 'default'
@@ -60,10 +63,6 @@ def parse_config():
     for pack in config['yes']:
         if pack in yes:
             set_plugins(yes[pack])
-    # No
-    for pack in config['no']:
-        if pack in _no:
-            set_plugins(_no[pack])
     # Dev
     for pack in config['dev']:
         if pack in dev:
@@ -71,7 +70,7 @@ def parse_config():
     # Colors
     for color in config['colors']:
         if color in plugins['colorschemes']:
-            plugins['colorschemes'][color]['default'] = True
+            install["colorschemes"][color] = True
 
 
 def copy_lua_script(category, plug):
@@ -121,36 +120,46 @@ require("lazy").setup({"""
     # Go through plugins dir
     # original_dir = os.getcwd()
     # os.chdir(original_dir + "/plugins")
+
     # Variable init
     for category in list(plugins):
         data += f"\n\t-- {category}\n"
-        for plug in list(plugins[category]):
+        for plug in list(install[category]):
             # Read file?
-            plugin = plugins[category][plug]
-            if plugin['default']:
-                line = construct_plugin_line(category, plug, plugin)
-                data += f"\t{line}\n"
-                copy_lua_script(category, plug)
-    if plugins['nerdtree']['nerdtree']['default']:
-        data += '\n'
+            if install[category][plug]:
+                if plug in plugins[category]:
+                    line = construct_plugin_line(
+                        category,
+                        plug,
+                        plugins[category][plug])
+                    data += f"\t{line}\n"
+                    copy_lua_script(category, plug)
+                else:
+                    print(f"No {plug} entry found in {category}, skipping.")
     data += "})\n"
-    if plugins['coc']['coc']['default']:
+
+    if "coc" in install["coc"] and install["coc"]["coc"]:
         data += "vim.g.coc_global_extensions = {"
         data += ", ".join([
-            f"'{obj['cocinstall']}'"
-            for name, obj in plugins['coc'].items()
-            if name != 'coc' and obj['default']])
+            f"'{plugins['coc'][name]['cocinstall']}'"
+            for name, val in install['coc'].items()
+            if name != 'coc' and val])
         data += "}\n"
+
     write_file("nvim/lua/lazy-init.lua", data)
     print('\033[1;31mDone\033[0m')
     # os.chdir(original_dir)
+
     # Install/Update
     # os.system('main/update.bash')
 
 
 def set_colorscheme(name):
     """Set the colorscheme for NeoVim and lightline"""
-    if plugins['statusbar']['lightline']['default']:
+    if (
+        "lightline" in install["statusbar"]
+        and install["statusbar"]["lightline"]
+    ):
         with open(
             'nvim/lua/plug-set/statusbar_lightline.lua',
             'a',
@@ -220,9 +229,9 @@ def create_init():
     # Colorscheme
     print("\033[1;32mSetting colorscheme\033[0m")
     schemes_installed = dict(
-        (k, v)
-        for k, v in plugins['colorschemes'].items()
-        if v['default'])
+        (k, plugins["colorschemes"][k])
+        for k, v in install["colorschemes"].items()
+        if v)
     if len(schemes_installed) == 0:
         print("No colorschemes were installed! :(")
     elif len(schemes_installed) == 1:
@@ -256,9 +265,6 @@ def check_valid_config():
         good_config = False
     if not isinstance(config['yes'], list):
         print("Error in config file. Expected [] list for 'yes'.")
-        good_config = False
-    if not isinstance(config['no'], list):
-        print("Error in config file. Expected [] list for 'no'.")
         good_config = False
     if not isinstance(config['dev'], list):
         print("Error in config file. Expected [] list for 'dev'.")

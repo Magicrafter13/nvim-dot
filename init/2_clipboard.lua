@@ -1,2 +1,2 @@
 -- Setup system clipboard if needed
-require("clipboard")
+pcall(require, "clipboard")

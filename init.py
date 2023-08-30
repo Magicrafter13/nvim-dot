@@ -136,19 +136,13 @@ def main(stdscr):
             json.loads(_f.read()),
             "=== Select Feature-sets to Enable ===")]
 
-    _no = []
-    with open("configs/no.json", "r", encoding='UTF-8') as _f:
-        _no = [token for idx, token in draw_checkbox_menu(
-            stdscr,
-            json.loads(_f.read()),
-            "=== Select Feature-sets to Disable ===")]
-
     dev = []
-    with open("configs/dev.json", "r", encoding='UTF-8') as _f:
-        dev = [token for idx, token in draw_checkbox_menu(
-            stdscr,
-            json.loads(_f.read()),
-            "=== Select Development Languages ===")]
+    if "programming" in yes:
+        with open("configs/dev.json", "r", encoding='UTF-8') as _f:
+            dev = [token for idx, token in draw_checkbox_menu(
+                stdscr,
+                json.loads(_f.read()),
+                "=== Select Development Languages ===")]
 
     #
     # [Color]
@@ -184,7 +178,6 @@ def main(stdscr):
     "base": "{base}",
     "environment": [{", ".join(f'"{token}"' for token in envs)}],
     "yes": [{", ".join(f'"{token}"' for token in yes)}],
-    "no": [{", ".join(f'"{token}"' for token in _no)}],
     "dev": [{", ".join(f'"{token}"' for token in dev)}],
     "colors": [{", ".join(f'"{token}"' for token in colors)}]
 }}

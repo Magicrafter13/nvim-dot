@@ -1,57 +1,28 @@
 {
 	"c": {
-		"analysis": {
-			"nvim-gdb": true
-		},
-		"coc": {
-			"clangd": true
-		}
+		"analysis": [ "nvim-gdb" ],
+		"coc": [ "clangd" ]
 	},
 	"fun": {
-		"highlighting": {
-			"vim-rockstar": true,
-			"vim-brainfuck": true
-		}
+		"highlighting": [ "vim-rockstar", "vim-brainfuck" ]
 	},
 	"java": {
-		"analysis": {
-			"vim-classpath": true,
-			"vim-jdb": false
-		},
-		"coc": {
-			"java": true
-		}
+		"analysis": [ "vim-classpath", "vim-jdb" ],
+		"coc": [ "java" ]
 	},
 	"latex": {
-		"qol": {
-			"vimtex": true
-		},
-		"misc": {
-			"latex-live": true
-		},
-		"coc": {
-			"texlab": true
-		}
+		"qol": [ "vimtex" ],
+		"misc": [ "latex-live" ],
+		"coc": [ "texlab" ]
 	},
 	"opengl": {
-		"highlighting": {
-			"vim-glsl": true
-		}
+		"highlighting": [ "vim-glsl" ]
 	},
 	"web": {
-		"highlighting": {
-			"vim-css-color": true,
-			"vim-css3-syntax": true
-		},
-		"coc": {
-			"html": true,
-			"eslint": true,
-			"tsserver": true
-		}
+		"highlighting": [ "vim-css-color", "vim-css3-syntax" ],
+		"coc": [ "html", "eslint", "tsserver" ]
 	},
 	"rust": {
-		"coc": {
-			"rust": true
-		}
+		"coc": [ "rust" ]
 	}
 }

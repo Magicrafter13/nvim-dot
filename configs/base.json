@@ -2,12 +2,8 @@
 	"manjaroKDE": {
 		"clipboard": 1,
 		"plugins": {
-			"misc": {
-				"firenvim": true
-			},
-			"coc": {
-				"discord": true
-			}
+			"misc": [ "firenvim" ],
+			"coc": [ "discord" ]
 		}
 	},
 	"manjaroXfce": {
