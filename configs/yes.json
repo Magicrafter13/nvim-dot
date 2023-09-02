@@ -11,7 +11,7 @@
 		"qol": [ "auto-pairs", "vim-numbertoggle" ]
 	},
 	"git": {
-		"source": [ "vim-fugitive", "vim-gitgutter" ]
+		"git": [ "vim-fugitive", "vim-gitgutter" ]
 	},
 	"all-color": {
 		"colorschemes": true

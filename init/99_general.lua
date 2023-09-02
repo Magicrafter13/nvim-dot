@@ -21,3 +21,5 @@ vim.opt.confirm = false -- [DEFAULT] don't automatically confirm y/n actions
 vim.opt.history = 2000
 vim.opt.spell = false -- [DEFAULT] disables spellcheck - who the hell would use this in a code editor???
 vim.opt.mouse = "nvc" -- Allow mouse input for normal, visual, and command modes (excluding insert)
+-- Set colorscheme (could be important to do before plugins if lazy loaded)
+pcall(require, "colorscheme")
