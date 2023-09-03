@@ -1,25 +1,36 @@
 {
-	"base": {
-		"statusbar": [ "lightline" ],
-		"source": [ "undotree" ],
-		"nerdtree": true
-	},
-	"programming": {
-		"source": [ "tagbar", "treesitter" ],
-		"analysis": [ "ale", "syntastic" ],
-		"highlighting": [ "vim-rainbow" ],
-		"qol": [ "auto-pairs", "vim-numbertoggle" ]
-	},
-	"git": {
-		"git": [ "vim-fugitive", "vim-gitgutter" ]
-	},
-	"all-color": {
-		"colorschemes": true
-	},
-	"coc": {
-		"coc": [ "coc", "json" ]
-	},
-	"intellij": {
-		"misc": [ "comrade" ]
-	}
+	"base": [
+		"lightline",
+		"undotree",
+		"nerdtree",
+		"nerdtree-git-plugin",
+		"vim-devicons",
+		"vim-nerdtree-syntax-highlight"
+	],
+	"programming": [
+		"tagbar", "treesitter",
+		"ale", "syntastic",
+		"vim-rainbow",
+		"auto-pairs", "vim-numbertoggle"
+	],
+	"git": [
+		"vim-fugitive", "vim-gitgutter"
+	],
+	"all-color": [
+		"dracula",
+		"onedark",
+		"nord-vim",
+		"oldhope",
+		"tokyonight",
+		"dzo",
+		"solas",
+		"vorange",
+		"firesparks"
+	],
+	"coc": [
+		"coc", "coc-json"
+	],
+	"intellij": [
+		"comrade"
+	]
 }

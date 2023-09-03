@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-
-from utils import read_file
+"""Configure user's clipboard."""
 
 import json
 import os
+
+from utils import read_file  # pylint: disable=import-error
 
 config = json.loads(read_file(("config.json")))
 

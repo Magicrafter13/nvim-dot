@@ -1,351 +1,379 @@
 {
-	"broken": {
-		"colorschemes/purify": {
-			"repo": "kyoz/purify",
-			"params": ["{ 'rtp': 'vim' }"],
-			"comment": "Bright, vibrant theme for ViM",
-			"colorscheme": "purify"
-		},
-		"analysis/vim-jdb": {
-			"repo": "Dica-Developer/vim-jdb",
-			"params": [
-				"url = 'https://gitlab.com/Dica-Developer/vim-jdb'",
-				"lazy = true"
-			],
-			"comment": "Java debugger (jdb) integration for ViM"
-		}
+	"_c01": "Broken or otherwise disabled packages.",
+	"colorschemes purify": {
+		"repo": "kyoz/purify",
+		"params": ["{ 'rtp': 'vim' }"],
+		"comment": "Bright, vibrant theme for ViM",
+		"colorscheme": "purify"
 	},
-	"colorschemes": {
-		"dracula": {
-			"repo": "dracula/vim",
-			"params": [
-				"name = 'dracula'",
-				"lazy = true"
-			],
-			"comment": "Dracula ViM theme",
-			"colorscheme": "dracula"
-		},
-		"onedark": {
-			"repo": "joshdick/onedark.vim",
-			"params": [
-				"lazy = true"
-			],
-			"comment": "Inspired by Atom's One Dark theme",
-			"colorscheme": "onedark"
-		},
-		"nord-vim": {
-			"repo": "arcticicestudio/nord-vim",
-			"params": [
-				"lazy = true"
-			],
-			"comment": "Nord Vim",
-			"colorscheme": "nord"
-		},
-		"oldhope": {
-			"repo": "j-tom/vim-old-hope",
-			"params": [
-				"lazy = true"
-			],
-			"comment": "An Old Hope ported to ViM. Colors based on Star Wars: A New Hope",
-			"colorscheme": "OldHope"
-		},
-		"tokyonight": {
-			"repo": "ghifarit53/tokyonight-vim",
-			"params": [
-				"lazy = true"
-			],
-			"comment": "VS Code inspired theme",
-			"colorscheme": "tokyonight"
-		},
-		"dzo": {
-			"repo": "Blevs/vim-dzo",
-			"params": [
-				"lazy = true"
-			],
-			"comment": "A dark color scheme for vim.",
-			"colorscheme": "dzo"
-		},
-		"solas": {
-			"repo": "damage220/solas.vim",
-			"params": [
-				"lazy = true"
-			],
-			"comment": "Dark color scheme based on PhpStorm.",
-			"colorscheme": "solas"
-		},
-		"vorange": {
-			"repo": "Marfisc/vorange",
-			"params": [
-				"lazy = true"
-			],
-			"comment": "Minimalist dark colorscheme based on Srcery.",
-			"colorscheme": "vorange"
-		},
-		"firesparks": {
-			"repo": "dsalychev/firesparks",
-			"params": [
-				"lazy = true"
-			],
-			"comment": "A fireplace-like ViM colorscheme",
-			"colorscheme": "firesparks-256-bright"
-		}
+	"analysis/vim-jdb": {
+		"repo": "Dica-Developer/vim-jdb",
+		"params": [
+			"url = 'https://gitlab.com/Dica-Developer/vim-jdb'",
+			"lazy = true"
+		],
+		"comment": "Java debugger (jdb) integration for ViM"
 	},
-	"statusbar": {
-		"lightline": {
-			"repo": "itchyny/lightline.vim",
-			"comment": "Fancy status bar at bottom of screen"
-		}
+
+
+
+	"_c02": "Colorschemes.",
+	"dracula": {
+		"repo": "dracula/vim",
+		"params": [
+			"name = 'dracula'",
+			"lazy = true"
+		],
+		"comment": "Dracula ViM theme",
+		"attributes": [ "colorscheme" ]
 	},
-	"git": {
-		"vim-fugitive": {
-			"repo": "tpope/vim-fugitive",
-			"comment": "Allows running git commands from ViM, with :Git"
-		},
-		"vim-gitgutter": {
-			"repo": "airblade/vim-gitgutter",
-			"comment": "When looking at modified file in git repo, shows markings (+, -, ~) on side to indicate changes"
-		}
+	"onedark": {
+		"repo": "joshdick/onedark.vim",
+		"params": [
+			"lazy = true"
+		],
+		"comment": "Inspired by Atom's One Dark theme",
+		"attributes": [ "colorscheme" ]
 	},
-	"source": {
-		"undotree": {
-			"repo": "mbbill/undotree",
-			"comment": "Visual Undo Tree"
-		},
-		"tagbar": {
-			"repo": "majutsushi/tagbar",
-			"comment": "Browse tags of file (like classes, variables, and functions)"
-		},
-		"treesitter": {
-			"repo": "nvim-treesitter/nvim-treesitter",
-			"params": [
-				"build = function() vim.cmd('TSUpdate') end"
-			],
-			"comment": "Code folding"
-		}
+	"nord-vim": {
+		"repo": "arcticicestudio/nord-vim",
+		"params": [
+			"lazy = true"
+		],
+		"comment": "Nord Vim",
+		"colorscheme": "nord",
+		"attributes": [ "colorscheme" ]
 	},
-	"analysis": {
-		"ale": {
-			"repo": "dense-analysis/ale",
-			"comment": "Code linter"
-		},
-		"syntastic": {
-			"repo": "scrooloose/syntastic",
-			"comment": "Syntax checking plugin, that runs through external syntax checkers"
-		},
-		"vim-classpath": {
-			"repo": "tpope/vim-classpath",
-			"comment": "Set Java classpath"
-		},
-		"nvim-gdb": {
-			"repo": "sakhnik/nvim-gdb",
-			"params": [
-				"build = function() vim.cmd('!' .. vim.fn.stdpath('data') .. '/plugged/nvim-gdb/install.sh') end"
-			],
-			"comment": "gdb integration with NeoVim"
-		}
+	"oldhope": {
+		"repo": "j-tom/vim-old-hope",
+		"params": [
+			"lazy = true"
+		],
+		"comment": "An Old Hope ported to ViM. Colors based on Star Wars: A New Hope",
+		"colorscheme": "OldHope",
+		"attributes": [ "colorscheme" ]
 	},
-	"highlighting": {
-		"vim-rainbow": {
-			"repo": "frazrepo/vim-rainbow",
-			"comment": "Multi-color brackets for ease-of-use"
-		},
-		"vim-css-color": {
-			"repo": "ap/vim-css-color",
-			"params": [
-				"lazy = true",
-				"ft = 'css'"
-			],
-			"comment": "Realtime CSS color preview (RGB hex)"
-		},
-		"vim-css3-syntax": {
-			"repo": "hail2u/vim-css3-syntax",
-			"params": [
-				"lazy = true",
-				"ft = 'css'"
-			],
-			"comment": "Improved CSS syntax highlighting"
-		},
-		"vim-rockstar": {
-			"repo": "sirosen/vim-rockstar",
-			"params": [
-				"lazy = true",
-				"ft = 'rockstar'"
-			],
-			"comment": "Rockstar syntax highlighting ..."
-		},
-		"vim-brainfuck": {
-			"repo": "llathasa-veleth/vim-brainfuck",
-			"params": [
-				"lazy = true",
-				"ft = 'brainfuck'"
-			],
-			"comment": "Brainfuck syntax highlighting. Yes. I'm serious."
-		},
-		"vim-glsl": {
-			"repo": "tikhomirov/vim-glsl",
-			"params": [
-				"lazy = true",
-				"ft = 'glsl'"
-			],
-			"comment": "OpenGL Shading Language syntax highlighting"
-		}
+	"tokyonight": {
+		"repo": "ghifarit53/tokyonight-vim",
+		"params": [
+			"lazy = true"
+		],
+		"comment": "VS Code inspired theme",
+		"attributes": [ "colorscheme" ]
 	},
-	"qol": {
-		"suda": {
-			"repo": "lambdalisue/suda.vim",
-			"comment": "Alternative for suda.vim, adds :SudaWrite (Neovim specific, workaround for bug)"
-		},
-		"auto-pairs": {
-			"repo": "jiangmiao/auto-pairs",
-			"comment": "Automatically creates the closing brackets when the first one is typed"
-		},
-		"vim-numbertoggle": {
-			"repo": "jeffkreeftmeijer/vim-numbertoggle",
-			"comment": "Toggle relativenumber based on current context"
-		},
-		"vimtex": {
-			"repo": "lervag/vimtex",
-			"params": [
-				"lazy = true",
-				"ft = 'tex'"
-			],
-			"comment": "Filetype plugin for LaTeX files"
-		}
+	"dzo": {
+		"repo": "Blevs/vim-dzo",
+		"params": [
+			"lazy = true"
+		],
+		"comment": "A dark color scheme for vim.",
+		"attributes": [ "colorscheme" ]
 	},
-	"misc": {
-		"firenvim": {
-			"repo": "glacambre/firenvim",
-			"params": [
-				"lazy = not vim.g.started_by_firenvim",
-				"module = false",
-				"build = function() vim.fn['firenvim#install'](0) end"
-			],
-			"comment": "Embed NeoVim in Firefox browser!"
-		},
-		"comrade": {
-			"repo": "beeender/Comrade",
-			"comment": "Android Studio (IntelliJ) \"Magic\" with NeoVim."
-		},
-		"latex-live": {
-			"repo": "xuhdev/vim-latex-live-preview",
-			"comment": "Live Previewing of LaTeX PDF Output"
-		}
+	"solas": {
+		"repo": "damage220/solas.vim",
+		"params": [
+			"lazy = true"
+		],
+		"comment": "Dark color scheme based on PhpStorm.",
+		"attributes": [ "colorscheme" ]
 	},
-	"coc": {
-		"coc": {
-			"repo": "neoclide/coc.nvim",
-			"params": [
-				"branch = 'release'"
-			],
-			"comment": "Intellisense engine (code completion)"
-		},
-		"java": {
-			"repo": "neoclide/coc-java",
-			"comment": "Java extension for coc.nvim",
-			"cocinstall": "coc-java"
-		},
-		"discord": {
-			"repo": "LeonardSSH/coc-discord-rpc",
-			"params": [
-				"lazy = not vim.g.started_by_firenvim"
-			],
-			"comment": "Fully customizable Discord Rich Presence integration for NeoVim and coc.",
-			"cocinstall": "coc-discord-rpc"
-		},
-		"clangd": {
-			"repo": "clangd/coc-clangd",
-			"params": [
-				"lazy = true",
-				"ft = {'c', 'cpp'}"
-			],
-			"comment": "clangd language extension for coc (C/C++)",
-			"cocinstall": "coc-clangd"
-		},
-		"texlab": {
-			"repo": "fannheyward/coc-texlab",
-			"params": [
-				"lazy = true",
-				"ft = 'tex'"
-			],
-			"comment": "TexLab extension for coc (LaTeX)",
-			"cocinstall": "coc-texlab"
-		},
-		"html": {
-			"repo": "neoclide/coc-html",
-			"params": [
-				"lazy = true",
-				"ft = 'html'"
-			],
-			"comment": "HTML extension for coc.nvim",
-			"cocinstall": "coc-html"
-		},
-		"json": {
-			"repo": "neoclide/coc-json",
-			"params": [
-				"lazy = true",
-				"ft = 'json'"
-			],
-			"comment": "json extension for coc.nvim",
-			"cocinstall": "coc-json"
-		},
-		"eslint": {
-			"repo": "neoclide/coc-eslint",
-			"params": [
-				"lazy = true",
-				"ft = 'javascript'"
-			],
-			"comment": "Eslint language server extension for coc.nvim",
-			"cocinstall": "coc-eslint"
-		},
-		"tsserver": {
-			"repo": "neoclide/coc-tsserver",
-			"params": [
-				"lazy = true",
-				"ft = {'javascript', 'typescript'}"
-			],
-			"comment": "Tsserver extension for coc.nvim, for javascript and typescript",
-			"cocinstall": "coc-tsserver"
-		},
-		"rust": {
-			"repo": "fannheyward/coc-rust-analyzer",
-			"params": [
-				"lazy = true",
-				"ft = 'rust'"
-			],
-			"comment": "Analysis/linting through rust-analyzer package.",
-			"cocinstall": "coc-rust-analyzer"
-		}
+	"vorange": {
+		"repo": "Marfisc/vorange",
+		"params": [
+			"lazy = true"
+		],
+		"comment": "Minimalist dark colorscheme based on Srcery.",
+		"attributes": [ "colorscheme" ]
 	},
+	"firesparks": {
+		"repo": "dsalychev/firesparks",
+		"params": [
+			"lazy = true"
+		],
+		"comment": "A fireplace-like ViM colorscheme",
+		"colorscheme": "firesparks-256-bright",
+		"attributes": [ "colorscheme" ]
+	},
+
+
+
+	"_c03": "Standard plugins.",
+	"lightline": {
+		"repo": "itchyny/lightline.vim",
+		"comment": "Fancy status bar at bottom of screen"
+	},
+	"undotree": {
+		"repo": "mbbill/undotree",
+		"comment": "Visual Undo Tree"
+	},
+	"treesitter": {
+		"repo": "nvim-treesitter/nvim-treesitter",
+		"params": [
+			"build = function() vim.cmd('TSUpdate') end"
+		],
+		"comment": "Code folding"
+	},
+	"suda": {
+		"repo": "lambdalisue/suda.vim",
+		"comment": "Alternative for suda.vim, adds :SudaWrite (Neovim specific, workaround for bug)"
+	},
+
+
+
+	"_c04": "Git related plugins.",
+	"vim-fugitive": {
+		"repo": "tpope/vim-fugitive",
+		"comment": "Allows running git commands from ViM, with :Git"
+	},
+	"vim-gitgutter": {
+		"repo": "airblade/vim-gitgutter",
+		"comment": "When looking at modified file in git repo, shows markings (+, -, ~) on side to indicate changes"
+	},
+
+
+
+	"_c10": "General programming plugins.",
+	"vim-rainbow": {
+		"repo": "frazrepo/vim-rainbow",
+		"comment": "Multi-color brackets for ease-of-use"
+	},
+	"auto-pairs": {
+		"repo": "jiangmiao/auto-pairs",
+		"comment": "Automatically creates the closing brackets when the first one is typed"
+	},
+	"vim-numbertoggle": {
+		"repo": "jeffkreeftmeijer/vim-numbertoggle",
+		"comment": "Toggle relativenumber based on current context"
+	},
+
+
+
+	"_c11": "LSP and linting.",
+	"ale": {
+		"repo": "dense-analysis/ale",
+		"comment": "Code linter"
+	},
+	"syntastic": {
+		"repo": "scrooloose/syntastic",
+		"comment": "Syntax checking plugin, that runs through external syntax checkers"
+	},
+
+
+
+	"_c12": "Nerdtree",
 	"nerdtree": {
-		"nerdtree": {
-			"repo": "preservim/nerdtree",
-			"params": [
-				"lazy = true",
-				"dependencies = {'nerdtree-git-plugin', 'vim-devicons', 'vim-nerdtree-syntax-highlight'}",
-				"cmd = 'NERDTreeToggle'"
-			],
-			"comment": "File tree explorer. Open with :NERDTree"
-		},
-		"nerdtree-git-plugin": {
-			"repo": "Xuyuanp/nerdtree-git-plugin",
-			"params": [
-				"lazy = true"
-			],
-			"comment": "Adds git markers to NERDTree (like showing changes, or ignored files)"
-		},
-		"vim-devicons": {
-			"repo": "ryanoasis/vim-devicons",
-			"params": [
-				"lazy = true"
-			],
-			"comment": "Icons for the fonts for other plugins...? something like that"
-		},
-		"vim-nerdtree-syntax-highlight": {
-			"repo": "tiagofumo/vim-nerdtree-syntax-highlight",
-			"params": [
-				"lazy = true"
-			],
-			"comment": "Colors devicons based on filetype"
-		}
+		"repo": "preservim/nerdtree",
+		"params": [
+			"lazy = true",
+			"dependencies = {'nerdtree-git-plugin', 'vim-devicons', 'vim-nerdtree-syntax-highlight'}",
+			"cmd = 'NERDTreeToggle'"
+		],
+		"comment": "File tree explorer. Open with :NERDTree"
+	},
+	"nerdtree-git-plugin": {
+		"repo": "Xuyuanp/nerdtree-git-plugin",
+		"params": [
+			"lazy = true"
+		],
+		"comment": "Adds git markers to NERDTree (like showing changes, or ignored files)",
+		"attributes": [ "nerdtree" ]
+	},
+	"vim-devicons": {
+		"repo": "ryanoasis/vim-devicons",
+		"params": [
+			"lazy = true"
+		],
+		"comment": "Icons for the fonts for other plugins...? something like that",
+		"attributes": [ "nerdtree" ]
+	},
+	"vim-nerdtree-syntax-highlight": {
+		"repo": "tiagofumo/vim-nerdtree-syntax-highlight",
+		"params": [
+			"lazy = true"
+		],
+		"comment": "Colors devicons based on filetype",
+		"attributes": [ "nerdtree" ]
+	},
+
+
+
+	"_c20": "Multiple or Misc Languages",
+	"tagbar": {
+		"repo": "majutsushi/tagbar",
+		"comment": "Browse tags of file (like classes, variables, and functions)"
+	},
+	"nvim-gdb": {
+		"repo": "sakhnik/nvim-gdb",
+		"params": [
+			"build = function() vim.cmd('!' .. vim.fn.stdpath('data') .. '/plugged/nvim-gdb/install.sh') end"
+		],
+		"comment": "gdb integration with NeoVim"
+	},
+	"vim-rockstar": {
+		"repo": "sirosen/vim-rockstar",
+		"params": [
+			"lazy = true",
+			"ft = 'rockstar'"
+		],
+		"comment": "Rockstar syntax highlighting ..."
+	},
+	"vim-brainfuck": {
+		"repo": "llathasa-veleth/vim-brainfuck",
+		"params": [
+			"lazy = true",
+			"ft = 'brainfuck'"
+		],
+		"comment": "Brainfuck syntax highlighting. Yes. I'm serious."
+	},
+
+
+
+	"_c21": "Lang: C",
+
+
+
+	"_c22": "Lang: Java",
+	"vim-classpath": {
+		"repo": "tpope/vim-classpath",
+		"comment": "Set Java classpath"
+	},
+
+
+
+	"_c23": "Lang: Web",
+	"vim-css-color": {
+		"repo": "ap/vim-css-color",
+		"params": [
+			"lazy = true",
+			"ft = 'css'"
+		],
+		"comment": "Realtime CSS color preview (RGB hex)"
+	},
+	"vim-css3-syntax": {
+		"repo": "hail2u/vim-css3-syntax",
+		"params": [
+			"lazy = true",
+			"ft = 'css'"
+		],
+		"comment": "Improved CSS syntax highlighting"
+	},
+
+
+
+	"_c24": "Lang: TeX",
+	"vimtex": {
+		"repo": "lervag/vimtex",
+		"params": [
+			"lazy = true",
+			"ft = 'tex'"
+		],
+		"comment": "Filetype plugin for LaTeX files"
+	},
+	"latex-live": {
+		"repo": "xuhdev/vim-latex-live-preview",
+		"comment": "Live Previewing of LaTeX PDF Output"
+	},
+
+
+
+	"_c90": "Integrations",
+	"firenvim": {
+		"repo": "glacambre/firenvim",
+		"params": [
+			"lazy = not vim.g.started_by_firenvim",
+			"module = false",
+			"build = function() vim.fn['firenvim#install'](0) end"
+		],
+		"comment": "Embed NeoVim in Firefox browser!"
+	},
+	"comrade": {
+		"repo": "beeender/Comrade",
+		"comment": "Android Studio (IntelliJ) \"Magic\" with NeoVim."
+	},
+
+
+
+	"coc": {
+		"repo": "neoclide/coc.nvim",
+		"params": [
+			"branch = 'release'"
+		],
+		"comment": "Intellisense engine (code completion)"
+	},
+	"coc-java": {
+		"repo": "neoclide/coc-java",
+		"comment": "Java extension for coc.nvim",
+		"cocinstall": "coc-java"
+	},
+	"coc-discord": {
+		"repo": "LeonardSSH/coc-discord-rpc",
+		"params": [
+			"lazy = not vim.g.started_by_firenvim"
+		],
+		"comment": "Fully customizable Discord Rich Presence integration for NeoVim and coc.",
+		"cocinstall": "coc-discord-rpc"
+	},
+	"coc-clangd": {
+		"repo": "clangd/coc-clangd",
+		"params": [
+			"lazy = true",
+			"ft = {'c', 'cpp'}"
+		],
+		"comment": "clangd language extension for coc (C/C++)",
+		"cocinstall": "coc-clangd"
+	},
+	"coc-texlab": {
+		"repo": "fannheyward/coc-texlab",
+		"params": [
+			"lazy = true",
+			"ft = 'tex'"
+		],
+		"comment": "TexLab extension for coc (LaTeX)",
+		"cocinstall": "coc-texlab"
+	},
+	"coc-html": {
+		"repo": "neoclide/coc-html",
+		"params": [
+			"lazy = true",
+			"ft = 'html'"
+		],
+		"comment": "HTML extension for coc.nvim",
+		"cocinstall": "coc-html"
+	},
+	"coc-json": {
+		"repo": "neoclide/coc-json",
+		"params": [
+			"lazy = true",
+			"ft = 'json'"
+		],
+		"comment": "json extension for coc.nvim",
+		"cocinstall": "coc-json"
+	},
+	"coc-eslint": {
+		"repo": "neoclide/coc-eslint",
+		"params": [
+			"lazy = true",
+			"ft = 'javascript'"
+		],
+		"comment": "Eslint language server extension for coc.nvim",
+		"cocinstall": "coc-eslint"
+	},
+	"coc-tsserver": {
+		"repo": "neoclide/coc-tsserver",
+		"params": [
+			"lazy = true",
+			"ft = {'javascript', 'typescript'}"
+		],
+		"comment": "Tsserver extension for coc.nvim, for javascript and typescript",
+		"cocinstall": "coc-tsserver"
+	},
+	"coc-rust": {
+		"repo": "fannheyward/coc-rust-analyzer",
+		"params": [
+			"lazy = true",
+			"ft = 'rust'"
+		],
+		"comment": "Analysis/linting through rust-analyzer package.",
+		"cocinstall": "coc-rust-analyzer"
 	}
 }

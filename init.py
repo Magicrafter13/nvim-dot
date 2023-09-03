@@ -4,6 +4,8 @@
 import curses
 import json
 
+from main.utils import read_file
+
 
 def draw_single_selection_menu(stdscr, things, title):
     """Create a menu where the user selects a single option (either with space
@@ -111,38 +113,31 @@ def main(stdscr):
     # [System]
     #
 
-    base = ""
-    with open("configs/base.json", "r", encoding='UTF-8') as _f:
-        _, base = draw_single_selection_menu(
-            stdscr,
-            json.loads(_f.read()),
-            "=== Select System Base ===")
+    base = draw_single_selection_menu(
+        stdscr,
+        json.loads(read_file("configs/base.json")),
+        "=== Select System Base ===")
 
-    envs = []
-    with open("configs/env.json", "r", encoding='UTF-8') as _f:
-        envs = [token for idx, token in draw_checkbox_menu(
-            stdscr,
-            json.loads(_f.read()),
-            "=== Select Environments ===")]
+    envs = [token for idx, token in draw_checkbox_menu(
+        stdscr,
+        json.loads(read_file("configs/env.json")),
+        "=== Select Environments ===")]
 
     #
     # [Additional]
     #
 
-    yes = []
-    with open("configs/yes.json", "r", encoding='UTF-8') as _f:
-        yes = [token for idx, token in draw_checkbox_menu(
-            stdscr,
-            json.loads(_f.read()),
-            "=== Select Feature-sets to Enable ===")]
+    yes = [token for idx, token in draw_checkbox_menu(
+        stdscr,
+        json.loads(read_file("configs/yes.json")),
+        "=== Select Feature-sets to Enable ===")]
 
     dev = []
     if "programming" in yes:
-        with open("configs/dev.json", "r", encoding='UTF-8') as _f:
-            dev = [token for idx, token in draw_checkbox_menu(
-                stdscr,
-                json.loads(_f.read()),
-                "=== Select Development Languages ===")]
+        dev = [token for idx, token in draw_checkbox_menu(
+            stdscr,
+            json.loads(read_file("configs/dev.json")),
+            "=== Select Development Languages ===")]
 
     #
     # [Color]
@@ -150,7 +145,10 @@ def main(stdscr):
 
     colors = []
     with open("plugins.json", "r", encoding='UTF-8') as _f:
-        colors_list = json.loads(_f.read())["colorschemes"]
+        colors_list = {
+            _n: _p
+            for _n, _p in json.loads(_f.read()).items()
+            if "attributes" in _p and "colorscheme" in _p["attributes"]}
         selected_rows = draw_checkbox_menu(
             stdscr,
             colors_list,
@@ -165,7 +163,7 @@ def main(stdscr):
         stdscr,
         colors_list,
         "=== Preferred Colorscheme ==="
-    ) if len(colors) > 1 else (0 if len(colors) == 1 else -1, _)
+    ) if len(colors) > 1 else (0 if len(colors) == 1 else -1, None)
 
     #
     # End
@@ -175,7 +173,7 @@ def main(stdscr):
         if color > -1:
             colors.insert(0, colors.pop(color))
         config.write(f"""{{
-    "base": "{base}",
+    "base": "{base[1]}",
     "environment": [{", ".join(f'"{token}"' for token in envs)}],
     "yes": [{", ".join(f'"{token}"' for token in yes)}],
     "dev": [{", ".join(f'"{token}"' for token in dev)}],

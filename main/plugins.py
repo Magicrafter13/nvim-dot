@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """Construct the lazy-init.lua file (plugin loader)"""
 
-from utils import read_file, write_file
-
 import json
 import os
+import sys
+
+from utils import read_file, write_file  # pylint: disable=import-error
 
 config = json.loads(read_file(("config.json")))
 
@@ -19,27 +20,31 @@ yes = json.loads(read_file(("configs/yes.json")))
 dev = json.loads(read_file(("configs/dev.json")))
 
 plugins = json.loads(read_file(("plugins.json")))
-install = {}
+for pid, val in list(plugins.items()):
+    if pid.startswith("_"):
+        plugins.pop(pid)
+        continue
+    if "attributes" not in val:
+        val["attributes"] = []
+    elif "colorscheme" in val["attributes"] and "colorscheme" not in val:
+        val["colorscheme"] = pid
+# A set would be better but I want the plugins added in the order we read
+# them...
+install = []
 
 
-def set_plugins(changes):
+def set_plugins(plugin_list):
     """Apply changes (like a mask) to an entry in the plugins dictionary"""
-    for category, c_obj in changes.items():
-        if isinstance(c_obj, bool):
-            for plugin in plugins[category]:
-                install[category][plugin] = True
-        else:
-            for plugin in c_obj:
-                install[category][plugin] = True
+    print(f"Called with {plugin_list}")
+    for _p in plugin_list:
+        if _p in plugins and _p not in install:
+            install.append(_p)
 
 
 def parse_config():
     """Read through user's config file and set plugin data accordingly"""
-    for key, _ in plugins.items():
-        install[key] = {}
-
     # Base
-    if len(config["base"]) == 0 or not config["base"] in base:
+    if len(config["base"]) == 0 or config["base"] not in base:
         config["base"] = "default"
     set_plugins(base[config["base"]]["plugins"])
     # Envs
@@ -56,36 +61,28 @@ def parse_config():
             set_plugins(dev[pack])
     # Colors
     for color in config["colors"]:
-        if color in plugins["colorschemes"]:
-            install["colorschemes"][color] = True
+        if "colorscheme" in plugins[color]["attributes"]:
+            install.append(color)
 
 
-def copy_lua_script(category, plug):
+def copy_lua_script(plug):
     """Copy over the lua script file for a designated plugin (if it exists)"""
-    src = f"settings/{category}/{plug}.lua"
+    src = f"settings/{plug}.lua"
     if os.path.exists(src):
-        name = ""
-        if category in {"coc", "nerdtree"}:
-            if category == plug:
-                name = category
-            else:
-                name = f"{category}/{plug}"
-        else:
-            name = f"{category}_{plug}"
-        os.system(f"cp {src} nvim/lua/plug-set/{name}.lua")
+        os.system(f"cp {src} nvim/lua/plug-set/{plug}.lua")
         with open("nvim/lua/plug-set/init.lua", "a", encoding="UTF-8") as _f:
-            _f.write(f'require("plug-set/{name}")\n')
+            _f.write(f'require("plug-set/{plug}")\n')
 
 
 _NL = "\n"
 
 
-def construct_plugin_line(category: str, plug: str, plugin: dict):
+def construct_plugin_line(plugin: dict):
     """Construct a plugin spec line for use with lazy.nvim"""
     line = f'"{plugin["repo"]}",'
     if "params" in plugin:
         line = f'{{ {line} {", ".join(plugin["params"])} }},'
-    elif category == "nerdtree" and not plug == "nerdtree":
+    elif "nerdtree" in plugin["attributes"]:
         line = f'{{ {line} dependencies = { "nerdtree" } }},'
     if "comment" in plugin:
         line += f" -- {plugin['comment']}"
@@ -116,10 +113,7 @@ def check_valid_config():
 def set_colorscheme(name):
     """Set the colorscheme for NeoVim and lightline"""
     data = f'vim.cmd("colorscheme {name}")'
-    if (
-        "lightline" in install["statusbar"]
-        and install["statusbar"]["lightline"]
-    ):
+    if "lightline" in install:
         data += f'''local old_lightline = vim.g.lightline or {{}}
 old_lightline.colorscheme = "{name}"
 vim.g.lightline = old_lightline
@@ -137,7 +131,7 @@ if __name__ == "__main__":
     print(
         "\033[1;31mConstructing nvim/lua/lazy_init.lua... and copying plugin "
         "settings to\n\tnvim/lua/plug-set/\033[0m")
-    data = """--
+    DATA = """--
 -- lazy.nvim
 --
 vim.g.mapleader = " "
@@ -148,50 +142,49 @@ require("lazy").setup({"""
     # os.chdir(original_dir + "/plugins")
 
     # Variable init
-    for category in list(plugins):
-        data += f"\n\t-- {category}\n"
-        for plug in list(install[category]):
-            # Read file?
-            if install[category][plug]:
-                if plug in plugins[category]:
-                    line = construct_plugin_line(
-                        category,
-                        plug,
-                        plugins[category][plug])
-                    data += f"\t{line}\n"
-                    copy_lua_script(category, plug)
-                else:
-                    print(f"No {plug} entry found in {category}, skipping.")
-    data += "})\n"
+    for _plug in install:
+        # Read file?
+        if _plug in plugins:
+            DATA += f"\t{construct_plugin_line(plugins[_plug])}\n"
+            copy_lua_script(_plug)
+        else:
+            print(f"No {_plug} entry found in plugins.json, skipping.")
+    DATA += "})\n"
 
-    if "coc" in install["coc"] and install["coc"]["coc"]:
+    if "coc" in install:
         # Add global coc variable
-        data += "vim.g.coc_global_extensions = {"
-        data += ", ".join([
-            f"'{plugins['coc'][name]['cocinstall']}'"
-            for name, val in install["coc"].items()
-            if name != "coc" and val])
-        data += "}\n"
+        DATA += "vim.g.coc_global_extensions = {"
+        DATA += ", ".join([
+            f"'{plugins[name]['cocinstall']}'"
+            for name in install
+            if name in plugins and name.startswith("coc-")])
+        DATA += "}\n"
         # Construct settings file
         coc_settings = [
-            f"// {name}\n{read_file(f'settings/{category}/{name}.json')}"
-            for name, obj in install["coc"].items()
-            if name in plugins["coc"] and os.path.exists(
-                f"settings/{category}/{name}.json")]
+            f"// {name}\n{read_file(f'settings/coc/{name}.json')}"
+            for name in install
+            if name in plugins and (
+                name.startswith("coc-")
+                or name == "coc"
+            ) and os.path.exists(f"settings/coc/{name}.json")]
+        print(f"Contents of settings: {coc_settings}")
         if len(coc_settings) > 0:
             write_file(
                 "nvim/coc-settings.json",
                 f'{{\n{_NL.join(coc_settings)}\n"": ""\n}}\n')
 
-    write_file("nvim/lua/lazy-init.lua", data)
+    write_file("nvim/lua/lazy-init.lua", DATA)
     print("\033[1;31mDone\033[0m")
 
     # Colorscheme
     print("\033[1;32mSetting colorscheme\033[0m")
     schemes_installed = dict(
-        (k, plugins["colorschemes"][k])
-        for k, v in install["colorschemes"].items()
-        if v)
+        (name, plugins[name])
+        for name in install
+        if name in plugins and "colorscheme" in plugins[name]["attributes"])
+    for k, v in schemes_installed.items():
+        if "colorscheme" not in v:
+            v["colorscheme"] = k
     if len(schemes_installed) == 0:
         print("No colorschemes were installed! :(")
     elif len(schemes_installed) == 1:
@@ -202,8 +195,8 @@ require("lazy").setup({"""
         print(
             "More than 1 colorscheme installed, please select one to use "
             "by default:")
-        for name in schemes_installed:
-            print(f"\t{name} - {schemes_installed[name]['comment']}")
+        for _name in schemes_installed:
+            print(f"\t{_name} - {schemes_installed[_name]['comment']}")
         selection = input()
         if selection in schemes_installed:
             set_colorscheme(schemes_installed[selection]["colorscheme"])

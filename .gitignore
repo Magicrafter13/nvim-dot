@@ -3,3 +3,4 @@
 /config.ini
 Session.vim
 /.config
+/main/__pycache__/

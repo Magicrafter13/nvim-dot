@@ -10,10 +10,10 @@ require"nvim-treesitter.configs".setup {
   -- Automatically install missing parsers when entering buffer
   auto_install = true,
 
-	ignore_install = { "css" },
+	ignore_install = { "css", "make" },
 
   highlight = {
-		disable = { "css" },
+		disable = { "css", "make" },
 
     -- `false` will disable the whole extension
     enable = true,
