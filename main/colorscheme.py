@@ -4,19 +4,11 @@ config.json, .plugins and plugins.json"""
 
 import json
 
-from utils import read_file, write_file  # pylint: disable=import-error
+from utils import read_file, write_file, load_plugins  # noqa: E501  pylint: disable=import-error
 
 config = json.loads(read_file("config.json"))
 installed = json.loads(read_file(".plugins"))["plugins"]
-plugins = json.loads(read_file("plugins.json"))
-for pid, val in list(plugins.items()):
-    if pid.startswith("_"):
-        plugins.pop(pid)
-        continue
-    if "attributes" not in val:
-        val["attributes"] = []
-    elif "colorscheme" in val["attributes"] and "colorscheme" not in val:
-        val["colorscheme"] = pid
+plugins = load_plugins()
 
 
 def set_colorscheme(name):

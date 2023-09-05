@@ -9,18 +9,13 @@ from utils import read_file  # pylint: disable=import-error
 config = json.loads(read_file(("config.json")))
 
 base = json.loads(read_file(("configs/base.json")))
-d = {
-    "clipboard": 0,
-    "plugins": {}
-}
-base['default'] = d
 
 if __name__ == "__main__":
     # Read config files
-    selected_base = base[
-        'default'
-        if len(config['base']) == 0 or not config['base'] in base
-        else config['base']]
+    selected_base = (
+        base[config["base"]]
+        if config and config["base"] in base
+        else {})
 
     # Clipboard
     print("\033[1;32mSetting up Clipboard Provider...\033[0m")

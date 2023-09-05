@@ -10,7 +10,7 @@ plugins = json.loads(read_file(".plugins"))["plugins"]
 config = json.loads(read_file("config.json"))
 
 ENL = "\\n"
-LSP_REQ = "\techo 'require(\"plug-set/nvim-lspconfig\")' >> nvim/lua/plug-set/init.lua"
+LSP_REQ = "\techo 'require(\"plug-set/nvim-lspconfig\")' >> nvim/lua/plug-set/init.lua"  # noqa: E501  pylint: disable=line-too-long
 
 if __name__ == "__main__":
     cwd = os.getcwd()
@@ -39,7 +39,7 @@ ifneq ($(EXIST),)
 else
 \ttouch nvim/lua/plug-set/init.lua
 endif
-""")  # pylint: disable=line-too-long
+""")  # noqa: E501  pylint: disable=line-too-long
 
     #
     # CREATE nvim/lua/plug-set/lsp.make
@@ -64,6 +64,6 @@ ifneq ($(EXIST),)
 else
 \ttouch nvim/lua/plug-set/nvim-lspconfig.lua
 endif
-""")
+""")  # noqa: E501
     else:
         write_file("nvim/lua/plug-set/lsp.make", "all:")

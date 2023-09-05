@@ -12,7 +12,6 @@ def draw_single_selection_menu(stdscr, things: dict, title: str, initial: str):
     """Create a menu where the user selects a single option (either with space
     or enter)"""
     last_idx = len(things.keys()) - 1
-    iterate = list(enumerate(things.keys()))
 
     highlighted_row = (
         list(things.keys()).index(initial)
@@ -26,7 +25,7 @@ def draw_single_selection_menu(stdscr, things: dict, title: str, initial: str):
         v_center = height // 2
 
         stdscr.addstr(v_center - last_idx, h_center - len(title) // 2, title)
-        for idx, option in iterate:
+        for idx, option in list(enumerate(things.keys())):
             _x = h_center - len(option) // 2
             # + 1 because the title is an entry
             _y = v_center - last_idx + (idx + 1) * 2
@@ -58,10 +57,13 @@ def draw_checkbox_menu(stdscr, things: dict, title: str, initial: list):
     also press a to quickly check all options"""
     # pylint: disable=too-many-locals
     last_idx = len(things.keys()) - 1
-    iterate = list(enumerate(things.keys()))
 
     highlighted_row = 0
-    selected_rows = {list(things.keys()).index(i) for i in initial if i in things.keys()} or set()
+    selected_rows = {
+        list(things.keys()).index(i)
+        for i in initial
+        if i in things.keys()
+    } or set()
     while True:
         stdscr.clear()
         height, width = stdscr.getmaxyx()
@@ -70,7 +72,7 @@ def draw_checkbox_menu(stdscr, things: dict, title: str, initial: list):
         v_center = height // 2
 
         stdscr.addstr(v_center - last_idx, h_center - len(title) // 2, title)
-        for idx, option in iterate:
+        for idx, option in list(enumerate(things.keys())):
             # + 4 because of the length of '[X] ' and '[ ] '
             _x = h_center - (len(option) + 4) // 2
             # + 1 because the title is an entry
@@ -108,7 +110,10 @@ def draw_checkbox_menu(stdscr, things: dict, title: str, initial: list):
 
 def main(stdscr):
     """Main ncurses and software logic"""
-    config = json.loads(read_file("config.json")) if os.path.exists("config.json") else {}
+    config = (
+        json.loads(read_file("config.json"))
+        if os.path.exists("config.json")
+        else {})
 
     # Initialize curses
     curses.curs_set(0)  # Hide the cursor
@@ -145,7 +150,7 @@ def main(stdscr):
     if "programming" in yes:
         programming = [token for idx, token in draw_checkbox_menu(
             stdscr,
-            { "lsp": {}, "completion": {} },
+            {"lsp": {}, "completion": {}},
             "=== Select Programming Features ===",
             config["programming"] if config else []
             )]
@@ -154,7 +159,6 @@ def main(stdscr):
             json.loads(read_file("configs/dev.json")),
             "=== Select Development Languages ===",
             config["dev"] if config else [])]
-
 
     #
     # [Color]

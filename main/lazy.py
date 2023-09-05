@@ -3,18 +3,10 @@
 
 import json
 
-from utils import read_file, write_file  # pylint: disable=import-error
+from utils import read_file, write_file, load_plugins  # noqa: E501  pylint: disable=import-error
 
 installed = json.loads(read_file(".plugins"))["plugins"]
-plugins = json.loads(read_file("plugins.json"))
-for pid, val in list(plugins.items()):
-    if pid.startswith("_"):
-        plugins.pop(pid)
-        continue
-    if "attributes" not in val:
-        val["attributes"] = []
-    elif "colorscheme" in val["attributes"] and "colorscheme" not in val:
-        val["colorscheme"] = pid
+plugins = load_plugins()
 
 
 def construct_plugin_line(plugin: dict):
@@ -39,6 +31,8 @@ if __name__ == "__main__":
 vim.g.mapleader = " "
 
 require("lazy").setup({{
-\t{NLTAB.join([construct_plugin_line(plugins[plugin]) for plugin in installed])}
+\t{NLTAB.join([
+    construct_plugin_line(plugins[plugin])
+    for plugin in installed])}
 }})
 """)

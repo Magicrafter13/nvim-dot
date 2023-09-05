@@ -4,29 +4,16 @@
 import json
 import sys
 
-from utils import read_file, write_file  # pylint: disable=import-error
+from utils import read_file, write_file, load_plugins  # noqa: E501  pylint: disable=import-error
 
 config = json.loads(read_file(("config.json")))
 
 base = json.loads(read_file(("configs/base.json")))
-d = {
-    "clipboard": 0,
-    "plugins": {}
-}
-base["default"] = d
 env = json.loads(read_file(("configs/env.json")))
 yes = json.loads(read_file(("configs/yes.json")))
 dev = json.loads(read_file(("configs/dev.json")))
 
-plugins = json.loads(read_file(("plugins.json")))
-for pid, val in list(plugins.items()):
-    if pid.startswith("_"):
-        plugins.pop(pid)
-        continue
-    if "attributes" not in val:
-        val["attributes"] = []
-    elif "colorscheme" in val["attributes"] and "colorscheme" not in val:
-        val["colorscheme"] = pid
+plugins = load_plugins()
 # A set would be better but I want the plugins added in the order we read
 # them...
 install = []
@@ -42,9 +29,8 @@ def set_plugins(plugin_list):
 def parse_config():
     """Read through user's config file and set plugin data accordingly"""
     # Base
-    if len(config["base"]) == 0 or config["base"] not in base:
-        config["base"] = "default"
-    set_plugins(base[config["base"]]["plugins"])
+    if len(config["base"]) > 0 and config["base"] in base:
+        set_plugins(base[config["base"]]["plugins"])
     # Envs
     for environment in config["environment"]:
         if environment in env:
@@ -101,4 +87,6 @@ if __name__ == "__main__":
             install.pop(_plug)
     if "lsp" in config["programming"]:
         install.append("nvim-lspconfig")
-    write_file(".plugins", f'''{{"plugins":[{", ".join([f'"{name}"' for name in install])}]}}''')
+    write_file(".plugins", f'''{{"plugins":[{", ".join([
+        f'"{name}"'
+        for name in install])}]}}''')
