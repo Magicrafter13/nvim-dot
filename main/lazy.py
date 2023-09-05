@@ -1,16 +1,19 @@
 #!/usr/bin/python3
-"""Construct nvim/lua/lazy-init.lua from .plugins and plugins.json"""
+"""Construct nvim/lua/lazy-init.lua from .plugins and plugins.json."""
 
 import json
 
-from utils import read_file, write_file, load_plugins  # noqa: E501  pylint: disable=import-error
+from utils import (  # pylint: disable=import-error
+    read_file,
+    write_file,
+    load_plugins)
 
 installed = json.loads(read_file(".plugins"))["plugins"]
 plugins = load_plugins()
 
 
 def construct_plugin_line(plugin: dict):
-    """Construct a plugin spec line for use with lazy.nvim"""
+    """Construct a plugin spec line for use with lazy.nvim."""
     line = f'"{plugin["repo"]}",'
     if "params" in plugin:
         line = f'{{ {line} {", ".join(plugin["params"])} }},'

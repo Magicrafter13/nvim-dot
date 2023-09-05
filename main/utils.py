@@ -4,20 +4,20 @@
 import json
 
 
-def read_file(filename):
-    """Simple file read using with"""
+def read_file(filename: str):
+    """Read contents of file, close, and then return contents."""
     with open(filename, "r", encoding="UTF-8") as _f:
         return _f.read()
 
 
-def write_file(filename, data):
-    """Simple file write using with"""
+def write_file(filename: str, data: str):
+    """Write data to file (does not append), and then close."""
     with open(filename, "w", encoding="UTF-8") as _f:
         _f.write(data)
 
 
 def load_plugins():
-    """Loads plugins.json and makes sure it has good data (see comments)"""
+    """Load plugins.json and makes sure it has good data (see comments)."""
     plugins = json.loads(read_file("plugins.json"))
     for pid, val in list(plugins.items()):
         # Ignore comments

@@ -1,10 +1,13 @@
 #!/usr/bin/python3
-"""Construct the lazy-init.lua file (plugin loader)"""
+"""Construct the lazy-init.lua file (plugin loader)."""
 
 import json
 import sys
 
-from utils import read_file, write_file, load_plugins  # noqa: E501  pylint: disable=import-error
+from utils import (  # pylint: disable=import-error
+    read_file,
+    write_file,
+    load_plugins)
 
 config = json.loads(read_file(("config.json")))
 
@@ -19,15 +22,15 @@ plugins = load_plugins()
 install = []
 
 
-def set_plugins(plugin_list):
-    """Apply changes (like a mask) to an entry in the plugins dictionary"""
+def set_plugins(plugin_list: list[str]):
+    """Apply changes (like a mask) to an entry in the plugins dictionary."""
     for _p in plugin_list:
         if _p in plugins and _p not in install:
             install.append(_p)
 
 
 def parse_config():
-    """Read through user's config file and set plugin data accordingly"""
+    """Read through user's config file and set plugin data accordingly."""
     # Base
     if len(config["base"]) > 0 and config["base"] in base:
         set_plugins(base[config["base"]]["plugins"])
@@ -53,7 +56,7 @@ _NL = "\n"
 
 
 def check_valid_config():
-    """Verify the user's config file is properly structured"""
+    """Verify the user's config file is properly structured."""
     good_config = True
     if not isinstance(config["base"], str):
         print("Error in config file. Expected string for 'base'.")

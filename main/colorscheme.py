@@ -1,18 +1,20 @@
 #!/usr/bin/python3
-"""Construct nvim/lua/colorscheme.lua from
-config.json, .plugins and plugins.json"""
+"""Construct colorscheme.lua from config.json, .plugins and plugins.json."""
 
 import json
 
-from utils import read_file, write_file, load_plugins  # noqa: E501  pylint: disable=import-error
+from utils import (  # pylint: disable=import-error
+    read_file,
+    write_file,
+    load_plugins)
 
 config = json.loads(read_file("config.json"))
 installed = json.loads(read_file(".plugins"))["plugins"]
 plugins = load_plugins()
 
 
-def set_colorscheme(name):
-    """Set the colorscheme for NeoVim and lightline"""
+def set_colorscheme(name: str):
+    """Set the colorscheme for NeoVim and lightline."""
     data = f'vim.cmd("colorscheme {name}")'
     if "lightline" in installed:
         data += f'''local old_lightline = vim.g.lightline or {{}}

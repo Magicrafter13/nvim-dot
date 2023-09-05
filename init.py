@@ -8,9 +8,20 @@ import os
 from main.utils import read_file
 
 
-def draw_single_selection_menu(stdscr, things: dict, title: str, initial: str):
-    """Create a menu where the user selects a single option (either with space
-    or enter)"""
+def draw_single_selection_menu(
+    stdscr: curses.window,
+    things: dict,
+    title: str,
+    initial: str
+):
+    """Single option menu screen.
+
+    Creates a menu where the user may select one of the provided options, and
+    then returns that option as a tuple, where the first item is the string,
+    and the second item is the dictionary entry. The user may navigate using
+    the up/down arrow keys, or j/k (vi style). They may select an option with
+    space or enter.
+    """
     last_idx = len(things.keys()) - 1
 
     highlighted_row = (
@@ -51,10 +62,21 @@ def draw_single_selection_menu(stdscr, things: dict, title: str, initial: str):
     return (highlighted_row, list(things.keys())[highlighted_row])
 
 
-def draw_checkbox_menu(stdscr, things: dict, title: str, initial: list):
-    """Create a menu where the user selects any options (or none) that they
-    want with space, then press enter to confirm their selections - they may
-    also press a to quickly check all options"""
+def draw_checkbox_menu(
+    stdscr: curses.window,
+    things: dict,
+    title: str,
+    initial: list
+):
+    """Multiple option menu screen.
+
+    Creates a menu where the user may select any of the provided options (or
+    none), and then returns those options as an array of tuples, where the
+    first item in each tuple is the array index, and the second item in each
+    tuple is the dictionary key. The user may navigate using the up/down arrow
+    keys, or j/k (vi style). They may select an option with space, and confirm
+    their choices with enter.
+    """
     # pylint: disable=too-many-locals
     last_idx = len(things.keys()) - 1
 
@@ -108,8 +130,16 @@ def draw_checkbox_menu(stdscr, things: dict, title: str, initial: list):
     return [(idx, list(things.keys())[idx]) for idx in selected_rows]
 
 
-def main(stdscr):
-    """Main ncurses and software logic"""
+def main(stdscr: curses.window):
+    """Run main curses screen and software logic.
+
+    Reads the user's config.json file if it exists, so that the options they
+    selected last time this script was run, will already be selected when they
+    get to each screen.
+
+    Prompts the user to select options for their config.json file - to see the
+    order this happens, refer to the # [...] comments below.
+    """
     config = (
         json.loads(read_file("config.json"))
         if os.path.exists("config.json")

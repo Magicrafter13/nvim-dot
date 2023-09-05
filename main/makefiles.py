@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Construct various Makefiles based on data in .plugins"""
+"""Construct various Makefiles based on data in .plugins."""
 
 import json
 import os
@@ -10,7 +10,9 @@ plugins = json.loads(read_file(".plugins"))["plugins"]
 config = json.loads(read_file("config.json"))
 
 ENL = "\\n"
-LSP_REQ = "\techo 'require(\"plug-set/nvim-lspconfig\")' >> nvim/lua/plug-set/init.lua"  # noqa: E501  pylint: disable=line-too-long
+LSP_REQ = (
+    "\techo 'require(\"plug-set/nvim-lspconfig\")' >> nvim/lua/plug-set/"
+    "init.lua")
 
 if __name__ == "__main__":
     cwd = os.getcwd()
