@@ -84,10 +84,10 @@ if __name__ == "__main__":
 
     print("\033[1;31mCaching list of Plugins\033[0m")
     # Clean bad entries from install list
-    for _plug in list(install):
+    for idx, _plug in enumerate(install):
         if _plug not in plugins:
             print(f"No {_plug} entry found in plugins.json, skipping.")
-            install.pop(_plug)
+            install.pop(idx)
     if "lsp" in config["programming"]:
         install.append("nvim-lspconfig")
     write_file(".plugins", f'''{{"plugins":[{", ".join([
