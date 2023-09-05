@@ -1,8 +1,0 @@
-{
-	"base": "headless",
-	"environment": ["restricted"],
-	"yes": ["coc", "feature-set2", "feature-set3"],
-	"no": ["unwanted1", "unwanted2"],
-	"dev": ["web", "java", "assembly"],
-	"colors": ["nord-vim", "solas"]
-}
