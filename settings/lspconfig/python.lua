@@ -9,7 +9,11 @@ lspconfig.pylsp.setup {
 					--enabled = true
 				--},
 				pylint = {
+					enabled = true
+				},
+				pydocstyle = {
 					enabled = true,
+					convention = "pep257"
 				}
 			}
 		}
