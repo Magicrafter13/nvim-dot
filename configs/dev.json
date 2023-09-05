@@ -1,28 +1,22 @@
 {
 	"c": [
-		"nvim-gdb",
-		"coc-clangd"
+		"nvim-gdb"
 	],
 	"fun": [
 		"vim-rockstar", "vim-brainfuck"
 	],
 	"java": [
-		"vim-classpath", "vim-jdb",
-		"coc-java"
+		"vim-classpath", "vim-jdb"
 	],
 	"latex": [
 		"vimtex",
-		"latex-live",
-		"coc-texlab"
+		"latex-live"
 	],
 	"opengl": [
 		"vim-glsl"
 	],
 	"web": [
-		"vim-css-color", "vim-css3-syntax",
-		"coc-html", "coc-eslint", "coc-tsserver"
+		"vim-css-color", "vim-css3-syntax"
 	],
-	"rust": [
-		"coc-rust"
-	]
+	"python": []
 }

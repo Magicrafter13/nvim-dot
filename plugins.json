@@ -149,6 +149,10 @@
 
 
 	"_c11": "LSP and linting.",
+	"nvim-lspconfig": {
+		"repo": "neovim/nvim-lspconfig",
+		"comment": "Premade LSP configs for various languages"
+	},
 	"ale": {
 		"repo": "dense-analysis/ale",
 		"comment": "Code linter"

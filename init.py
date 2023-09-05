@@ -3,17 +3,21 @@
 
 import curses
 import json
+import os
 
 from main.utils import read_file
 
 
-def draw_single_selection_menu(stdscr, things, title):
+def draw_single_selection_menu(stdscr, things: dict, title: str, initial: str):
     """Create a menu where the user selects a single option (either with space
     or enter)"""
     last_idx = len(things.keys()) - 1
     iterate = list(enumerate(things.keys()))
 
-    highlighted_row = 0
+    highlighted_row = (
+        list(things.keys()).index(initial)
+        if initial and initial in things.keys()
+        else 0)
     while True:
         stdscr.clear()
         height, width = stdscr.getmaxyx()
@@ -48,7 +52,7 @@ def draw_single_selection_menu(stdscr, things, title):
     return (highlighted_row, list(things.keys())[highlighted_row])
 
 
-def draw_checkbox_menu(stdscr, things, title):
+def draw_checkbox_menu(stdscr, things: dict, title: str, initial: list):
     """Create a menu where the user selects any options (or none) that they
     want with space, then press enter to confirm their selections - they may
     also press a to quickly check all options"""
@@ -57,7 +61,7 @@ def draw_checkbox_menu(stdscr, things, title):
     iterate = list(enumerate(things.keys()))
 
     highlighted_row = 0
-    selected_rows = set()
+    selected_rows = {list(things.keys()).index(i) for i in initial if i in things.keys()} or set()
     while True:
         stdscr.clear()
         height, width = stdscr.getmaxyx()
@@ -104,6 +108,7 @@ def draw_checkbox_menu(stdscr, things, title):
 
 def main(stdscr):
     """Main ncurses and software logic"""
+    config = json.loads(read_file("config.json")) if os.path.exists("config.json") else {}
 
     # Initialize curses
     curses.curs_set(0)  # Hide the cursor
@@ -116,12 +121,14 @@ def main(stdscr):
     base = draw_single_selection_menu(
         stdscr,
         json.loads(read_file("configs/base.json")),
-        "=== Select System Base ===")
+        "=== Select System Base ===",
+        config["base"] if config else "")
 
     envs = [token for idx, token in draw_checkbox_menu(
         stdscr,
         json.loads(read_file("configs/env.json")),
-        "=== Select Environments ===")]
+        "=== Select Environments ===",
+        config["environment"] if config else [])]
 
     #
     # [Additional]
@@ -130,14 +137,24 @@ def main(stdscr):
     yes = [token for idx, token in draw_checkbox_menu(
         stdscr,
         json.loads(read_file("configs/yes.json")),
-        "=== Select Feature-sets to Enable ===")]
+        "=== Select Feature-sets to Enable ===",
+        config["yes"] if config else [])]
 
+    programming = []
     dev = []
     if "programming" in yes:
+        programming = [token for idx, token in draw_checkbox_menu(
+            stdscr,
+            { "lsp": {}, "completion": {} },
+            "=== Select Programming Features ===",
+            config["programming"] if config else []
+            )]
         dev = [token for idx, token in draw_checkbox_menu(
             stdscr,
             json.loads(read_file("configs/dev.json")),
-            "=== Select Development Languages ===")]
+            "=== Select Development Languages ===",
+            config["dev"] if config else [])]
+
 
     #
     # [Color]
@@ -152,7 +169,8 @@ def main(stdscr):
         selected_rows = draw_checkbox_menu(
             stdscr,
             colors_list,
-            "=== Select Desired Colorschemes ===")
+            "=== Select Desired Colorschemes ===",
+            config["colors"] if config else [])
         for _, token in selected_rows:
             colors.append(token)
         for idx in range(0, len(colors_list))[::-1]:
@@ -162,7 +180,8 @@ def main(stdscr):
     color, _ = draw_single_selection_menu(
         stdscr,
         colors_list,
-        "=== Preferred Colorscheme ==="
+        "=== Preferred Colorscheme ===",
+        ""
     ) if len(colors) > 1 else (0 if len(colors) == 1 else -1, None)
 
     #
@@ -176,6 +195,7 @@ def main(stdscr):
     "base": "{base[1]}",
     "environment": [{", ".join(f'"{token}"' for token in envs)}],
     "yes": [{", ".join(f'"{token}"' for token in yes)}],
+    "programming": [{", ".join(f'"{token}"' for token in programming)}],
     "dev": [{", ".join(f'"{token}"' for token in dev)}],
     "colors": [{", ".join(f'"{token}"' for token in colors)}]
 }}

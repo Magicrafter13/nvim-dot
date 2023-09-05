@@ -9,7 +9,6 @@
 	],
 	"programming": [
 		"tagbar", "treesitter",
-		"ale", "syntastic",
 		"vim-rainbow",
 		"auto-pairs", "vim-numbertoggle"
 	],
@@ -26,9 +25,6 @@
 		"solas",
 		"vorange",
 		"firesparks"
-	],
-	"coc": [
-		"coc", "coc-json"
 	],
 	"intellij": [
 		"comrade"

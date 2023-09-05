@@ -15,4 +15,4 @@ vim.opt.rtp:prepend(lazypath)
 -- Initialize plugins
 require("lazy-init")
 -- Plugin settings
-pcall(require, "plug-set")
+require("plug-set")
