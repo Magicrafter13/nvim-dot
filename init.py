@@ -181,7 +181,7 @@ def main(stdscr):
         stdscr,
         colors_list,
         "=== Preferred Colorscheme ===",
-        ""
+        config["colors"][0] if config else ""
     ) if len(colors) > 1 else (0 if len(colors) == 1 else -1, None)
 
     #
