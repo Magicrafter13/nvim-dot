@@ -13,7 +13,7 @@
 		"auto-pairs", "vim-numbertoggle"
 	],
 	"git": [
-		"vim-fugitive", "vim-gitgutter"
+		"vim-fugitive", "gitsigns_nvim"
 	],
 	"all-color": [
 		"dracula",

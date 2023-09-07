@@ -196,6 +196,10 @@
 		"repo": "airblade/vim-gitgutter",
 		"comment": "When looking at modified file in git repo, shows markings (+, -, ~) on side to indicate changes"
 	},
+	"gitsigns_nvim": {
+		"repo": "lewis6991/gitsigns.nvim",
+		"comment": "Super fast git decorations implemented purely in Lua."
+	},
 
 
 
