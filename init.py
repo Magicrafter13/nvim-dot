@@ -32,10 +32,12 @@ def get_menu_input(stdscr: curses.window, space_is_enter: bool):
     """Wait for user to press a valid key, and returns a common code."""
     while True:
         key = stdscr.getch()
-        if key in {curses.KEY_UP, ord('k')}:
-            return 'k'
+        if key in {curses.KEY_LEFT, ord('h')}:
+            return 'h'
         if key in {curses.KEY_DOWN, ord('j')}:
             return 'j'
+        if key in {curses.KEY_UP, ord('k')}:
+            return 'k'
         if key in {curses.KEY_RIGHT, ord('l'), curses.KEY_ENTER}:
             return 'l'
         if key == ord(' '):
@@ -89,9 +91,15 @@ def draw_single_selection_menu(
                 if highlighted_row < last_idx:
                     highlighted_row += 1
             case 'l':
-                break
-
-    return (highlighted_row, list(things.keys())[highlighted_row])
+                return (
+                    True,
+                    highlighted_row,
+                    list(things.keys())[highlighted_row])
+            case 'h':
+                return (
+                    False,
+                    highlighted_row,
+                    list(things.keys())[highlighted_row])
 
 
 def draw_checkbox_menu(
@@ -144,7 +152,13 @@ def draw_checkbox_menu(
                 if highlighted_row < last_idx:
                     highlighted_row += 1
             case 'l':
-                break
+                return (
+                    True,
+                    [(idx, list(things.keys())[idx]) for idx in selected_rows])
+            case 'h':
+                return (
+                    False,
+                    [(idx, list(things.keys())[idx]) for idx in selected_rows])
             case ' ':
                 if highlighted_row in selected_rows:
                     selected_rows.remove(highlighted_row)
@@ -152,8 +166,6 @@ def draw_checkbox_menu(
                     selected_rows.add(highlighted_row)
             case 'a':
                 selected_rows.update(range(last_idx + 1))
-
-    return [(idx, list(things.keys())[idx]) for idx in selected_rows]
 
 
 def main(stdscr: curses.window):
@@ -171,91 +183,108 @@ def main(stdscr: curses.window):
         if os.path.exists("config.json")
         else {})
 
+    # Initialize menu data
+    options = [
+        json.loads(read_file("configs/base.json")),
+        json.loads(read_file("configs/env.json")),
+        json.loads(read_file("configs/yes.json")),
+        {"lsp": {}, "completion": {}},
+        json.loads(read_file("configs/dev.json")),
+        {
+            _n: _p
+            for _n, _p in json.loads(read_file("plugins.json")).items()
+            if "attributes" in _p and "colorscheme" in _p["attributes"]},
+        {}
+    ]
+    titles = [
+        "Select System Base",
+        "Select Environments",
+        "Select Feature-sets to Enable",
+        "Select Programming Features",
+        "Select Development Languages",
+        "Select Desired Colorschemes",
+        "Preferred Colorscheme"
+    ]
+    selections = [
+        config["base"],
+        config["environment"],
+        config["yes"],
+        config["programming"],
+        config["dev"],
+        config["colors"],
+        config["colors"][0] if config["colors"] else ""
+    ] if config else [
+        "",
+        [],
+        [],
+        [],
+        [],
+        [],
+        ""
+    ]
+
     # Initialize curses
     curses.curs_set(0)  # Hide the cursor
     stdscr.clear()      # Clear the screen
 
-    #
-    # [System]
-    #
+    # Navigate the screens
+    # This section is kinda ugly, but I tried to comment the weird bits
+    screen = 0
+    while screen < len(options):
+        go_next = True
+        if isinstance(selections[screen], str):
+            _go_next, idx, opt = draw_single_selection_menu(
+                stdscr,
+                options[screen],
+                titles[screen],
+                selections[screen])
+            go_next = _go_next
+            selections[screen] = opt
+        else:
+            _go_next, arr = draw_checkbox_menu(
+                stdscr,
+                options[screen],
+                titles[screen],
+                selections[screen])
+            go_next = _go_next
+            selections[screen] = [token for idx, token in arr]
+        # Special rules for screen 5 (colorscheme check list)
+        if screen == 5:
+            options[6] = {token: 0 for token in selections[5]}
 
-    base = draw_single_selection_menu(
-        stdscr,
-        json.loads(read_file("configs/base.json")),
-        "=== Select System Base ===",
-        config["base"] if config else "")
+        # Go to next screen
+        screen += 1 if go_next else -1
+        screen = max(screen, 0)
 
-    envs = [token for idx, token in draw_checkbox_menu(
-        stdscr,
-        json.loads(read_file("configs/env.json")),
-        "=== Select Environments ===",
-        config["environment"] if config else [])]
-
-    #
-    # [Additional]
-    #
-
-    yes = [token for idx, token in draw_checkbox_menu(
-        stdscr,
-        json.loads(read_file("configs/yes.json")),
-        "=== Select Feature-sets to Enable ===",
-        config["yes"] if config else [])]
-
-    programming = []
-    dev = []
-    if "programming" in yes:
-        programming = [token for idx, token in draw_checkbox_menu(
-            stdscr,
-            {"lsp": {}, "completion": {}},
-            "=== Select Programming Features ===",
-            config["programming"] if config else []
-            )]
-        dev = [token for idx, token in draw_checkbox_menu(
-            stdscr,
-            json.loads(read_file("configs/dev.json")),
-            "=== Select Development Languages ===",
-            config["dev"] if config else [])]
-
-    #
-    # [Color]
-    #
-
-    colors = []
-    colors_list = {
-        _n: _p
-        for _n, _p in json.loads(read_file("plugins.json")).items()
-        if "attributes" in _p and "colorscheme" in _p["attributes"]}
-    selected_rows = draw_checkbox_menu(
-        stdscr,
-        colors_list,
-        "=== Select Desired Colorschemes ===",
-        config["colors"] if config else [])
-    colors = [token for _, token in selected_rows]
-    for idx in range(0, len(colors_list))[::-1]:
-        if idx not in [idx for idx, _ in selected_rows]:
-            colors_list.pop(list(colors_list.keys())[idx])
-
-    color, _ = draw_single_selection_menu(
-        stdscr,
-        colors_list,
-        "=== Preferred Colorscheme ===",
-        config["colors"][0] if config else ""
-    ) if len(colors) > 1 else (0 if len(colors) == 1 else -1, None)
+        # 3 is programming, 4 is dev - these should only be entered if 2 (yes)
+        # had programming checked - if it wasn't, then we should skip over them
+        while screen in {3, 4} and "programming" not in selections[2]:
+            screen += 1 if go_next else -1
+        # Screen 6 may not have any options available if the user picked
+        # nothing on screen 5
+        if screen == 6 and not options[6]:
+            screen += 1 if go_next else -1
 
     #
     # End
     #
 
+    # Assuming the user even saw the 6th screen (which they won't if no
+    # colorschemes are installed), then we need to make sure the scheme they
+    # picked there is the first one in the list.
+    if options[6]:
+        selections[5].insert(
+            0,
+            selections[5].pop(selections[5].index(selections[6])))
+
     with open("config.json", "w", encoding="UTF-8") as config:
-        if color > -1:
-            colors.insert(0, colors.pop(color))
         config.write(f"""{{
-    "base": "{base[1]}",
-    "environment": [{", ".join(f'"{token}"' for token in envs)}],
-    "yes": [{", ".join(f'"{token}"' for token in yes)}],
-    "programming": [{", ".join(f'"{token}"' for token in programming)}],
-    "dev": [{", ".join(f'"{token}"' for token in dev)}],
-    "colors": [{", ".join(f'"{token}"' for token in colors)}]
+    "base": "{selections[0]}",
+    "environment": [{", ".join(f'"{token}"' for token in selections[1])}],
+    "yes": [{", ".join(f'"{token}"' for token in selections[2])}],
+    "programming": [{", ".join(f'"{token}"' for token in selections[3])}],
+    "dev": [{", ".join(f'"{token}"' for token in selections[4])}],
+    "colors": [{", ".join(f'"{token}"' for token in selections[5])}]
 }}
 """)
 
