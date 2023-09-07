@@ -153,6 +153,14 @@
 		"colorscheme": "firesparks-256-bright",
 		"attributes": [ "colorscheme" ]
 	},
+	"catppuccin": {
+		"repo": "catppuccin/nvim",
+		"params": [
+			"name = 'catppuccin'"
+		],
+		"colorscheme": "catppuccin-macchiato",
+		"attributes": [ "colorscheme" ]
+	},
 
 
 
