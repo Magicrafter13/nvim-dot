@@ -14,6 +14,65 @@
 		],
 		"comment": "Java debugger (jdb) integration for ViM"
 	},
+	"coc-java": {
+		"repo": "neoclide/coc-java",
+		"comment": "Java extension for coc.nvim",
+		"cocinstall": "coc-java"
+	},
+	"coc-texlab": {
+		"repo": "fannheyward/coc-texlab",
+		"params": [
+			"lazy = true",
+			"ft = 'tex'"
+		],
+		"comment": "TexLab extension for coc (LaTeX)",
+		"cocinstall": "coc-texlab"
+	},
+	"coc-html": {
+		"repo": "neoclide/coc-html",
+		"params": [
+			"lazy = true",
+			"ft = 'html'"
+		],
+		"comment": "HTML extension for coc.nvim",
+		"cocinstall": "coc-html"
+	},
+	"coc-json": {
+		"repo": "neoclide/coc-json",
+		"params": [
+			"lazy = true",
+			"ft = 'json'"
+		],
+		"comment": "json extension for coc.nvim",
+		"cocinstall": "coc-json"
+	},
+	"coc-eslint": {
+		"repo": "neoclide/coc-eslint",
+		"params": [
+			"lazy = true",
+			"ft = 'javascript'"
+		],
+		"comment": "Eslint language server extension for coc.nvim",
+		"cocinstall": "coc-eslint"
+	},
+	"coc-tsserver": {
+		"repo": "neoclide/coc-tsserver",
+		"params": [
+			"lazy = true",
+			"ft = {'javascript', 'typescript'}"
+		],
+		"comment": "Tsserver extension for coc.nvim, for javascript and typescript",
+		"cocinstall": "coc-tsserver"
+	},
+	"coc-rust": {
+		"repo": "fannheyward/coc-rust-analyzer",
+		"params": [
+			"lazy = true",
+			"ft = 'rust'"
+		],
+		"comment": "Analysis/linting through rust-analyzer package.",
+		"cocinstall": "coc-rust-analyzer"
+	},
 
 
 
@@ -295,89 +354,9 @@
 		"comment": "Android Studio (IntelliJ) \"Magic\" with NeoVim."
 	},
 
-
-
-	"coc": {
-		"repo": "neoclide/coc.nvim",
-		"params": [
-			"branch = 'release'"
-		],
-		"comment": "Intellisense engine (code completion)"
-	},
-	"coc-java": {
-		"repo": "neoclide/coc-java",
-		"comment": "Java extension for coc.nvim",
-		"cocinstall": "coc-java"
-	},
-	"coc-discord": {
-		"repo": "LeonardSSH/coc-discord-rpc",
-		"params": [
-			"lazy = not vim.g.started_by_firenvim"
-		],
-		"comment": "Fully customizable Discord Rich Presence integration for NeoVim and coc.",
-		"cocinstall": "coc-discord-rpc"
-	},
-	"coc-clangd": {
-		"repo": "clangd/coc-clangd",
-		"params": [
-			"lazy = true",
-			"ft = {'c', 'cpp'}"
-		],
-		"comment": "clangd language extension for coc (C/C++)",
-		"cocinstall": "coc-clangd"
-	},
-	"coc-texlab": {
-		"repo": "fannheyward/coc-texlab",
-		"params": [
-			"lazy = true",
-			"ft = 'tex'"
-		],
-		"comment": "TexLab extension for coc (LaTeX)",
-		"cocinstall": "coc-texlab"
-	},
-	"coc-html": {
-		"repo": "neoclide/coc-html",
-		"params": [
-			"lazy = true",
-			"ft = 'html'"
-		],
-		"comment": "HTML extension for coc.nvim",
-		"cocinstall": "coc-html"
-	},
-	"coc-json": {
-		"repo": "neoclide/coc-json",
-		"params": [
-			"lazy = true",
-			"ft = 'json'"
-		],
-		"comment": "json extension for coc.nvim",
-		"cocinstall": "coc-json"
-	},
-	"coc-eslint": {
-		"repo": "neoclide/coc-eslint",
-		"params": [
-			"lazy = true",
-			"ft = 'javascript'"
-		],
-		"comment": "Eslint language server extension for coc.nvim",
-		"cocinstall": "coc-eslint"
-	},
-	"coc-tsserver": {
-		"repo": "neoclide/coc-tsserver",
-		"params": [
-			"lazy = true",
-			"ft = {'javascript', 'typescript'}"
-		],
-		"comment": "Tsserver extension for coc.nvim, for javascript and typescript",
-		"cocinstall": "coc-tsserver"
-	},
-	"coc-rust": {
-		"repo": "fannheyward/coc-rust-analyzer",
-		"params": [
-			"lazy = true",
-			"ft = 'rust'"
-		],
-		"comment": "Analysis/linting through rust-analyzer package.",
-		"cocinstall": "coc-rust-analyzer"
+	"_c95": "Stupid Things",
+	"presence-nvim": {
+		"repo": "andweeb/presence.nvim",
+		"comment": "Discord rich presence"
 	}
 }
