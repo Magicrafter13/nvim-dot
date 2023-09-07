@@ -8,6 +8,42 @@ import os
 from main.utils import read_file
 
 
+def get_center(stdscr: curses.window):
+    """Get the center values of a curses screen."""
+    height, width = stdscr.getmaxyx()
+    return width // 2, height // 2
+
+
+def display_list_option(
+    stdscr: curses.window,
+    option: str,
+    highlighted: bool,
+    _x: int,
+    _y: int
+):
+    """Show a list option with optional highlight."""
+    if highlighted:
+        stdscr.attron(curses.A_REVERSE)
+    stdscr.addstr(_y, _x, option)
+    stdscr.attroff(curses.A_REVERSE)
+
+
+def get_menu_input(stdscr: curses.window, space_is_enter: bool):
+    """Wait for user to press a valid key, and returns a common code."""
+    while True:
+        key = stdscr.getch()
+        if key in {curses.KEY_UP, ord('k')}:
+            return 'k'
+        if key in {curses.KEY_DOWN, ord('j')}:
+            return 'j'
+        if key in {curses.KEY_RIGHT, ord('l'), curses.KEY_ENTER}:
+            return 'l'
+        if key == ord(' '):
+            return 'l' if space_is_enter else ' '
+        if key == ord('a'):
+            return 'a'
+
+
 def draw_single_selection_menu(
     stdscr: curses.window,
     things: dict,
@@ -30,34 +66,30 @@ def draw_single_selection_menu(
         else 0)
     while True:
         stdscr.clear()
-        height, width = stdscr.getmaxyx()
-
-        h_center = width // 2
-        v_center = height // 2
+        h_center, v_center = get_center(stdscr)
 
         stdscr.addstr(v_center - last_idx, h_center - len(title) // 2, title)
         for idx, option in list(enumerate(things.keys())):
-            _x = h_center - len(option) // 2
+            # for _y:
             # + 1 because the title is an entry
-            _y = v_center - last_idx + (idx + 1) * 2
-
-            if idx == highlighted_row:
-                stdscr.attron(curses.A_REVERSE)
-                stdscr.addstr(_y, _x, option)
-                stdscr.attroff(curses.A_REVERSE)
-            else:
-                stdscr.addstr(_y, _x, option)
+            display_list_option(
+                stdscr,
+                option,
+                idx == highlighted_row,
+                h_center - len(option) // 2,
+                v_center - last_idx + (idx + 1) * 2)
 
         stdscr.refresh()
 
-        key = stdscr.getch()
-        if (key == curses.KEY_UP or key == ord('k')) and highlighted_row > 0:
-            highlighted_row -= 1
-        elif (key == curses.KEY_DOWN or
-                key == ord('j')) and highlighted_row < last_idx:
-            highlighted_row += 1
-        elif key == ord('\n') or key == ord(' '):
-            break
+        match get_menu_input(stdscr, True):
+            case 'k':
+                if highlighted_row > 0:
+                    highlighted_row -= 1
+            case 'j':
+                if highlighted_row < last_idx:
+                    highlighted_row += 1
+            case 'l':
+                break
 
     return (highlighted_row, list(things.keys())[highlighted_row])
 
@@ -88,44 +120,38 @@ def draw_checkbox_menu(
     } or set()
     while True:
         stdscr.clear()
-        height, width = stdscr.getmaxyx()
-
-        h_center = width // 2
-        v_center = height // 2
+        h_center, v_center = get_center(stdscr)
 
         stdscr.addstr(v_center - last_idx, h_center - len(title) // 2, title)
         for idx, option in list(enumerate(things.keys())):
+            # for _x and _y:
             # + 4 because of the length of '[X] ' and '[ ] '
-            _x = h_center - (len(option) + 4) // 2
             # + 1 because the title is an entry
-            _y = v_center - last_idx + (idx + 1) * 2
-
-            option_text = f"[{'X' if idx in selected_rows else ' '}] {option}"
-
-            if idx == highlighted_row:
-                stdscr.attron(curses.A_REVERSE)
-                stdscr.addstr(_y, _x, option_text)
-                stdscr.attroff(curses.A_REVERSE)
-            else:
-                stdscr.addstr(_y, _x, option_text)
+            display_list_option(
+                stdscr,
+                f"[{'X' if idx in selected_rows else ' '}] {option}",
+                idx == highlighted_row,
+                h_center - (len(option) + 4) // 2,
+                v_center - last_idx + (idx + 1) * 2)
 
         stdscr.refresh()
 
-        key = stdscr.getch()
-        if (key == curses.KEY_UP or key == ord('k')) and highlighted_row > 0:
-            highlighted_row -= 1
-        elif (key == curses.KEY_DOWN or
-                key == ord('j')) and highlighted_row < last_idx:
-            highlighted_row += 1
-        elif key == ord(' '):
-            if highlighted_row in selected_rows:
-                selected_rows.remove(highlighted_row)
-            else:
-                selected_rows.add(highlighted_row)
-        elif key == ord('\n'):
-            break
-        elif key == ord('a'):
-            selected_rows.update(range(last_idx + 1))
+        match get_menu_input(stdscr, False):
+            case 'k':
+                if highlighted_row > 0:
+                    highlighted_row -= 1
+            case 'j':
+                if highlighted_row < last_idx:
+                    highlighted_row += 1
+            case 'l':
+                break
+            case ' ':
+                if highlighted_row in selected_rows:
+                    selected_rows.remove(highlighted_row)
+                else:
+                    selected_rows.add(highlighted_row)
+            case 'a':
+                selected_rows.update(range(last_idx + 1))
 
     return [(idx, list(things.keys())[idx]) for idx in selected_rows]
 
@@ -195,21 +221,19 @@ def main(stdscr: curses.window):
     #
 
     colors = []
-    with open("plugins.json", "r", encoding='UTF-8') as _f:
-        colors_list = {
-            _n: _p
-            for _n, _p in json.loads(_f.read()).items()
-            if "attributes" in _p and "colorscheme" in _p["attributes"]}
-        selected_rows = draw_checkbox_menu(
-            stdscr,
-            colors_list,
-            "=== Select Desired Colorschemes ===",
-            config["colors"] if config else [])
-        for _, token in selected_rows:
-            colors.append(token)
-        for idx in range(0, len(colors_list))[::-1]:
-            if idx not in [idx for idx, _ in selected_rows]:
-                colors_list.pop(list(colors_list.keys())[idx])
+    colors_list = {
+        _n: _p
+        for _n, _p in json.loads(read_file("plugins.json")).items()
+        if "attributes" in _p and "colorscheme" in _p["attributes"]}
+    selected_rows = draw_checkbox_menu(
+        stdscr,
+        colors_list,
+        "=== Select Desired Colorschemes ===",
+        config["colors"] if config else [])
+    colors = [token for _, token in selected_rows]
+    for idx in range(0, len(colors_list))[::-1]:
+        if idx not in [idx for idx, _ in selected_rows]:
+            colors_list.pop(list(colors_list.keys())[idx])
 
     color, _ = draw_single_selection_menu(
         stdscr,
