@@ -38,7 +38,7 @@ def get_menu_input(stdscr: curses.window, space_is_enter: bool):
             return 'j'
         if key in {curses.KEY_UP, ord('k')}:
             return 'k'
-        if key in {curses.KEY_RIGHT, ord('l'), curses.KEY_ENTER}:
+        if key in {curses.KEY_RIGHT, ord('l'), ord('\n')}:
             return 'l'
         if key == ord(' '):
             return 'l' if space_is_enter else ' '
