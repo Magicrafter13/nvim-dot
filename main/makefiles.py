@@ -53,6 +53,7 @@ endif
     if LSP:
         write_file(
             "nvim/lua/plug-set/lsp.make",
+            # pylint: disable=C0301
             f"""POSSIBLE := {FILES}
 FILES    := $(wildcard settings/lspconfig/*.lua)
 EXIST    := $(filter $(POSSIBLE),$(FILES))
@@ -62,6 +63,8 @@ ifneq ($(EXIST),)
 \techo -e "\\e[1;32mSetting up LSP config\\e[0m"
 \techo "-- Setup language servers." > nvim/lua/plug-set/nvim-lspconfig.lua
 \techo "local lspconfig = require('lspconfig')" >> nvim/lua/plug-set/nvim-lspconfig.lua
+\techo "vim.diagnostic.config({{virtual_text = false}})" >> nvim/lua/plug-set/nvim-lspconfig.lua
+\techo "vim.api.nvim_create_autocmd({{ 'CursorHold', 'CursorHoldI' }}, {{ pattern = '*', callback = function() vim.diagnostic.open_float(nil, {{focus = false}}) end }})" >> nvim/lua/plug-set/nvim-lspconfig.lua
 \tcat $(EXIST) >> nvim/lua/plug-set/nvim-lspconfig.lua
 else
 \ttouch nvim/lua/plug-set/nvim-lspconfig.lua
