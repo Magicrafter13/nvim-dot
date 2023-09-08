@@ -158,7 +158,7 @@
 		"params": [
 			"name = 'catppuccin'"
 		],
-		"colorscheme": "catppuccin-macchiato",
+		"colorscheme": "catppuccin",
 		"attributes": [ "colorscheme" ]
 	},
 
@@ -280,7 +280,9 @@
 	"nvim-gdb": {
 		"repo": "sakhnik/nvim-gdb",
 		"params": [
-			"build = function() vim.cmd('!' .. vim.fn.stdpath('data') .. '/plugged/nvim-gdb/install.sh') end"
+			"build = function() vim.cmd('!' .. vim.fn.stdpath('data') .. '/plugged/nvim-gdb/install.sh') end",
+			"lazy = true",
+			"ft = {'c', 'cpp'}"
 		],
 		"comment": "gdb integration with NeoVim"
 	},
