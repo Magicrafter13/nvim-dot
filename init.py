@@ -4,6 +4,7 @@
 import curses
 import json
 import os
+import sys
 
 from main.utils import read_file
 
@@ -28,22 +29,27 @@ def display_list_option(
     stdscr.attroff(curses.A_REVERSE)
 
 
+KEYMAP = {
+    "g": {ord('g'), curses.KEY_PPAGE},
+    "G": {ord('G'), curses.KEY_NPAGE},
+    "h": {ord('h'), curses.KEY_LEFT},
+    "j": {ord('j'), curses.KEY_DOWN},
+    "k": {ord('k'), curses.KEY_UP},
+    "l": {ord('l'), curses.KEY_RIGHT, ord('\n')},
+    "a": {ord('a')},
+    "q": {ord('q'), ord('\033')}
+}
+
+
 def get_menu_input(stdscr: curses.window, space_is_enter: bool):
     """Wait for user to press a valid key, and returns a common code."""
     while True:
         key = stdscr.getch()
-        if key in {curses.KEY_LEFT, ord('h')}:
-            return 'h'
-        if key in {curses.KEY_DOWN, ord('j')}:
-            return 'j'
-        if key in {curses.KEY_UP, ord('k')}:
-            return 'k'
-        if key in {curses.KEY_RIGHT, ord('l'), ord('\n')}:
-            return 'l'
         if key == ord(' '):
             return 'l' if space_is_enter else ' '
-        if key == ord('a'):
-            return 'a'
+        for _r, keys in KEYMAP.items():
+            if key in keys:
+                return _r
 
 
 def draw_single_selection_menu(
@@ -84,6 +90,10 @@ def draw_single_selection_menu(
         stdscr.refresh()
 
         match get_menu_input(stdscr, True):
+            case 'g':
+                highlighted_row = 0
+            case 'G':
+                highlighted_row = last_idx
             case 'k':
                 if highlighted_row > 0:
                     highlighted_row -= 1
@@ -100,6 +110,8 @@ def draw_single_selection_menu(
                     False,
                     highlighted_row,
                     list(things.keys())[highlighted_row])
+            case 'q':
+                sys.exit(0)
 
 
 def draw_checkbox_menu(
@@ -145,6 +157,10 @@ def draw_checkbox_menu(
         stdscr.refresh()
 
         match get_menu_input(stdscr, False):
+            case 'g':
+                highlighted_row = 0
+            case 'G':
+                highlighted_row = last_idx
             case 'k':
                 if highlighted_row > 0:
                     highlighted_row -= 1
@@ -166,6 +182,8 @@ def draw_checkbox_menu(
                     selected_rows.add(highlighted_row)
             case 'a':
                 selected_rows.update(range(last_idx + 1))
+            case 'q':
+                sys.exit(0)
 
 
 def main(stdscr: curses.window):
@@ -290,4 +308,5 @@ def main(stdscr: curses.window):
 
 
 if __name__ == "__main__":
+    os.environ.setdefault('ESCDELAY', '25')
     curses.wrapper(main)
