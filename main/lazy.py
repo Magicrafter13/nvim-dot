@@ -31,6 +31,7 @@ if __name__ == "__main__":
     write_file("nvim/lua/lazy-init.lua", f"""--
 -- lazy.nvim
 --
+vim.keymap.set("n", "<Space>", "<Nop>", {{ remap = false }})
 vim.g.mapleader = " "
 
 require("lazy").setup({{

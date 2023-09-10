@@ -49,7 +49,7 @@ nvim/init.lua: init/0_truecolor.lua init/1_cursor.lua init/2_clipboard.lua init/
 nvim/lua/clipboard.lua: main/clipboard.py config.json configs/base.json
 	@main/clipboard.py
 
-nvim/lua/colorscheme.lua: .plugins plugins.json
+nvim/lua/colorscheme.lua: .plugins plugins.json main/colorscheme.py
 	@main/colorscheme.py
 
 nvim/lua/lazy-init.lua: .plugins plugins.json
