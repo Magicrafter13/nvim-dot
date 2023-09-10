@@ -34,7 +34,7 @@ nvim/lua/plug-set/init.lua: .plugins $(EXIST)
 ifneq ($(EXIST),)
 \techo -e '\\e[1;32mCopying plugin settings and adding them to plug-set/init.lua...\\e[0m'
 \tcp -u $(EXIST) nvim/lua/plug-set/
-\techo -e '$(foreach file,$(patsubst settings/%.lua,%,$(EXIST)),\\nrequire("plug-set/$(file)"))' > nvim/lua/plug-set/init.lua
+\techo '$(foreach file,$(patsubst settings/%.lua,%,$(EXIST)),\\nrequire("plug-set/$(file)"))' > nvim/lua/plug-set/init.lua
 {LSP_REQ if LSP else ''}
 else
 \ttouch nvim/lua/plug-set/init.lua
