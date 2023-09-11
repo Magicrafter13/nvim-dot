@@ -169,6 +169,14 @@
 		"repo": "itchyny/lightline.vim",
 		"comment": "Fancy status bar at bottom of screen"
 	},
+	"feline": {
+		"repo": "freddiehaddad/feline.nvim",
+		"comment": "Minimal, customizable statusline."
+	},
+	"lualine": {
+		"repo": "nvim-lualine/lualine.nvim",
+		"comment": "Fast, easy to configure statusline."
+	},
 	"undotree": {
 		"repo": "mbbill/undotree",
 		"comment": "Visual Undo Tree"
@@ -183,6 +191,10 @@
 	"suda": {
 		"repo": "lambdalisue/suda.vim",
 		"comment": "Alternative for suda.vim, adds :SudaWrite (Neovim specific, workaround for bug)"
+	},
+	"nvim-web-devicons": {
+		"repo": "nvim-tree/nvim-web-devicons",
+		"comment": "Nerd font icons for languages and such, with colors included. \"Fork\" of vim-devicons."
 	},
 
 
@@ -224,6 +236,15 @@
 		"repo": "neovim/nvim-lspconfig",
 		"comment": "Premade LSP configs for various languages"
 	},
+	"fidget": {
+		"repo": "j-hui/fidget.nvim",
+		"params": [
+			"tag = 'legacy'",
+			"lazy = true",
+			"event = 'LspAttach'"
+		],
+		"comment": "nvim-lsp progress UI"
+	},
 	"ale": {
 		"repo": "dense-analysis/ale",
 		"comment": "Code linter"
@@ -240,7 +261,7 @@
 		"repo": "preservim/nerdtree",
 		"params": [
 			"lazy = true",
-			"dependencies = {'nerdtree-git-plugin', 'vim-devicons', 'vim-nerdtree-syntax-highlight'}",
+			"dependencies = {'nerdtree-git-plugin', 'nvim-web-devicons'}",
 			"cmd = 'NERDTreeToggle'"
 		],
 		"comment": "File tree explorer. Open with :NERDTree"
@@ -251,22 +272,6 @@
 			"lazy = true"
 		],
 		"comment": "Adds git markers to NERDTree (like showing changes, or ignored files)",
-		"attributes": [ "nerdtree" ]
-	},
-	"vim-devicons": {
-		"repo": "ryanoasis/vim-devicons",
-		"params": [
-			"lazy = true"
-		],
-		"comment": "Icons for the fonts for other plugins...? something like that",
-		"attributes": [ "nerdtree" ]
-	},
-	"vim-nerdtree-syntax-highlight": {
-		"repo": "tiagofumo/vim-nerdtree-syntax-highlight",
-		"params": [
-			"lazy = true"
-		],
-		"comment": "Colors devicons based on filetype",
 		"attributes": [ "nerdtree" ]
 	},
 
@@ -372,5 +377,13 @@
 	"presence-nvim": {
 		"repo": "andweeb/presence.nvim",
 		"comment": "Discord rich presence"
+	},
+	"noice": {
+		"repo": "folke/noice.nvim",
+		"params": [
+			"event = 'VeryLazy'",
+			"dependencies = { 'MunifTanjim/nui.nvim', 'rcarriga/nvim-notify' }"
+		],
+		"comment": "Message and command UI."
 	}
 }

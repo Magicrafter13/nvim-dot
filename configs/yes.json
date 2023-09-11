@@ -1,11 +1,10 @@
 {
 	"base": [
-		"lightline",
+		"lualine",
 		"undotree",
+		"nvim-web-devicons",
 		"nerdtree",
-		"nerdtree-git-plugin",
-		"vim-devicons",
-		"vim-nerdtree-syntax-highlight"
+		"nerdtree-git-plugin"
 	],
 	"programming": [
 		"tagbar", "treesitter",
@@ -14,6 +13,9 @@
 	],
 	"git": [
 		"vim-fugitive", "gitsigns_nvim"
+	],
+	"ui": [
+		"noice"
 	],
 	"all-color": [
 		"dracula",

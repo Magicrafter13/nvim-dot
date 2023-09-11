@@ -16,11 +16,21 @@ plugins = load_plugins()
 def set_colorscheme(name: str):
     """Set the colorscheme for NeoVim and lightline."""
     data = f'vim.cmd("colorscheme {name}")'
+    # lightline
     if "lightline" in installed:
-        data += f'''local old_lightline = vim.g.lightline or {{}}
+        data += f'''
+local old_lightline = vim.g.lightline or {{}}
 old_lightline.colorscheme = "{name}"
 vim.g.lightline = old_lightline
 vim.call("lightline#enable")'''
+    # lualine
+    if "lualine" in installed:
+        data += f'''
+local lualine_colors = require("lualine.themes.{name}")
+lualine_colors.normal.c.bg = NONE
+lualine_colors.inactive.c.bg = NONE
+require("lualine").setup{{ options = {{theme = lualine_colors}} }}
+--require("plug-set/lualine")'''
     write_file("nvim/lua/colorscheme.lua", f"{data}\n")
 
 
