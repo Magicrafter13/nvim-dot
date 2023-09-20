@@ -26,10 +26,12 @@ vim.call("lightline#enable")'''
     # lualine
     if "lualine" in installed:
         data += f'''
-local lualine_colors = require("lualine.themes.{name}")
-lualine_colors.normal.c.bg = NONE
-lualine_colors.inactive.c.bg = NONE
-require("lualine").setup{{ options = {{theme = lualine_colors}} }}
+local status, lualine_colors = pcall(require, "lualine.themes.{name}")
+if status then
+    lualine_colors.normal.c.bg = NONE
+    lualine_colors.inactive.c.bg = NONE
+    require("lualine").setup{{ options = {{theme = lualine_colors}} }}
+end
 --require("plug-set/lualine")'''
     write_file("nvim/lua/colorscheme.lua", f"{data}\n")
 
