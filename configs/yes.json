@@ -9,13 +9,14 @@
 	"programming": [
 		"tagbar", "treesitter",
 		"vim-rainbow",
-		"auto-pairs", "vim-numbertoggle"
+		"auto-pairs", "vim-numbertoggle",
+		"nvim-ufo"
 	],
 	"git": [
 		"vim-fugitive", "gitsigns_nvim"
 	],
 	"ui": [
-		"noice"
+		"noice", "barbar"
 	],
 	"all-color": [
 		"dracula",

@@ -192,9 +192,20 @@
 		"repo": "lambdalisue/suda.vim",
 		"comment": "Alternative for suda.vim, adds :SudaWrite (Neovim specific, workaround for bug)"
 	},
+	"barbar": {
+		"repo": "romgrk/barbar.nvim",
+		"params": [
+			"dependencies = { 'nvim-web-devicons' }"
+		],
+		"comment": "Better tablines."
+	},
 	"nvim-web-devicons": {
 		"repo": "nvim-tree/nvim-web-devicons",
 		"comment": "Nerd font icons for languages and such, with colors included. \"Fork\" of vim-devicons."
+	},
+	"which-key": {
+		"repo": "folke/which-key.nvim",
+		"comment": "Popup to display possible keybinds of current command."
 	},
 
 
@@ -227,6 +238,13 @@
 	"vim-numbertoggle": {
 		"repo": "jeffkreeftmeijer/vim-numbertoggle",
 		"comment": "Toggle relativenumber based on current context"
+	},
+	"nvim-ufo": {
+		"repo": "kevinhwang91/nvim-ufo",
+		"params": [
+			"dependencies = { 'kevinhwang91/promise-async' }"
+		],
+		"comment": "Better looking code folding."
 	},
 
 
