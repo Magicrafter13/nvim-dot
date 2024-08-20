@@ -205,6 +205,10 @@
 	},
 	"which-key": {
 		"repo": "folke/which-key.nvim",
+		"params": [
+			"event = 'VeryLazy'",
+			"init = function() vim.o.timeout = true; vim.o.timeoutlen = 300; end"
+		],
 		"comment": "Popup to display possible keybinds of current command."
 	},
 

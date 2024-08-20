@@ -4,13 +4,14 @@
 		"undotree",
 		"nvim-web-devicons",
 		"nerdtree",
-		"nerdtree-git-plugin"
+		"nerdtree-git-plugin",
+		"which-key"
 	],
 	"programming": [
 		"tagbar", "treesitter",
 		"vim-rainbow",
 		"auto-pairs", "vim-numbertoggle",
-		"nvim-ufo"
+		"nvim-ufo-temp-fake"
 	],
 	"git": [
 		"vim-fugitive", "gitsigns_nvim"
