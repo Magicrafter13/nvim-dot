@@ -15,9 +15,7 @@
 	"opengl": [
 		"vim-glsl"
 	],
-	"web": [
-		"vim-css-color", "vim-css3-syntax"
-	],
+	"web": [],
 	"python": [],
 	"asm": []
 }

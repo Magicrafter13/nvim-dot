@@ -13,13 +13,17 @@
 		"treesitter",
 		"nvim-numbertoggle",
 		"nvim-ufo",
-		"indent-blankline"
+		"indent-blankline",
+		"todo-comments",
+		"nvim-colorizer"
 	],
 	"Stay in NeoVim": [
 		"telescope"
 	],
 	"Git": [
-		"vim-fugitive", "gitsigns_nvim"
+		"vim-fugitive",
+		"gitsigns_nvim",
+		"neogit"
 	],
 	"UI": [
 		"noice", "barbar"

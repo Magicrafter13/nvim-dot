@@ -97,6 +97,22 @@
 		"repo": "frazrepo/vim-rainbow",
 		"comment": "Multi-color brackets for ease-of-use"
 	},
+	"vim-css-color": {
+		"repo": "ap/vim-css-color",
+		"params": [
+			"lazy = true",
+			"ft = 'css'"
+		],
+		"comment": "Realtime CSS color preview (RGB hex)"
+	},
+	"vim-css3-syntax": {
+		"repo": "hail2u/vim-css3-syntax",
+		"params": [
+			"lazy = true",
+			"ft = 'css'"
+		],
+		"comment": "Improved CSS syntax highlighting"
+	},
 
 
 
@@ -240,6 +256,14 @@
 		"repo": "lewis6991/gitsigns.nvim",
 		"comment": "Super fast git decorations implemented purely in Lua."
 	},
+	"neogit": {
+		"repo": "NeogitOrg/neogit",
+		"params": [
+			"dependencies = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim', 'nvim-telescope/telescope.nvim' }",
+			"config = true"
+		],
+		"comment": "Git interface in NeoVim."
+	},
 
 
 
@@ -281,6 +305,17 @@
 			"opts = {}"
 		],
 		"comment": "Indentation guide."
+	},
+	"todo-comments": {
+		"repo": "folke/todo-comments.nvim",
+		"params": [
+			"dependencies = { 'nvim-lua/plenary.nvim' }"
+		],
+		"comment": "Labels like TODO and HACK. Supports Trouble and Telescope too."
+	},
+	"nvim-colorizer": {
+		"repo": "norcalli/nvim-colorizer.lua",
+		"comment": "Color RGB codes and such."
 	},
 
 
@@ -377,22 +412,6 @@
 
 
 	"_c23": "Lang: Web",
-	"vim-css-color": {
-		"repo": "ap/vim-css-color",
-		"params": [
-			"lazy = true",
-			"ft = 'css'"
-		],
-		"comment": "Realtime CSS color preview (RGB hex)"
-	},
-	"vim-css3-syntax": {
-		"repo": "hail2u/vim-css3-syntax",
-		"params": [
-			"lazy = true",
-			"ft = 'css'"
-		],
-		"comment": "Improved CSS syntax highlighting"
-	},
 
 
 
