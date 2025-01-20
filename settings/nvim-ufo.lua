@@ -43,10 +43,17 @@ end
 
 require('ufo').setup({
 	provider_selector = function(bufnr, filetype, buftype)
-		return {'lsp', 'treesitter'}
+		return {'treesitter', 'indent'}
 	end,
-	close_fold_kinds = {'imports', 'comment'},
+	close_fold_kinds_for_ft = {
+		default = {'imports', 'comment'}
+	},
 	fold_virt_text_handler = handler
 })
 
-vim.opt.foldenable = false
+vim.opt.foldenable = true
+vim.opt.foldcolumn = 'auto:9'
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.fillchars = 'eob: ,fold: ,foldopen:,foldsep:│,foldclose:'
+vim.opt.foldminlines = 3

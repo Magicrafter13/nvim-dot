@@ -73,6 +73,30 @@
 		"comment": "Analysis/linting through rust-analyzer package.",
 		"cocinstall": "coc-rust-analyzer"
 	},
+	"auto-pairs": {
+		"repo": "jiangmiao/auto-pairs",
+		"comment": "Automatically creates the closing brackets when the first one is typed"
+	},
+	"vim-numbertoggle": {
+		"repo": "jeffkreeftmeijer/vim-numbertoggle",
+		"comment": "Toggle relativenumber based on current context"
+	},
+	"lightline": {
+		"repo": "itchyny/lightline.vim",
+		"comment": "Fancy status bar at bottom of screen"
+	},
+	"feline": {
+		"repo": "freddiehaddad/feline.nvim",
+		"comment": "Minimal, customizable statusline."
+	},
+	"vim-gitgutter": {
+		"repo": "airblade/vim-gitgutter",
+		"comment": "When looking at modified file in git repo, shows markings (+, -, ~) on side to indicate changes"
+	},
+	"vim-rainbow": {
+		"repo": "frazrepo/vim-rainbow",
+		"comment": "Multi-color brackets for ease-of-use"
+	},
 
 
 
@@ -165,14 +189,6 @@
 
 
 	"_c03": "Standard plugins.",
-	"lightline": {
-		"repo": "itchyny/lightline.vim",
-		"comment": "Fancy status bar at bottom of screen"
-	},
-	"feline": {
-		"repo": "freddiehaddad/feline.nvim",
-		"comment": "Minimal, customizable statusline."
-	},
 	"lualine": {
 		"repo": "nvim-lualine/lualine.nvim",
 		"comment": "Fast, easy to configure statusline."
@@ -207,6 +223,7 @@
 		"repo": "folke/which-key.nvim",
 		"params": [
 			"event = 'VeryLazy'",
+			"keys = { { \"<leader>?\", function() require(\"which-key\").show({ global = false}) end, desc = \"Buffer Local Keymaps (which-key)\" } }",
 			"init = function() vim.o.timeout = true; vim.o.timeoutlen = 300; end"
 		],
 		"comment": "Popup to display possible keybinds of current command."
@@ -219,10 +236,6 @@
 		"repo": "tpope/vim-fugitive",
 		"comment": "Allows running git commands from ViM, with :Git"
 	},
-	"vim-gitgutter": {
-		"repo": "airblade/vim-gitgutter",
-		"comment": "When looking at modified file in git repo, shows markings (+, -, ~) on side to indicate changes"
-	},
 	"gitsigns_nvim": {
 		"repo": "lewis6991/gitsigns.nvim",
 		"comment": "Super fast git decorations implemented purely in Lua."
@@ -230,25 +243,44 @@
 
 
 
+	"_c05": "Things that help you stay in your editor.",
+	"telescope": {
+		"repo": "nvim-telescope/telescope.nvim",
+		"params": [
+			"dependencies = { 'nvim-lua/plenary.nvim' }"
+		],
+		"comment": "File finder with fuzzy search."
+	},
+
+
+
 	"_c10": "General programming plugins.",
-	"vim-rainbow": {
-		"repo": "frazrepo/vim-rainbow",
-		"comment": "Multi-color brackets for ease-of-use"
-	},
-	"auto-pairs": {
-		"repo": "jiangmiao/auto-pairs",
-		"comment": "Automatically creates the closing brackets when the first one is typed"
-	},
-	"vim-numbertoggle": {
-		"repo": "jeffkreeftmeijer/vim-numbertoggle",
-		"comment": "Toggle relativenumber based on current context"
-	},
 	"nvim-ufo": {
 		"repo": "kevinhwang91/nvim-ufo",
 		"params": [
 			"dependencies = { 'kevinhwang91/promise-async' }"
 		],
 		"comment": "Better looking code folding."
+	},
+	"nvim-autopairs": {
+		"repo": "windwp/nvim-autopairs",
+		"params": [
+			"event = \"InsertEnter\"",
+			"config = true"
+		],
+		"comment": "Automatic closing parenthesis, and more."
+	},
+	"nvim-numbertoggle": {
+		"repo": "sitiom/nvim-numbertoggle",
+		"comment": "Context dependent relativenumber."
+	},
+	"indent-blankline": {
+		"repo": "lukas-reineke/indent-blankline.nvim",
+		"params": [
+			"main = \"ibl\"",
+			"opts = {}"
+		],
+		"comment": "Indentation guide."
 	},
 
 

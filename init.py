@@ -196,6 +196,8 @@ def main(stdscr: curses.window):
     Prompts the user to select options for their config.json file - to see the
     order this happens, refer to the # [...] comments below.
     """
+    curses.use_default_colors()
+
     config = (
         json.loads(read_file("config.json"))
         if os.path.exists("config.json")

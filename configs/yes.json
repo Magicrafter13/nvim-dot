@@ -1,5 +1,5 @@
 {
-	"base": [
+	"Base Config": [
 		"lualine",
 		"undotree",
 		"nvim-web-devicons",
@@ -7,19 +7,24 @@
 		"nerdtree-git-plugin",
 		"which-key"
 	],
-	"programming": [
-		"tagbar", "treesitter",
-		"vim-rainbow",
-		"auto-pairs", "vim-numbertoggle",
-		"nvim-ufo-temp-fake"
+	"Programming": [
+		"nvim-autopairs",
+		"tagbar",
+		"treesitter",
+		"nvim-numbertoggle",
+		"nvim-ufo",
+		"indent-blankline"
 	],
-	"git": [
+	"Stay in NeoVim": [
+		"telescope"
+	],
+	"Git": [
 		"vim-fugitive", "gitsigns_nvim"
 	],
-	"ui": [
+	"UI": [
 		"noice", "barbar"
 	],
-	"all-color": [
+	"All Color": [
 		"dracula",
 		"onedark",
 		"nord-vim",
@@ -30,7 +35,7 @@
 		"vorange",
 		"firesparks"
 	],
-	"intellij": [
+	"IntelliJ": [
 		"comrade"
 	]
 }

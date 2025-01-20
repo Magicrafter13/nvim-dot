@@ -1,12 +1,12 @@
 {
-	"manjaroKDE": {
+	"KDE": {
 		"clipboard": 1,
 		"plugins": [
 			"firenvim",
 			"presence-nvim"
 		]
 	},
-	"manjaroXfce": {
+	"Xfce": {
 		"clipboard": 2,
 		"plugins": {}
 	},
