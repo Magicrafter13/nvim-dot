@@ -1,4 +1,8 @@
 {
+	"Wayland": {
+		"clipboard": 4,
+		"plugins": []
+	},
 	"KDE": {
 		"clipboard": 1,
 		"plugins": [
@@ -8,14 +12,14 @@
 	},
 	"Xfce": {
 		"clipboard": 2,
-		"plugins": {}
+		"plugins": []
 	},
 	"headless": {
 		"clipboard": 0,
-		"plugins": {}
+		"plugins": []
 	},
 	"termux": {
 		"clipboard": 3,
-		"plugins": {}
+		"plugins": []
 	}
 }

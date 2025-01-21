@@ -46,5 +46,8 @@ if __name__ == "__main__":
             "Neovim will use Termux API. Make sure to install the "
             "package, and the corresponding Android package!")
         os.system('cp main/termux_clipboard.lua nvim/lua/clipboard.lua')
+    elif selected_base['clipboard'] == 4:
+        print("Wayland clipboard is supported via wl-clipboard and wayclip in Neovim out-of-the-box.")
+        os.system('rm -f nvim/lua/clipboard.lua')
     else:
         print("Invalid environment - continuing with setup.")
