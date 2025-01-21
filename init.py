@@ -278,7 +278,7 @@ def main(stdscr: curses.window):
 
         # 3 is programming, 4 is dev - these should only be entered if 2 (yes)
         # had programming checked - if it wasn't, then we should skip over them
-        while screen in {3, 4} and "programming" not in selections[2]:
+        while screen in {3, 4} and "Programming" not in selections[2]:
             screen += 1 if go_next else -1
         # Screen 6 may not have any options available if the user picked
         # nothing on screen 5
