@@ -412,6 +412,15 @@
 
 
 	"_c23": "Lang: Web",
+	"nvim-ts-autotag": {
+		"repo": "windwp/nvim-ts-autotag",
+		"params": [
+			"event = 'BufReadPre'",
+			"event = 'BufNewFile'",
+			"opts = {}"
+		],
+		"comment": "Auto close and auto rename tags in XML style languages, and more."
+	},
 
 
 

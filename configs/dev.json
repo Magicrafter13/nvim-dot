@@ -15,7 +15,9 @@
 	"opengl": [
 		"vim-glsl"
 	],
-	"web": [],
+	"web": [
+		"nvim-ts-autotag"
+	],
 	"python": [],
 	"asm": []
 }
