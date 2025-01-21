@@ -1,23 +1,23 @@
 {
-	"c": [
+	"C": [
 		"nvim-gdb"
 	],
-	"fun": [
+	"Fun": [
 		"vim-rockstar", "vim-brainfuck"
 	],
-	"java": [
+	"Java": [
 		"vim-classpath", "vim-jdb"
 	],
-	"latex": [
+	"LaTeX": [
 		"vimtex",
 		"latex-live"
 	],
-	"opengl": [
+	"OpenGL": [
 		"vim-glsl"
 	],
-	"web": [
+	"Web": [
 		"nvim-ts-autotag"
 	],
-	"python": [],
-	"asm": []
+	"Python": [],
+	"Assembly": []
 }
