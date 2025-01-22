@@ -348,6 +348,14 @@
 		"repo": "mfussenegger/nvim-lint",
 		"comment": "Asynchronous linting via nvim built-in LSP."
 	},
+	"nvim-cmp": {
+		"repo": "hrsh7th/nvim-cmp",
+		"comment": "Completion."
+	},
+	"cmp-nvim-lsp": {
+		"repo": "hrsh7th/cmp-nvim-lsp",
+		"comment": "nvim-cmp + lspconfig"
+	},
 	"fidget": {
 		"repo": "j-hui/fidget.nvim",
 		"params": [

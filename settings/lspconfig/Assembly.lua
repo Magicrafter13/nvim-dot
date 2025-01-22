@@ -1,1 +1,3 @@
-lspconfig.asm_lsp.setup {}
+lspconfig.asm_lsp.setup {
+	capabilities = capabilities
+}

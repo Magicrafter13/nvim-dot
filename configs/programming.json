@@ -6,5 +6,8 @@
 	"Linting": [
 		"nvim-lint"
 	],
-	"Completion": []
+	"Completion": [
+		"nvim-cmp",
+		"cmp-nvim-lsp"
+	]
 }
