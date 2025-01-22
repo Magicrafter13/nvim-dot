@@ -359,7 +359,6 @@
 	"fidget": {
 		"repo": "j-hui/fidget.nvim",
 		"params": [
-			"tag = 'legacy'",
 			"lazy = true",
 			"event = 'LspAttach'"
 		],

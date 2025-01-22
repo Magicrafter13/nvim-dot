@@ -28,6 +28,7 @@ uninstall:
 
 nvim/lua/plug-set/settings.make nvim/lua/plug-set/lsp.make: config.json .plugins main/makefiles.py
 	@main/makefiles.py $@
+	@$(MAKE) -s -f $@ -B
 
 nvim/lua/plug-set/nvim-lspconfig.lua: nvim/lua/plug-set/lsp.make
 	@$(MAKE) -s -f nvim/lua/plug-set/lsp.make

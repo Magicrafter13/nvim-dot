@@ -95,7 +95,7 @@ if __name__ == "__main__":
             install.pop(idx)
     if "LSP" in config["programming"]:
         install.append("nvim-lspconfig")
-        install.append("fidget")
+        #install.append("fidget")
     write_file(".plugins", f'''{{"plugins":[{", ".join([
         f'"{name}"'
         for name in install])}]}}''')

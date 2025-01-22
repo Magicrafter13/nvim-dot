@@ -4,7 +4,6 @@
 		"mason-lspconfig"
 	],
 	"Linting": [
-		"nvim-lint"
 	],
 	"Completion": [
 		"nvim-cmp",
