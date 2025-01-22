@@ -1,0 +1,10 @@
+{
+	"LSP": [
+		"mason",
+		"mason-lspconfig"
+	],
+	"Linting": [
+		"nvim-lint"
+	],
+	"Completion": []
+}

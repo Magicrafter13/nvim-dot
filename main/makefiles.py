@@ -9,7 +9,7 @@ from utils import read_file, write_file  # pylint: disable=import-error
 plugins = json.loads(read_file(".plugins"))["plugins"]
 config = json.loads(read_file("config.json"))
 
-LSP = "lsp" in config["programming"]
+LSP = "LSP" in config["programming"]
 LSP_REQ = (
     "\techo 'require(\"plug-set/nvim-lspconfig\")' >> nvim/lua/plug-set/"
     "init.lua")

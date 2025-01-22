@@ -208,7 +208,7 @@ def main(stdscr: curses.window):
         json.loads(read_file("configs/base.json")),
         json.loads(read_file("configs/env.json")),
         json.loads(read_file("configs/yes.json")),
-        {"lsp": {}, "completion": {}},
+        json.loads(read_file("configs/programming.json")),
         json.loads(read_file("configs/dev.json")),
         {
             _n: _p

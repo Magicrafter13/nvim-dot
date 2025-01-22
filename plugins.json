@@ -113,6 +113,14 @@
 		],
 		"comment": "Improved CSS syntax highlighting"
 	},
+	"ale": {
+		"repo": "dense-analysis/ale",
+		"comment": "Code linter"
+	},
+	"syntastic": {
+		"repo": "scrooloose/syntastic",
+		"comment": "Syntax checking plugin, that runs through external syntax checkers"
+	},
 
 
 
@@ -325,6 +333,21 @@
 		"repo": "neovim/nvim-lspconfig",
 		"comment": "Premade LSP configs for various languages"
 	},
+	"mason": {
+		"repo": "williamboman/mason.nvim",
+		"params": [
+			"opts = {}"
+		],
+		"comment": "Automatically install LSPs and more."
+	},
+	"mason-lspconfig": {
+		"repo": "williamboman/mason-lspconfig.nvim",
+		"comment": "Better interoperability between lspconfig and mason."
+	},
+	"nvim-lint": {
+		"repo": "mfussenegger/nvim-lint",
+		"comment": "Asynchronous linting via nvim built-in LSP."
+	},
 	"fidget": {
 		"repo": "j-hui/fidget.nvim",
 		"params": [
@@ -333,14 +356,6 @@
 			"event = 'LspAttach'"
 		],
 		"comment": "nvim-lsp progress UI"
-	},
-	"ale": {
-		"repo": "dense-analysis/ale",
-		"comment": "Code linter"
-	},
-	"syntastic": {
-		"repo": "scrooloose/syntastic",
-		"comment": "Syntax checking plugin, that runs through external syntax checkers"
 	},
 
 

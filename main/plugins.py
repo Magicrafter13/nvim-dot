@@ -14,6 +14,7 @@ config = json.loads(read_file(("config.json")))
 base = json.loads(read_file(("configs/base.json")))
 env = json.loads(read_file(("configs/env.json")))
 yes = json.loads(read_file(("configs/yes.json")))
+programming = json.loads(read_file(("configs/programming.json")))
 dev = json.loads(read_file(("configs/dev.json")))
 
 plugins = load_plugins()
@@ -42,6 +43,10 @@ def parse_config():
     for pack in config["yes"]:
         if pack in yes:
             set_plugins(yes[pack])
+    # Programming
+    for pack in config["programming"]:
+        if pack in programming:
+            set_plugins(programming[pack])
     # Dev
     for pack in config["dev"]:
         if pack in dev:
@@ -88,7 +93,7 @@ if __name__ == "__main__":
         if _plug not in plugins:
             print(f"No {_plug} entry found in plugins.json, skipping.")
             install.pop(idx)
-    if "lsp" in config["programming"]:
+    if "LSP" in config["programming"]:
         install.append("nvim-lspconfig")
         install.append("fidget")
     write_file(".plugins", f'''{{"plugins":[{", ".join([
