@@ -11,7 +11,7 @@ require("lualine").setup {
 	options = {
 		component_separators = '|',
 		section_separators = { left = '', right = '' },
-		disabled_filetypes = { 'nerdtree', 'tagbar' },
+		disabled_filetypes = { 'nerdtree', 'tagbar', 'trouble' },
 		always_divide_middle = true,
 		--globalstatus = true
 	},
