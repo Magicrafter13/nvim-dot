@@ -14,7 +14,9 @@
 		"nvim-numbertoggle",
 		"indent-blankline",
 		"todo-comments",
-		"nvim-colorizer"
+		"nvim-colorizer",
+		"trouble",
+		"nvim-ufo"
 	],
 	"Stay in NeoVim": [
 		"telescope"
@@ -27,7 +29,6 @@
 	"UI": [
 		"noice",
 		"barbar",
-		"nvim-ufo",
 		"statuscol"
 	],
 	"All Color": [

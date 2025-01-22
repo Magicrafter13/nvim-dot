@@ -51,9 +51,9 @@ require('ufo').setup({
 	fold_virt_text_handler = handler
 })
 
-vim.opt.foldenable = true
-vim.opt.foldcolumn = 'auto:9'
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
-vim.opt.fillchars = 'eob: ,fold: ,foldopen:,foldsep:│,foldclose:'
-vim.opt.foldminlines = 3
+vim.opt.foldcolumn = '1'
+vim.opt.fillchars = 'fold: ,foldopen:,foldsep: ,foldclose:'
+
+-- More modern approach, but cluttered
+-- vim.opt.foldcolumn = 'auto:9'
+-- vim.opt.fillchars = 'fold: ,foldopen:,foldsep:│,foldclose:'

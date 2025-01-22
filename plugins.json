@@ -368,6 +368,13 @@
 		],
 		"comment": "nvim-lsp progress UI"
 	},
+	"trouble": {
+		"repo": "folke/trouble.nvim",
+		"params": [
+			"cmd = \"Trouble\""
+		],
+		"comment": "Diagnostics."
+	},
 
 
 
