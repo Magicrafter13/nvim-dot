@@ -12,7 +12,6 @@
 		"tagbar",
 		"treesitter",
 		"nvim-numbertoggle",
-		"nvim-ufo",
 		"indent-blankline",
 		"todo-comments",
 		"nvim-colorizer"
@@ -26,7 +25,10 @@
 		"neogit"
 	],
 	"UI": [
-		"noice", "barbar"
+		"noice",
+		"barbar",
+		"nvim-ufo",
+		"statuscol"
 	],
 	"All Color": [
 		"dracula",

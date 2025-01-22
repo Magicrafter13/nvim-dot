@@ -252,6 +252,10 @@
 		],
 		"comment": "Popup to display possible keybinds of current command."
 	},
+	"statuscol": {
+		"repo": "luukvbaal/statuscol.nvim",
+		"comment": "Configurable status column with click handlers."
+	},
 
 
 

@@ -1,7 +1,7 @@
---vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
---	pattern = "*",
---	command = "normal zR"
---})
+vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
+	pattern = "*",
+	command = "normal zR"
+})
 
 require"nvim-treesitter.configs".setup {
   -- Automatically install missing parsers when entering buffer
