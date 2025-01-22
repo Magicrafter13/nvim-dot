@@ -5,6 +5,7 @@ require 'statuscol'.setup {
 			sign = { namespace = { "diagnostics/signs" }, maxwidth = 2, auto = true },
 			click = "v:lua.ScSa"},
 		{ text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+		{ sign = { namespace = { "gitsign" }, maxwidth = 1, auto = true }, click = "v:lua.ScSa" },
 		{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
 		{
 			sign = { name = { ".*" }, maxwidth = 2, colwidth = 1, auto = true, wrap = true },
