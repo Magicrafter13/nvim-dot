@@ -1,7 +1,10 @@
 {
 	"Wayland": {
 		"clipboard": 4,
-		"plugins": []
+		"plugins": [
+			"firenvim",
+			"presence-nvim"
+		]
 	},
 	"KDE": {
 		"clipboard": 1,
