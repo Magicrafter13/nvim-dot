@@ -19,5 +19,6 @@
 		"nvim-ts-autotag"
 	],
 	"Python": [],
-	"Assembly": []
+	"Assembly": [],
+	"JavaScript": []
 }
