@@ -2,12 +2,12 @@ test_config_runs:
   stage: test
   before_script:
     - mkdir -p ~/.config # Just in case
+    - rm -rf ~/.config/nvim
     - python3 -m venv venv
     - source venv/bin/activate
     - venv/bin/pip install pynvim
   script:
     - python3 ./all_options.py # Generate config file
-    - mkdir -p ~/.config # Just in case
     - make # Build nvim config
     - |
       output=$(nvim --headless -c 'qa' 2 2>&1 >/dev/null) # Dry run nvim
