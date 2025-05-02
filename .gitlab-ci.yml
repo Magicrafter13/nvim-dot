@@ -1,5 +1,10 @@
 test_config_runs:
   stage: test
+  before_script:
+    - mkdir -p ~/.config # Just in case
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - venv/bin/pip install pynvim
   script:
     - python3 ./all_options.py # Generate config file
     - mkdir -p ~/.config # Just in case
@@ -11,3 +16,5 @@ test_config_runs:
         echo "$output" >&2
         exit 1
       fi
+  after_script:
+    - deactivate
