@@ -10,11 +10,10 @@ test_config_runs:
     - python3 ./all_options.py # Generate config file
     - make # Build nvim config
     - |
+      export NVIM_PYTHON3_HOST_PROG="$PWD/.venv/bin/python"
       output=$(nvim --headless -c 'qa' 2 2>&1 >/dev/null) # Dry run nvim
       if [ -n "$output" ]
       then
         echo "$output" >&2
         exit 1
       fi
-  after_script:
-    - deactivate
