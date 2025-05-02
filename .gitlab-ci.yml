@@ -1,10 +1,10 @@
 test_config_runs:
   stage: test
   script:
-    - script -q -c 'make config' <<< 'Gklalalalalall'
-    - make
+    - python3 ./all_options.py # Generate config file
+    - make # Build nvim config
     - |
-      output=$(nvim --headless -c 'qa' 2 2>&1 >/dev/null)
+      output=$(nvim --headless -c 'qa' 2 2>&1 >/dev/null) # Dry run nvim
       if [ -n "$output" ]
       then
         echo "$output" >&2
