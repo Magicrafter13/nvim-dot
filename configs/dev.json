@@ -10,7 +10,6 @@
 	],
 	"LaTeX": [
 		"vimtex",
-		"latex-live"
 	],
 	"OpenGL": [
 		"vim-glsl"

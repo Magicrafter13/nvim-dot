@@ -7,6 +7,7 @@ test_config_runs:
     - source venv/bin/activate
     - venv/bin/pip install pynvim
     - export NVIM_PYTHON3_HOST_PROG="$PWD/venv/bin/python"
+    - export COLORTERM=truecolor # we have to lie
   script:
     - python3 ./all_options.py # Generate config file
     - |
