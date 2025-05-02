@@ -9,7 +9,7 @@
 		"vim-classpath", "vim-jdb"
 	],
 	"LaTeX": [
-		"vimtex",
+		"vimtex"
 	],
 	"OpenGL": [
 		"vim-glsl"
