@@ -20,5 +20,8 @@
 	],
 	"Python": [],
 	"Assembly": [],
+	"Rust": [
+		"rustaceanvim"
+	],
 	"JavaScript": []
 }

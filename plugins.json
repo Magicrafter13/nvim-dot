@@ -473,6 +473,18 @@
 
 
 
+	"_c25": "Lang: Rust",
+	"rustaceanvim": {
+		"repo": "https://github.com/mrcjkb/rustaceanvim",
+		"comment": "Advanced LSP with Rust Analyzer",
+		"params": [
+			"version = '^5'",
+			"lazy = false"
+		]
+	},
+
+
+
 	"_c90": "Integrations",
 	"firenvim": {
 		"repo": "glacambre/firenvim",
