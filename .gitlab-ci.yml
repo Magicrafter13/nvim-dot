@@ -1,10 +1,10 @@
 test_config_runs:
   stage: test
   script:
-    - make config <<< 'Gklalalalalall'
+    - script -q -c 'make config' <<< 'Gklalalalalall'
     - make
     - |
-      output=$(nvim --headless -c 'qa' 3>&2 2>&1 1>&3 2>/dev/null)
+      output=$(nvim --headless -c 'qa' 2 2>&1 >/dev/null)
       if [ -n "$output" ]
       then
         echo "$output" >&2
