@@ -1,3 +1,9 @@
+local python_version = vim.trim(vim.fn.system({ "python3", "-c", "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')" }))
+local venv_path = string.format(
+	'import sys; sys.path.append("/usr/lib/python%s/site-packages"); import pylint_venv; pylint_venv.inithook(force_venv_activation=True, quiet=True)',
+	python_version
+)
+
 lspconfig.pylsp.setup {
 	capabilities = capabilities,
 	settings = {
@@ -10,7 +16,11 @@ lspconfig.pylsp.setup {
 					--enabled = true
 				--},
 				pylint = {
-					enabled = true
+					enabled = true,
+					args = {
+						"--init-hook",
+						venv_path,
+					}
 				},
 				pydocstyle = {
 					enabled = true,
