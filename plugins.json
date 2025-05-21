@@ -478,7 +478,7 @@
 		"repo": "https://github.com/mrcjkb/rustaceanvim",
 		"comment": "Advanced LSP with Rust Analyzer",
 		"params": [
-			"version = '^5'",
+			"version = '^6'",
 			"lazy = false"
 		]
 	},
