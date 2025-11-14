@@ -4,7 +4,7 @@ local venv_path = string.format(
 	python_version
 )
 
-lspconfig.pylsp.setup {
+vim.lsp.config.pylsp = {
 	capabilities = capabilities,
 	settings = {
 		pylsp = {

@@ -64,7 +64,6 @@ nvim/lua/plug-set/nvim-lspconfig.lua: $(EXIST)
 ifneq ($(EXIST),)
 \techo -e "\\e[1;32mSetting up LSP config\\e[0m"
 \techo "-- Setup language servers." > nvim/lua/plug-set/nvim-lspconfig.lua
-\techo "local lspconfig = require('lspconfig')" >> nvim/lua/plug-set/nvim-lspconfig.lua
 \techo "vim.diagnostic.config({{virtual_text = false}})" >> nvim/lua/plug-set/nvim-lspconfig.lua
 \techo "vim.api.nvim_create_autocmd({{ 'CursorHold', 'CursorHoldI' }}, {{ pattern = '*', callback = function() vim.diagnostic.open_float(nil, {{focus = false}}) end }})" >> nvim/lua/plug-set/nvim-lspconfig.lua
 \techo "local capabilities = {"require('cmp_nvim_lsp').default_capabilities()" if COMP else '{}'}" >> nvim/lua/plug-set/nvim-lspconfig.lua

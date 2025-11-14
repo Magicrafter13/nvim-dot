@@ -1,3 +1,3 @@
-lspconfig.asm_lsp.setup {
+vim.lsp.config.asm_lsp = {
 	capabilities = capabilities
 }

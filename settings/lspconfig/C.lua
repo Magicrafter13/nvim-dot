@@ -1,3 +1,3 @@
-lspconfig.clangd.setup {
+vim.lsp.config.clangd = {
 	capabilities = capabilities
 }

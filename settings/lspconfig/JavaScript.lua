@@ -1,4 +1,4 @@
-lspconfig.eslint.setup {
+vim.lsp.config.eslint = {
 	capabilities = capabilities,
 	settings = {
 		codeActionOnSave = {
@@ -9,6 +9,6 @@ lspconfig.eslint.setup {
 	}
 }
 
-lspconfig.ts_ls.setup {
+vim.lsp.config.ts_ls = {
 	capabilities = capabilities
 }

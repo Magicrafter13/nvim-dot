@@ -407,7 +407,6 @@
 	"nvim-gdb": {
 		"repo": "sakhnik/nvim-gdb",
 		"params": [
-			"build = function() vim.cmd('!' .. vim.fn.stdpath('data') .. '/plugged/nvim-gdb/install.sh') end",
 			"lazy = true",
 			"ft = {'c', 'cpp'}"
 		],
