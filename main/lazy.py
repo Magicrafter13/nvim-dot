@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Construct nvim/lua/lazy-init.lua from .plugins and plugins.json."""
 
 import json

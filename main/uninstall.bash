@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Main directory
 echo 'Clearing out ./nvim/'

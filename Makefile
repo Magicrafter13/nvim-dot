@@ -1,4 +1,6 @@
 default:
+# Check for dependency programs
+	@./main/checkdeps.bash
 # Compile lua config files
 	@$(MAKE) -e all --no-print-directory
 

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Construct colorscheme.lua from config.json, .plugins and plugins.json."""
 
 import json

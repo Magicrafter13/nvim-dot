@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Construct the lazy-init.lua file (plugin loader)."""
 
 import json

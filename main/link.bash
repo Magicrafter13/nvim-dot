@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 config="${XDG_CONFIG_HOME:-$HOME/.config}"
 

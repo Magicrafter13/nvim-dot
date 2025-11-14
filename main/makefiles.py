@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Construct various Makefiles based on data in .plugins."""
 
 import json
