@@ -1,6 +1,6 @@
 default:
 # Check for dependency programs
-	@./main/checkdeps.bash
+	@bash ./main/checkdeps.bash
 # Compile lua config files
 	@$(MAKE) -e all --no-print-directory
 
@@ -15,21 +15,21 @@ all: directories nvim/lua/plug-set/init.lua nvim/init.lua nvim/lua/clipboard.lua
 	@echo 'Updating plugins...'
 	@nvim -u nvim/init.lua -i NONE --headless "+Lazy! update" +qa
 # Final cleanup
-	@./main/cleanup.bash
+	@bash ./main/cleanup.bash
 
 clean:
 	@rm -rf .plugins nvim/*
 
 config:
-	@./init.py
+	@python3 ./init.py
 
 uninstall:
-	@./main/uninstall.bash
+	@bash ./main/uninstall.bash
 
 .PHONY: directories all clean uninstall
 
 nvim/lua/plug-set/settings.make nvim/lua/plug-set/lsp.make: config.json .plugins main/makefiles.py
-	@main/makefiles.py $@
+	@python3 main/makefiles.py $@
 	@$(MAKE) -s -f $@ -B
 
 nvim/lua/plug-set/nvim-lspconfig.lua: nvim/lua/plug-set/lsp.make
@@ -43,22 +43,22 @@ config.json:
 	@$(MAKE) -e config --no-print-directory
 
 .plugins: config.json configs/base.json configs/env.json configs/yes.json configs/dev.json
-	@main/plugins.py
+	@python3 main/plugins.py
 
 nvim/init.lua: init/0_truecolor.lua init/1_cursor.lua init/2_clipboard.lua init/3_plugins.lua init/80_binary.lua init/81_spell.lua init/90_remaps.lua init/99_general.lua
 	@echo -e "\e[1;31mConstructing nvim/init.lua\e[0m"
 	@cat init/0_truecolor.lua init/1_cursor.lua init/2_clipboard.lua init/3_plugins.lua init/80_binary.lua init/81_spell.lua init/90_remaps.lua init/99_general.lua > nvim/init.lua
 
 nvim/lua/clipboard.lua: main/clipboard.py config.json configs/base.json
-	@main/clipboard.py
+	@python3 main/clipboard.py
 
 nvim/lua/colorscheme.lua: .plugins plugins.json main/colorscheme.py
-	@main/colorscheme.py
+	@python3 main/colorscheme.py
 
 nvim/lua/lazy-init.lua: .plugins plugins.json
-	@main/lazy.py
+	@python3 main/lazy.py
 # Symlink directories and files to standard system locations
-	@./main/link.bash
+	@bash ./main/link.bash
 # Install/remove plugins
 	@echo 'Installing lazy.nvim + new plugins...'
 	@nvim -u nvim/init.lua -i NONE --headless "+Lazy! install" +qa
